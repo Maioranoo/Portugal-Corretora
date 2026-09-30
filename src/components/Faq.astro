@@ -67,7 +67,7 @@ const { faqs, title = SECTIONS.faq.title, name = 'faq' } = Astro.props;
   summary :global(svg) {
     flex: none;
     color: var(--color-brand);
-    transition: transform var(--duration) var(--ease-out);
+    transition: transform 200ms var(--ease-out);
   }
 
   details[open] summary :global(svg) {

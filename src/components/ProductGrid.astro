@@ -77,11 +77,21 @@ const ICONS: Record<Product['slug'], IconName> = {
     background: var(--color-surface);
     color: var(--color-ink);
     text-decoration: none;
-    overflow: hidden;
     transition:
-      border-color var(--duration) var(--ease-out),
-      transform var(--duration) var(--ease-out),
-      box-shadow var(--duration) var(--ease-out);
+      border-color 200ms var(--ease-out),
+      transform 200ms var(--ease-out);
+  }
+
+  /* Sombra do hover em camada própria: anima só opacidade (GPU), não box-shadow */
+  .tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: var(--shadow-2);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms var(--ease-out);
   }
 
   .tile:hover {
@@ -91,23 +101,32 @@ const ICONS: Record<Product['slug'], IconName> = {
 
   @media (hover: hover) and (pointer: fine) {
     .tile:hover {
-      box-shadow: var(--shadow-2);
       transform: translateY(-2px);
+    }
+
+    .tile:hover::after {
+      opacity: 1;
+    }
+
+    .tile:hover .tile__go :global(svg) {
+      transform: translateX(3px);
     }
   }
 
   .tile__arc {
     position: absolute;
-    right: -6px;
-    top: -4px;
+    right: 0;
+    top: 0;
     width: min(40%, 150px);
+    /* recorta só o arco no canto arredondado; o cartão não corta mais nada, então a sombra do hover aparece */
+    clip-path: inset(0 round 0 var(--radius) 0 0);
     fill: none;
     stroke: var(--color-brand);
     stroke-width: 1.5;
     stroke-opacity: 0.18;
     stroke-dasharray: 1;
     stroke-dashoffset: 0;
-    transition: stroke-opacity var(--duration) var(--ease-out);
+    transition: stroke-opacity 200ms var(--ease-out);
   }
 
   .tile:hover .tile__arc {
@@ -150,12 +169,8 @@ const ICONS: Record<Product['slug'], IconName> = {
     color: var(--color-brand);
   }
 
-  .tile:hover .tile__go :global(svg) {
-    transform: translateX(3px);
-  }
-
   .tile__go :global(svg) {
-    transition: transform var(--duration) var(--ease-out);
+    transition: transform 200ms var(--ease-out);
   }
 
   @media (max-width: 1080px) {

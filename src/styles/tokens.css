@@ -86,7 +86,6 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 150ms;
   --duration: 280ms;
-  --duration-draw: 700ms;
 
   /* Layout */
   --container: 72rem;

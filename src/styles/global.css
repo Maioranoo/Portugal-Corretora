@@ -294,8 +294,8 @@ details::details-content {
   block-size: 0;
   overflow: hidden;
   transition:
-    block-size 260ms var(--ease-out),
-    content-visibility 260ms allow-discrete;
+    block-size 200ms var(--ease-out),
+    content-visibility 200ms allow-discrete;
 }
 
 details[open]::details-content {

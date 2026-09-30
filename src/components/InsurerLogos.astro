@@ -82,7 +82,7 @@ const list = (ids ? INSURERS.filter((i) => ids.includes(i.id)) : INSURERS).map((
     object-fit: contain;
     filter: grayscale(1) contrast(1.15);
     opacity: 0.8;
-    transition: filter var(--duration) var(--ease-out), opacity var(--duration) var(--ease-out);
+    transition: filter 200ms var(--ease-out), opacity 200ms var(--ease-out);
   }
 
   /* O logo da Yelum é amarelo; em escala de cinza ficaria apagado demais */

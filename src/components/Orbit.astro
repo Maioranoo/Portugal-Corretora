@@ -138,14 +138,14 @@ const items = PRODUCTS.slice(0, ANGLES.length).map((product, i) => {
     }
   }
 
+  /* Hover: o arco acende por opacidade (GPU); apaga mais rápido do que acende */
   .orbit__draw {
     stroke: var(--color-brand);
     stroke-width: 3;
     stroke-linecap: round;
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
     vector-effect: non-scaling-stroke;
-    transition: stroke-dashoffset var(--duration-draw) var(--ease-out);
+    opacity: 0;
+    transition: opacity 120ms var(--ease-out);
   }
 
   .orbit__dot {
@@ -153,11 +153,12 @@ const items = PRODUCTS.slice(0, ANGLES.length).map((product, i) => {
     stroke: var(--color-brand);
     stroke-width: 2;
     vector-effect: non-scaling-stroke;
-    transition: fill var(--duration) var(--ease-out);
+    transition: fill 150ms var(--ease-out);
   }
 
   .orbit__arc.is-active .orbit__draw {
-    stroke-dashoffset: 0;
+    opacity: 1;
+    transition-duration: 180ms;
   }
 
   .orbit__arc.is-active .orbit__dot {

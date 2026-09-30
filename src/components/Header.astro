@@ -185,9 +185,9 @@ const current = Astro.url.pathname.replace(/\/$/, '');
       opacity: 0;
       transform: translateY(-8px);
       transition:
-        opacity var(--duration) var(--ease-out),
-        transform var(--duration) var(--ease-out),
-        visibility 0s linear var(--duration);
+        opacity 160ms var(--ease-out),
+        transform 160ms var(--ease-out),
+        visibility 0s linear 160ms;
     }
 
     .header__nav[data-open='true'] {
@@ -195,8 +195,8 @@ const current = Astro.url.pathname.replace(/\/$/, '');
       opacity: 1;
       transform: none;
       transition:
-        opacity var(--duration) var(--ease-out),
-        transform var(--duration) var(--ease-out);
+        opacity 220ms var(--ease-out),
+        transform 220ms var(--ease-out);
     }
 
     .header__products {
