@@ -15,7 +15,6 @@ Legenda:
 |---|------|-----------|---------------|
 | 1 | **Onde o domínio portugalcorretora.com.br está registrado** (Registro.br direto ou dentro do Wix) | Bloqueia o lançamento | Desenvolvimento segue normalmente; publicação em endereço temporário da Vercel |
 | 2 | **Quem fornece o e-mail atendimento@portugalcorretora.com.br** (Google Workspace, Microsoft 365, Wix ou outro). Necessário para preservar os registros MX ao trocar o DNS e para configurar SPF/DKIM do Resend | Bloqueia o lançamento | Formulário testado com e-mail de teste |
-| 3 | Arquivos do logo em alta qualidade (SVG ou PNG transparente; versões branca e colorida) na pasta `brand/` | Não bloqueia | Logo extraído do site atual |
 | 4 | Números da corretora: clientes atendidos, apólices ativas, sinistros resolvidos | Não bloqueia | Marcador `1000` |
 | 5 | Fotos reais da equipe e/ou do escritório | Não bloqueia | Imagens de banco provisórias |
 | 6 | Prêmio Porto Elite: ano(s) e nome exato da categoria | Não bloqueia | Selo com texto genérico "Prêmio Porto Elite – Consórcio" marcado para revisão |
@@ -28,11 +27,19 @@ Legenda:
 | 17 | Contas na **Vercel** e no **Resend** criadas pelo cliente (ou acesso concedido) | Bloqueia o lançamento | Desenvolvimento local |
 
 ### Pendências já resolvidas (2026-09-29)
-- **Horário de atendimento:** 8h às 20h (dias da semana a confirmar).
+- **Horário de atendimento:** 8h às 20h, de segunda a sexta (sem atendimento nos fins de semana).
 - **Facebook:** https://www.facebook.com/portugalseguros
 - **Instagram:** https://www.instagram.com/portugalcorretora/
 - **Link de avaliação:** `/avaliar` redireciona para `https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3`. Esse link abre a janela "escrever avaliação" no Google. Se ele falhar no celular durante os testes, trocamos pelo link oficial do Perfil da Empresa no Google.
 - **Encarregado de dados (DPO):** atendimento@portugalcorretora.com.br
+- **Logo:** arquivos em `brand/Logos/`.
+  - Cor do logo medida no arquivo: `#003780`.
+  - Versão colorida principal: `Logo Portugal.png` (1913×756, transparente).
+  - Versão branca: `Logo Portugal Branco.png` (3669×1057, transparente).
+  - Símbolo do globo sozinho: `Logo.gif`, que serve de base para o favicon.
+  - Originais vetoriais: `Logo Portugal.ai` (compatível com PDF) e os arquivos `.cdr`. O ideal é gerar um SVG a partir do `.ai`, mas isso exige uma ferramenta de conversão que o ambiente ainda não tem; a decisão fica para o plano.
+  - `LOGO PORTO NOVO BRANCO.png` é o logo da Porto Seguro, reaproveitável na seção de seguradoras.
+  - `LOGO.png` (ícone de pessoa) não é da marca da corretora e não será usado.
 
 ---
 
@@ -53,14 +60,14 @@ Legenda:
 - Endereço: Av. Portugal, 1285 – Jardim Bela Vista, Santo André – SP, 09040-011
 - WhatsApp Business: (11) 93805-2598 (`5511938052598`)
 - E-mail que recebe os pedidos: atendimento@portugalcorretora.com.br
-- Horário de atendimento: 8h às 20h
+- Horário de atendimento: 8h às 20h, de segunda a sexta
 - Redes sociais: Facebook (facebook.com/portugalseguros) e Instagram (@portugalcorretora)
 - Encarregado de dados (DPO): atendimento@portugalcorretora.com.br
 - Tempo de mercado: +12 anos
 - Google: nota 4,8 com 19 avaliações
 - Seguradoras parceiras (11): Porto Seguro, Allianz, Tokio Marine, HDI, Suhai, Yelum, Bradesco Seguros, Pier, Azul Seguros, Itaú Seguros, Mitsui Sumitomo e SulAmérica Saúde
 - Diferenciais:
-  - atendimento pelo WhatsApp das 8h às 20h;
+  - atendimento pelo WhatsApp das 8h às 20h, em dias úteis;
   - acompanhamento em caso de sinistro;
   - "comparamos mais de 10 seguradoras para encontrar o melhor preço para você";
   - Prêmio Porto Elite (consórcio).
@@ -214,7 +221,7 @@ Recomenda-se revisão jurídica antes do lançamento.
 
 - **Estilo:** próximo e acolhedor, com um toque de agilidade.
 - **Cores:**
-  - azul-marinho do logo como cor principal (≈ `#0F2D5C`, a confirmar com o arquivo do logo);
+  - azul do logo como cor principal (`#003780`, medido no arquivo original);
   - fundos claros e quentes;
   - âmbar ou dourado discreto como destaque;
   - verde do WhatsApp só nos botões de WhatsApp.
