@@ -13,9 +13,10 @@
 */
 @font-face {
   font-family: 'Archivo';
-  src: url('/fonts/archivo-latin-var.woff2') format('woff2');
-  font-weight: 100 900;
-  font-stretch: 62% 125%;
+  /* Recorte da Archivo variável (fonttools): pesos 400 a 850, larguras 82% a 100%, caracteres latinos */
+  src: url('/fonts/archivo-latin-var.v2.woff2') format('woff2');
+  font-weight: 400 850;
+  font-stretch: 82% 100%;
   font-style: normal;
   font-display: swap;
 }
