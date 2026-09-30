@@ -149,3 +149,23 @@ export const PRODUCT_PAGE = {
   closeTitle: 'Pronto para ficar protegido?',
   closeLead: 'Fale com um especialista e receba as opções das seguradoras para o seu perfil.',
 } as const;
+
+// Página "Já sou cliente"
+export const CLIENT_PAGE = {
+  seo: {
+    title: 'Já sou cliente | Portugal Corretora de Seguros',
+    description:
+      'Precisa acionar o seguro, a assistência 24h ou pedir segunda via? Fale com a Portugal pelo WhatsApp ou ligue direto para a sua seguradora.',
+  },
+  title: 'Já é cliente? Estamos com você',
+  lead: 'Fale com a gente pelo WhatsApp para qualquer necessidade do seu seguro. Em uma emergência, a assistência 24h da seguradora atende direto pelo telefone.',
+  whatsappMessage: 'Olá! Já sou cliente da Portugal Corretora e preciso de ajuda com meu seguro.',
+  topics: [
+    { title: 'Acionar sinistro', text: 'Batida, roubo, incêndio ou outro imprevisto: orientamos o passo a passo e acionamos a seguradora com você.' },
+    { title: 'Assistência 24h', text: 'Guincho, chaveiro, encanador e outros serviços: ligue para a sua seguradora (telefones abaixo) ou fale com a gente.' },
+    { title: 'Segunda via', text: 'Boleto, apólice ou carteirinha: pedimos para você e enviamos pelo WhatsApp.' },
+    { title: 'Alterar o seguro', text: 'Troca de carro, mudança de endereço ou inclusão de pessoas: ajustamos a sua apólice.' },
+  ],
+  phonesTitle: 'Telefones de assistência das seguradoras',
+  phonesNote: 'Números informados pelas seguradoras em seus sites oficiais. Em caso de dúvida, fale com a gente.',
+} as const;

@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "serve:static": "node scripts/serve-static.mjs"
+    "serve:static": "node scripts/serve-static.mjs",
+    "test:build": "astro build && vitest run --config vitest.build.config.ts"
   },
   "dependencies": {
     "@astrojs/vercel": "^11.0.11",

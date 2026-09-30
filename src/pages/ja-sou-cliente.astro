@@ -1,0 +1,228 @@
+---
+import Icon from '../components/Icon.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { INSURERS } from '../content/insurers';
+import { CLIENT_PAGE, COMPANY } from '../content/site';
+import { buildWhatsAppUrl } from '../lib/whatsapp';
+
+const waUrl = buildWhatsAppUrl(COMPANY.whatsapp, CLIENT_PAGE.whatsappMessage);
+const withAssistance = INSURERS.filter((i) => i.assistance);
+const tel = (n: string) => `tel:${n.replace(/\D/g, '')}`;
+---
+<BaseLayout title={CLIENT_PAGE.seo.title} description={CLIENT_PAGE.seo.description} path="/ja-sou-cliente">
+  <section class="c-hero" aria-labelledby="cliente-titulo">
+    <div class="container c-hero__inner">
+      <h1 id="cliente-titulo">{CLIENT_PAGE.title}</h1>
+      <p class="section__lead">{CLIENT_PAGE.lead}</p>
+      <div class="c-hero__actions">
+        <a class="button button--primary" href={waUrl} target="_blank" rel="noopener" data-wa-contact data-wa-context="Já sou cliente">
+          <Icon name="whatsapp" size={20} />
+          Falar no WhatsApp
+        </a>
+        <p class="c-hero__hours"><Icon name="clock" size={18} />{COMPANY.hoursLabel}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface" aria-label="Como podemos ajudar">
+    <div class="container">
+      <ul class="c-topics">
+        {
+          CLIENT_PAGE.topics.map((t) => (
+            <li>
+              <h2>{t.title}</h2>
+              <p>{t.text}</p>
+              <a href={waUrl} target="_blank" rel="noopener" data-wa-contact data-wa-context="Já sou cliente">
+                Falar sobre isso
+                <Icon name="arrow" size={18} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="telefones-titulo">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title" id="telefones-titulo">{CLIENT_PAGE.phonesTitle}</h2>
+        <p class="section__lead">{CLIENT_PAGE.phonesNote}</p>
+      </div>
+      <ul class="c-phones">
+        {
+          withAssistance.map((i) => (
+            <li>
+              <h3>{i.name}</h3>
+              {i.assistance!.phones.length > 0 ? (
+                <ul>
+                  {i.assistance!.phones.map((p) => (
+                    <li>
+                      <a href={tel(p.number)}>
+                        <Icon name="phone" size={18} />
+                        {p.number}
+                      </a>
+                      <span>{p.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="c-phones__note">{i.assistance!.note}</p>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .c-hero {
+    padding: clamp(2rem, 1rem + 3vw, 4.5rem) 0 var(--section-y);
+  }
+
+  .c-hero__inner {
+    display: grid;
+    gap: var(--space-5);
+    justify-items: start;
+  }
+
+  .c-hero h1 {
+    font-size: clamp(2.125rem, 1.2rem + 2.9vw, 3.375rem);
+    font-weight: 850;
+    color: var(--color-brand);
+    max-width: 18ch;
+  }
+
+  .c-hero .section__lead {
+    margin-top: 0;
+  }
+
+  .c-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+    margin-top: var(--space-2);
+  }
+
+  .c-hero__hours {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .c-topics {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .c-topics li {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2);
+    padding-top: var(--space-4);
+    border-top: 2px solid var(--color-brand);
+  }
+
+  .c-topics h2 {
+    font-size: var(--step-1);
+    color: var(--color-ink);
+  }
+
+  .c-topics p {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .c-topics a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    font-weight: 700;
+    font-size: var(--step--1);
+  }
+
+  .c-phones {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .c-phones > li {
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .c-phones h3 {
+    font-size: var(--step-1);
+    color: var(--color-brand);
+    margin-bottom: var(--space-3);
+  }
+
+  .c-phones ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .c-phones ul li {
+    display: grid;
+    gap: 2px;
+  }
+
+  .c-phones a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 32px;
+    font-weight: 800;
+    font-size: var(--step-1);
+    font-stretch: var(--width-display);
+    text-decoration: none;
+  }
+
+  .c-phones a:hover {
+    text-decoration: underline;
+  }
+
+  .c-phones span,
+  .c-phones__note {
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 1080px) {
+    .c-topics {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .c-phones {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .c-topics,
+    .c-phones {
+      grid-template-columns: 1fr;
+    }
+
+    .c-hero__actions {
+      display: grid;
+      width: 100%;
+    }
+  }
+</style>

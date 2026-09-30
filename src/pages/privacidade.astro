@@ -1,0 +1,235 @@
+---
+// Recomenda-se revisão jurídica antes da publicação (pendência 16 da spec).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { COMPANY } from '../content/site';
+
+const updatedAt = '30 de setembro de 2026';
+---
+<BaseLayout
+  title="Política de Privacidade | Portugal Corretora de Seguros"
+  description="Como a Portugal Corretora de Seguros trata os seus dados pessoais no site: quais dados coletamos, para quê, com quem compartilhamos e como exercer os seus direitos."
+  path="/privacidade"
+>
+  <article class="container policy">
+    <header class="policy__head">
+      <h1>Política de Privacidade</h1>
+      <p>Última atualização: {updatedAt}</p>
+    </header>
+
+    <section>
+      <h2>1. Quem somos</h2>
+      <p>
+        Este site é da <strong>{COMPANY.name}</strong> ({COMPANY.legalName}), inscrita no CNPJ {COMPANY.cnpj}, corretora
+        registrada na SUSEP sob o nº {COMPANY.susep}, com endereço em {COMPANY.address.street}, {COMPANY.address.district},{' '}
+        {COMPANY.address.city} - {COMPANY.address.state}, CEP {COMPANY.address.zip}. Nesta política, "nós" e "Portugal"
+        se referem à corretora, que é a controladora dos dados tratados neste site, nos termos da Lei Geral de Proteção de
+        Dados (Lei nº 13.709/2018, LGPD).
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Quais dados coletamos</h2>
+      <h3>Quando você preenche o formulário "Falar com um especialista"</h3>
+      <ul>
+        <li>Nome e número de WhatsApp.</li>
+        <li>O tipo de seguro e as informações que você escolhe sobre ele (por exemplo, modelo e ano do carro).</li>
+        <li>Cidade, se você informar.</li>
+        <li>A página do site em que você estava e a campanha de anúncio pela qual chegou (parâmetros UTM).</li>
+      </ul>
+      <h3>Quando você navega pelo site</h3>
+      <ul>
+        <li>
+          <strong>Estatísticas anônimas de visita</strong>, pela Vercel Web Analytics, sem cookies e sem identificar você.
+        </li>
+        <li>
+          <strong>Cookies de marketing da Meta</strong> (Facebook e Instagram), <strong>somente se você clicar em "Aceitar"</strong>{' '}
+          no aviso de cookies.
+        </li>
+      </ul>
+      <p>
+        O site <strong>não armazena</strong> os dados do formulário em banco de dados: eles são enviados para o e-mail de
+        atendimento da corretora e abrem uma conversa no WhatsApp.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Para que usamos os dados</h2>
+      <ul>
+        <li>Entrar em contato com você e preparar uma proposta de seguro, plano de saúde, consórcio ou fiança.</li>
+        <li>Saber quais anúncios e páginas trazem pessoas interessadas, para melhorar a nossa comunicação.</li>
+        <li>Medir e melhorar os anúncios nas redes da Meta, apenas quando você consente com os cookies de marketing.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Bases legais</h2>
+      <ul>
+        <li>
+          <strong>Formulário:</strong> procedimentos preliminares relacionados a contrato, a pedido do titular (art. 7º, V, da LGPD).
+          Você pede o contato e nós o fazemos.
+        </li>
+        <li><strong>Cookies de marketing:</strong> consentimento (art. 7º, I, da LGPD), que você pode retirar a qualquer momento.</li>
+        <li><strong>Estatísticas anônimas:</strong> legítimo interesse (art. 7º, IX, da LGPD), sem identificar o visitante.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. Com quem compartilhamos</h2>
+      <ul>
+        <li><strong>Vercel</strong>: hospedagem do site e estatísticas anônimas de visita.</li>
+        <li><strong>Resend</strong>: envio do e-mail com os dados do formulário para a nossa equipe.</li>
+        <li><strong>Meta</strong> (Facebook e Instagram): somente se você aceitar os cookies de marketing.</li>
+        <li><strong>Seguradoras e operadoras parceiras</strong>: quando você segue com o atendimento, para elaborar a proposta.</li>
+      </ul>
+      <p>Alguns desses fornecedores podem tratar dados fora do Brasil, com as garantias previstas na LGPD.</p>
+    </section>
+
+    <section>
+      <h2>6. Por quanto tempo guardamos</h2>
+      <p>
+        O site não guarda os dados do formulário. As mensagens recebidas no e-mail de atendimento e no WhatsApp da corretora
+        são mantidas pelo tempo necessário ao atendimento e ao cumprimento de obrigações legais e regulatórias do setor de
+        seguros.
+      </p>
+    </section>
+
+    <section>
+      <h2>7. Seus direitos</h2>
+      <p>Você pode, a qualquer momento, pedir:</p>
+      <ul>
+        <li>confirmação de que tratamos os seus dados e acesso a eles;</li>
+        <li>correção de dados incompletos, inexatos ou desatualizados;</li>
+        <li>anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a LGPD;</li>
+        <li>portabilidade dos dados;</li>
+        <li>informação sobre com quem compartilhamos os dados;</li>
+        <li>revogação do consentimento para os cookies de marketing.</li>
+      </ul>
+      <p>
+        Para exercer esses direitos, fale com o nosso encarregado de dados pelo e-mail{' '}
+        <a href={`mailto:${COMPANY.dpoEmail}`}>{COMPANY.dpoEmail}</a>. Você também pode apresentar reclamação à Autoridade
+        Nacional de Proteção de Dados (ANPD).
+      </p>
+    </section>
+
+    <section id="cookies">
+      <h2>8. Cookies e armazenamento no navegador</h2>
+      <div class="policy__table" role="region" aria-label="Lista de cookies" tabindex="0">
+        <table>
+          <thead>
+            <tr><th>Nome</th><th>Onde fica</th><th>Para que serve</th><th>Duração</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>pc-consent</code></td><td>Seu navegador (localStorage)</td><td>Guarda a sua escolha no aviso de cookies</td><td>6 meses</td></tr>
+            <tr><td><code>pc-utm</code></td><td>Seu navegador (sessionStorage)</td><td>Lembra a campanha de anúncio pela qual você chegou</td><td>Até fechar a aba</td></tr>
+            <tr><td><code>_fbp</code>, <code>fr</code></td><td>Cookies da Meta</td><td>Medição dos anúncios, só após "Aceitar"</td><td>Até 3 meses</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Você pode mudar a sua escolha quando quiser:{' '}
+        <button type="button" class="button button--ghost policy__prefs" data-cookie-preferences>Alterar minhas preferências de cookies</button>
+      </p>
+    </section>
+
+    <section>
+      <h2>9. Alterações nesta política</h2>
+      <p>
+        Podemos atualizar esta política para refletir mudanças no site ou na lei. A data da última atualização aparece no
+        topo da página.
+      </p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .policy {
+    max-width: 52rem;
+    padding-block: clamp(2rem, 1rem + 3vw, 4.5rem) 0;
+  }
+
+  .policy__head {
+    margin-bottom: var(--space-7);
+  }
+
+  .policy h1 {
+    font-size: clamp(2.125rem, 1.2rem + 2.9vw, 3.375rem);
+    font-weight: 850;
+    color: var(--color-brand);
+  }
+
+  .policy__head p {
+    margin-top: var(--space-2);
+    color: var(--color-text-muted);
+  }
+
+  .policy section {
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .policy h2 {
+    font-size: var(--step-2);
+    color: var(--color-ink);
+    margin-bottom: var(--space-3);
+  }
+
+  .policy h3 {
+    font-size: var(--step-0);
+    font-stretch: 100%;
+    margin: var(--space-4) 0 var(--space-2);
+  }
+
+  .policy p,
+  .policy li {
+    color: var(--color-text-muted);
+    max-width: 70ch;
+  }
+
+  .policy p + p,
+  .policy ul + p {
+    margin-top: var(--space-3);
+  }
+
+  .policy ul {
+    padding-left: var(--space-5);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .policy strong {
+    color: var(--color-ink);
+  }
+
+  .policy__table {
+    overflow-x: auto;
+    margin-bottom: var(--space-4);
+  }
+
+  .policy table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--step--1);
+  }
+
+  .policy th,
+  .policy td {
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .policy th {
+    color: var(--color-ink);
+  }
+
+  .policy code {
+    font-size: 0.95em;
+    color: var(--color-brand);
+  }
+
+  .policy__prefs {
+    margin-top: var(--space-3);
+    display: flex;
+  }
+</style>

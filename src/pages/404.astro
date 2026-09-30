@@ -1,0 +1,51 @@
+---
+import Globe from '../components/Globe.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PRODUCTS } from '../content/products';
+---
+<BaseLayout
+  title="Página não encontrada | Portugal Corretora de Seguros"
+  description="Esta página não existe. Veja os seguros da Portugal Corretora ou fale com um especialista."
+  path="/404"
+  noindex
+>
+  <section class="nf" aria-labelledby="nf-titulo">
+    <div class="container nf__inner">
+      <Globe class="nf__globe" disc={false} />
+      <h1 id="nf-titulo">Não encontramos esta página</h1>
+      <p class="section__lead">O endereço pode ter mudado. Veja abaixo os nossos seguros ou volte para o início.</p>
+      <a class="button button--primary" href="/">Voltar para o início</a>
+    </div>
+  </section>
+  <ProductGrid products={PRODUCTS} title="Qual seguro você procura?" id="produtos-404" />
+</BaseLayout>
+
+<style>
+  .nf {
+    padding: clamp(2rem, 1rem + 3vw, 4.5rem) 0 0;
+  }
+
+  .nf__inner {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-4);
+  }
+
+  .nf :global(.nf__globe) {
+    width: 96px;
+    height: 96px;
+    --globe-line: var(--color-brand);
+  }
+
+  .nf h1 {
+    font-size: clamp(2rem, 1.2rem + 2.4vw, 3rem);
+    font-weight: 850;
+    color: var(--color-brand);
+  }
+
+  .nf .section__lead {
+    margin: 0 auto;
+  }
+</style>
