@@ -46,9 +46,7 @@ test('redirecionamentos do site antigo', async ({ request }) => {
     ['/cotacao-seguro-residencial', '/seguro-residencial'],
     ['/cotacao-seguro-vida', '/seguro-de-vida'],
     ['/seguroaluguel', '/fianca-locaticia'],
-    ['/seguro-viagem', '/#produtos'],
-    ['/cotacao-seguro-viagem', '/#produtos'],
-    ['/seguro-empresarial', '/#produtos'],
+    ['/cotacao-seguro-viagem', '/seguro-viagem'],
   ];
   for (const [from, to] of map) {
     const res = await request.get(from, { maxRedirects: 0 });
@@ -61,7 +59,7 @@ test('sitemap lista as páginas públicas', async ({ request }) => {
   const res = await request.get('/sitemap.xml');
   expect(res.status()).toBe(200);
   const xml = await res.text();
-  for (const p of ['/', '/seguro-auto', '/consorcio', '/ja-sou-cliente', '/privacidade']) {
+  for (const p of ['/', '/seguro-auto', '/consorcio', '/seguro-viagem', '/seguro-empresarial', '/ja-sou-cliente', '/privacidade']) {
     expect(xml).toContain(`<loc>https://www.portugalcorretora.com.br${p}</loc>`);
   }
   expect(xml).not.toContain('/avaliar');

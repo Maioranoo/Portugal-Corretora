@@ -17,6 +17,8 @@ const ICONS: Record<Product['slug'], IconName> = {
   consorcio: 'coin',
   'fianca-locaticia': 'key',
   'seguro-de-vida': 'heart',
+  'seguro-viagem': 'plane',
+  'seguro-empresarial': 'building',
 };
 ---
 <section class="section products" id={id} aria-labelledby={`${id}-titulo`}>
@@ -53,7 +55,7 @@ const ICONS: Record<Product['slug'], IconName> = {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-4);
   }
 

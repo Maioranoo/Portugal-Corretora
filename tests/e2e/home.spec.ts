@@ -1,6 +1,15 @@
 import { expect, test } from '@playwright/test';
 
-const SLUGS = ['seguro-auto', 'seguro-residencial', 'plano-de-saude', 'consorcio', 'fianca-locaticia', 'seguro-de-vida'];
+const SLUGS = [
+  'seguro-auto',
+  'seguro-residencial',
+  'plano-de-saude',
+  'consorcio',
+  'fianca-locaticia',
+  'seguro-de-vida',
+  'seguro-viagem',
+  'seguro-empresarial',
+];
 
 test('home tem todas as seções e links para os 6 produtos', async ({ page }) => {
   await page.goto('/');

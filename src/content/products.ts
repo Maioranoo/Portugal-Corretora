@@ -13,7 +13,7 @@ export interface Product {
   slug: ProductSlug;
   name: string;
   shortName: string; // rótulo curto do trilho de produtos
-  priority: 1 | 2 | 3 | 4 | 5 | 6;
+  priority: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
   featured: boolean;
   cardText: string; // até 90 caracteres
   seo: { title: string; description: string }; // title ≤ 60; description 70–160
@@ -372,6 +372,120 @@ export const PRODUCTS: readonly Product[] = [
       {
         q: 'A empresa é obrigada a ter seguro de vida?',
         a: 'Depende da convenção coletiva da categoria. Muitas exigem, e mesmo quando não exigem é um benefício valorizado pela equipe.',
+      },
+    ],
+    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
+    insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'itau', 'mitsui-sumitomo'],
+  },
+  {
+    slug: 'seguro-viagem',
+    name: PRODUCT_FORMS['seguro-viagem'].name,
+    shortName: 'Viagem',
+    priority: 7,
+    featured: false,
+    cardText: 'Despesas médicas, bagagem e imprevistos cobertos no Brasil e no exterior.',
+    seo: {
+      title: 'Seguro Viagem Nacional e Internacional',
+      description:
+        'Seguro viagem para o Brasil e o exterior, com despesas médicas, bagagem e assistência 24h. Compare as opções com a Portugal Corretora.',
+    },
+    hero: {
+      title: 'Viaje tranquilo, com proteção do embarque à volta',
+      subtitle:
+        'Seguro viagem para o Brasil e o exterior. Comparamos as opções e indicamos a cobertura certa para o seu destino.',
+    },
+    coveragesTitle: 'O que o Seguro Viagem cobre',
+    coverages: [
+      { title: 'Despesas médicas e hospitalares', text: 'Atendimento em caso de doença ou acidente durante a viagem.' },
+      { title: 'Assistência 24h', text: 'Central de atendimento da seguradora, em português, a qualquer hora.' },
+      { title: 'Bagagem', text: 'Indenização por extravio ou dano à bagagem despachada.' },
+      { title: 'Cancelamento da viagem', text: 'Reembolso de despesas quando você precisa cancelar por motivo coberto.' },
+      { title: 'Atraso de voo', text: 'Ajuda com gastos extras quando o voo atrasa ou é cancelado.' },
+      { title: 'Regresso antecipado', text: 'Volta para casa organizada em situações de emergência cobertas.' },
+    ],
+    audiences: [
+      { title: 'Férias no exterior', text: 'Proteção com o valor de cobertura exigido pelo país de destino.' },
+      { title: 'Viagem pelo Brasil', text: 'Segurança também em viagens nacionais, a lazer ou a trabalho.' },
+      { title: 'Estudo ou intercâmbio', text: 'Coberturas para estadias longas fora do país.' },
+    ],
+    steps: [
+      { title: 'Conte o que você precisa', text: 'Informe o destino e a duração da viagem.' },
+      { title: 'Comparamos as seguradoras', text: 'Buscamos a cobertura certa para o seu roteiro.' },
+      { title: 'Você viaja protegido', text: 'Enviamos a apólice e ficamos à disposição durante a viagem.' },
+    ],
+    faqs: [
+      {
+        q: 'Seguro viagem é obrigatório?',
+        a: 'Para alguns destinos, sim. Os países do Espaço Schengen, na Europa, exigem seguro com cobertura médica mínima para a entrada. Confirmamos a exigência do seu destino.',
+      },
+      {
+        q: 'O cartão de crédito já não cobre?',
+        a: 'Alguns cartões oferecem seguro viagem, mas com coberturas e condições limitadas. Comparamos o que o seu cartão oferece com um seguro dedicado.',
+      },
+      {
+        q: 'Com quanto tempo de antecedência devo contratar?',
+        a: 'O ideal é contratar assim que a viagem for confirmada, porque algumas coberturas, como cancelamento, valem desde a contratação.',
+      },
+      {
+        q: 'Cobre viagens pelo Brasil?',
+        a: 'Sim. Existem planos para viagens nacionais, com assistência médica e cobertura de bagagem.',
+      },
+    ],
+    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
+    insurers: ['porto', 'allianz', 'tokio-marine'],
+  },
+  {
+    slug: 'seguro-empresarial',
+    name: PRODUCT_FORMS['seguro-empresarial'].name,
+    shortName: 'Empresarial',
+    priority: 8,
+    featured: false,
+    cardText: 'Imóvel comercial, estoque e equipamentos protegidos contra imprevistos.',
+    seo: {
+      title: 'Seguro Empresarial para o seu negócio',
+      description:
+        'Seguro empresarial para lojas, escritórios e pequenas empresas: imóvel, estoque e equipamentos protegidos. Compare com a Portugal Corretora.',
+    },
+    hero: {
+      title: 'Seu negócio protegido para continuar funcionando',
+      subtitle:
+        'Seguro para o imóvel, o estoque e os equipamentos da sua empresa. Comparamos as seguradoras e montamos a proteção certa para o seu ramo.',
+    },
+    coveragesTitle: 'O que o Seguro Empresarial cobre',
+    coverages: [
+      { title: 'Incêndio, raio e explosão', text: 'Proteção para o imóvel comercial e tudo o que tem dentro dele.' },
+      { title: 'Roubo e furto qualificado', text: 'Indenização por mercadorias, equipamentos e bens levados.' },
+      { title: 'Danos elétricos', text: 'Máquinas e equipamentos danificados por oscilação ou curto-circuito.' },
+      { title: 'Vendaval e alagamento', text: 'Danos causados por ventos fortes, granizo e chuvas intensas, conforme o plano.' },
+      { title: 'Lucros cessantes', text: 'Ajuda com as despesas fixas se o negócio precisar parar por um sinistro coberto.' },
+      { title: 'Assistência empresarial', text: 'Chaveiro, eletricista e encanador para resolver imprevistos rápido.' },
+    ],
+    audiences: [
+      { title: 'Comércio e lojas', text: 'Proteção para o ponto, o estoque e o caixa.' },
+      { title: 'Escritórios e consultórios', text: 'Equipamentos, móveis e documentos protegidos.' },
+      { title: 'Pequenas indústrias e serviços', text: 'Máquinas e matéria-prima cobertas contra imprevistos.' },
+    ],
+    steps: [
+      { title: 'Conte o que você precisa', text: 'Informe o ramo da empresa e se o imóvel é próprio ou alugado.' },
+      { title: 'Comparamos as seguradoras', text: 'Montamos coberturas adequadas ao seu tipo de negócio.' },
+      { title: 'Sua empresa fica protegida', text: 'E conta com a gente se precisar acionar o seguro.' },
+    ],
+    faqs: [
+      {
+        q: 'Empresa em imóvel alugado pode contratar?',
+        a: 'Pode. O seguro protege os bens da empresa e pode incluir a responsabilidade pelos danos ao imóvel alugado.',
+      },
+      {
+        q: 'MEI pode fazer seguro empresarial?',
+        a: 'Pode. Existem opções para pequenos negócios e MEI, com coberturas ajustadas ao tamanho da operação.',
+      },
+      {
+        q: 'O que são lucros cessantes?',
+        a: 'É a cobertura que ajuda a pagar despesas fixas, como aluguel e salários, enquanto a empresa fica parada por causa de um sinistro coberto.',
+      },
+      {
+        q: 'O estoque fica coberto?',
+        a: 'Sim, mercadorias e matéria-prima podem ser incluídas, de acordo com o valor declarado na contratação.',
       },
     ],
     // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente

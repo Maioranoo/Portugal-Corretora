@@ -5,6 +5,8 @@ export const PRODUCT_SLUGS = [
   'consorcio',
   'fianca-locaticia',
   'seguro-de-vida',
+  'seguro-viagem',
+  'seguro-empresarial',
 ] as const;
 
 export type ProductSlug = (typeof PRODUCT_SLUGS)[number];
@@ -70,6 +72,27 @@ export const PRODUCT_FORMS: Record<ProductSlug, ProductForm> = {
     slug: 'seguro-de-vida',
     name: 'Seguro de Vida',
     fields: [{ id: 'modalidade', label: 'Modalidade', kind: 'select', options: ['Individual', 'Empresarial'] }],
+  },
+  'seguro-viagem': {
+    slug: 'seguro-viagem',
+    name: 'Seguro Viagem',
+    fields: [
+      {
+        id: 'destino',
+        label: 'Destino',
+        kind: 'select',
+        options: ['Brasil', 'América do Sul', 'América do Norte', 'Europa', 'Outros destinos'],
+      },
+      { id: 'duracao', label: 'Duração da viagem', kind: 'select', options: ['Até 7 dias', '8 a 15 dias', '16 a 30 dias', 'Mais de 30 dias'] },
+    ],
+  },
+  'seguro-empresarial': {
+    slug: 'seguro-empresarial',
+    name: 'Seguro Empresarial',
+    fields: [
+      { id: 'ramo', label: 'Ramo da empresa', kind: 'text', placeholder: 'Ex.: loja de roupas, escritório, restaurante', maxLength: 60 },
+      { id: 'imovel', label: 'O imóvel da empresa é', kind: 'select', options: ['Próprio', 'Alugado'] },
+    ],
   },
 };
 

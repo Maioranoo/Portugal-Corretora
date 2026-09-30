@@ -25,7 +25,8 @@ function showErrors(form: HTMLFormElement, errors: LeadErrors) {
     const key = slot.dataset.errorFor as string;
     const message = errors[key] ?? '';
     slot.textContent = message;
-    const control = form.querySelector<HTMLElement>(`[name="${key}"]:not([type="hidden"])`);
+    // Procura o campo no mesmo bloco do aviso: dois produtos podem ter campos com o mesmo nome.
+    const control = slot.closest('.field')?.querySelector<HTMLElement>('input, select, textarea');
     if (!control) return;
     if (message) {
       control.setAttribute('aria-invalid', 'true');
@@ -62,10 +63,9 @@ function initLeadForm(root: HTMLElement) {
   // Quando a pessoa mexe num campo com erro, o erro dele some (os demais continuam até o próximo envio).
   const clearError = (event: Event) => {
     const control = event.target as HTMLElement | null;
-    const name = control?.getAttribute('name');
-    if (!control || !name || control.getAttribute('aria-invalid') !== 'true') return;
+    if (!control || control.getAttribute('aria-invalid') !== 'true') return;
     control.removeAttribute('aria-invalid');
-    const slot = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+    const slot = control.closest('.field')?.querySelector<HTMLElement>('[data-error-for]');
     if (slot) slot.textContent = '';
   };
   form.addEventListener('input', clearError);

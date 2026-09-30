@@ -8,7 +8,8 @@ export default defineConfig({
   trailingSlash: 'never',
   // A barra de ferramentas do modo dev injeta títulos (h1) que o Playwright enxerga nos testes.
   devToolbar: { enabled: false },
-  // Endereços do site antigo (Wix) levados para as páginas novas; /consorcio e /seguro-de-vida já existem com o mesmo nome.
+  // Endereços do site antigo (Wix) levados para as páginas novas; /consorcio, /seguro-de-vida, /seguro-viagem e
+  // /seguro-empresarial já existem com o mesmo nome.
   redirects: {
     '/servicos': '/#produtos',
     '/contato': '/#contato',
@@ -18,9 +19,7 @@ export default defineConfig({
     '/cotacao-seguro-residencial': '/seguro-residencial',
     '/cotacao-seguro-vida': '/seguro-de-vida',
     '/seguroaluguel': '/fianca-locaticia',
-    '/seguro-viagem': '/#produtos',
-    '/cotacao-seguro-viagem': '/#produtos',
-    '/seguro-empresarial': '/#produtos',
+    '/cotacao-seguro-viagem': '/seguro-viagem',
     // Temporário (302): o navegador não guarda o destino, caso o link do Google mude.
     // Manter igual a COMPANY.google.writeReviewUrl em src/content/site.ts (o teste de build confere).
     '/avaliar': {

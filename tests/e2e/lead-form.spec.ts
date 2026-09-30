@@ -144,6 +144,24 @@ test('home: o erro de um campo some assim que a pessoa corrige', async ({ page }
   await expect(form.locator('[data-error-for="produto"]')).toBeEmpty();
 });
 
+test('home: campo com o mesmo nome em dois produtos marca o erro no produto escolhido', async ({ page }) => {
+  await stubOpen(page);
+  await captureApi(page);
+  await page.goto('/');
+  const form = page.locator('#contato [data-lead-form]');
+  await form.locator('[data-product-select]').selectOption('seguro-empresarial');
+  await form.getByLabel('Seu nome').fill('Ana');
+  await form.getByLabel('WhatsApp', { exact: true }).fill('11987654321');
+  await form.getByLabel('Ramo da empresa').fill('Padaria');
+  await form.getByRole('button', { name: 'Falar com um especialista' }).click();
+  const empresarial = form.getByLabel('O imóvel da empresa é');
+  await expect(empresarial).toHaveAttribute('aria-invalid', 'true');
+  await expect(empresarial).toBeFocused();
+  await expect(form.locator('[data-product-fields="seguro-empresarial"] [data-error-for="detalhes.imovel"]')).not.toBeEmpty();
+  await empresarial.selectOption('Alugado');
+  await expect(form.locator('[data-product-fields="seguro-empresarial"] [data-error-for="detalhes.imovel"]')).toBeEmpty();
+});
+
 test('sem internet mostra aviso e mantém os dados', async ({ page, context }) => {
   await stubOpen(page);
   await page.goto('/seguro-de-vida');

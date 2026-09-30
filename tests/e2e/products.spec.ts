@@ -7,6 +7,8 @@ const PRODUCTS = [
   ['consorcio', 'Consórcio'],
   ['fianca-locaticia', 'Fiança Locatícia'],
   ['seguro-de-vida', 'Seguro de Vida'],
+  ['seguro-viagem', 'Seguro Viagem'],
+  ['seguro-empresarial', 'Seguro Empresarial'],
 ] as const;
 
 for (const [slug, name] of PRODUCTS) {

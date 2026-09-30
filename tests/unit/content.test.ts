@@ -13,9 +13,10 @@ function strings(value: unknown): string[] {
 const FORBIDDEN = [/os melhores preços/i, /menor preço/i, /garantid[oa]/i, /atendimento (24|vinte e quatro)/i];
 
 describe('produtos', () => {
-  test('6 produtos, na ordem de prioridade, com os slugs do formulário', () => {
+  test('8 produtos, na ordem de prioridade, com os slugs do formulário', () => {
+    expect(PRODUCTS).toHaveLength(8);
     expect(PRODUCTS.map((p) => p.slug)).toEqual([...PRODUCT_SLUGS]);
-    expect(PRODUCTS.map((p) => p.priority)).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(PRODUCTS.map((p) => p.priority)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
     expect(PRODUCTS.filter((p) => p.featured).map((p) => p.priority)).toEqual([1, 2, 3, 4]);
   });
   test.each(PRODUCTS.map((p) => [p.slug, p] as const))('%s tem conteúdo completo', (_, p) => {

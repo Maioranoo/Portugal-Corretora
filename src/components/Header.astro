@@ -69,7 +69,7 @@ const current = Astro.url.pathname.replace(/\/$/, '');
   .header__inner {
     display: flex;
     align-items: center;
-    gap: var(--space-5);
+    gap: var(--space-4);
     height: var(--header-h);
   }
 
@@ -87,7 +87,7 @@ const current = Astro.url.pathname.replace(/\/$/, '');
   .header__nav {
     display: flex;
     align-items: center;
-    gap: var(--space-5);
+    gap: var(--space-3);
     margin-left: auto;
   }
 
@@ -104,11 +104,12 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-    padding: 0 var(--space-3);
+    padding: 0 10px;
     border-radius: var(--radius-sm);
     color: var(--color-ink);
     font-weight: 600;
     font-size: var(--step--1);
+    white-space: nowrap;
     text-decoration: none;
     transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
   }
@@ -129,7 +130,7 @@ const current = Astro.url.pathname.replace(/\/$/, '');
   .header__client {
     border-left: 1px solid var(--color-border);
     border-radius: 0;
-    padding-left: var(--space-5);
+    padding-left: var(--space-4);
   }
 
   .header__back {
@@ -137,6 +138,7 @@ const current = Astro.url.pathname.replace(/\/$/, '');
   }
 
   .header__wa {
+    flex: none;
     min-height: 44px;
     padding: 0 var(--space-4);
     font-size: var(--step--1);
@@ -146,7 +148,7 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     display: none;
   }
 
-  @media (max-width: 1080px) {
+  @media (max-width: 1240px) {
     .header__toggle {
       display: inline-flex;
       align-items: center;

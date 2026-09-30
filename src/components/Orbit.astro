@@ -16,7 +16,8 @@ const ANGLES = [216, 201, 186, 171, 156, 141];
 const rad = (deg: number) => (deg * Math.PI) / 180;
 const at = (r: number, deg: number) => ({ x: CX + r * Math.cos(rad(deg)), y: CY + r * Math.sin(rad(deg)) });
 
-const items = PRODUCTS.map((product, i) => {
+// Seis arcos: os 6 primeiros produtos por prioridade. Viagem e Empresarial aparecem no menu e na grade.
+const items = PRODUCTS.slice(0, ANGLES.length).map((product, i) => {
   const angle = ANGLES[i];
   const start = at(R_GLOBE, angle + 12);
   const end = at(R_LABEL, angle);
