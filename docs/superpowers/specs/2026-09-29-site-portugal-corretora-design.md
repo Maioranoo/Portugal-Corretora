@@ -20,16 +20,19 @@ Legenda:
 | 5 | Fotos reais da equipe e/ou do escritório | Não bloqueia | Imagens de banco provisórias |
 | 6 | Prêmio Porto Elite: ano(s) e nome exato da categoria | Não bloqueia | Selo com texto genérico "Prêmio Porto Elite – Consórcio" marcado para revisão |
 | 7 | Quais seguradoras trabalham com cada produto | Não bloqueia | Divisão provável, marcada para revisão |
-| 8 | Horário de atendimento do WhatsApp e do escritório | Não bloqueia | Texto "horário estendido", sem horas |
 | 9 | Razão social da empresa (vai para o rodapé e a política de privacidade) | Não bloqueia | Marcador `[RAZÃO SOCIAL]` |
-| 10 | Links das redes sociais (Instagram, Facebook e outras) | Não bloqueia | Ícones ocultos até haver link |
-| 11 | Link direto "escrever avaliação" do Google (Perfil da Empresa no Google → "Pedir avaliações") | Não bloqueia | `/avaliar` aponta para a página de avaliações já enviada pelo cliente |
 | 12 | 3 avaliações do Google escolhidas para exibir no site | Não bloqueia | Seção mostra só a nota 4,8 e o link |
 | 13 | Código (ID) do Pixel da Meta | Não bloqueia | Nada é carregado enquanto não houver ID |
 | 14 | Confirmação dos telefones de assistência 24h de cada seguradora (a pesquisa dos números públicos fica com o desenvolvimento) | Não bloqueia | Números públicos pesquisados, marcados para conferência |
-| 15 | Encarregado de dados (DPO) para a política de privacidade | Não bloqueia | atendimento@portugalcorretora.com.br |
 | 16 | Revisão jurídica da política de privacidade | Recomendado antes do lançamento | Política-base escrita pelo desenvolvimento |
 | 17 | Contas na **Vercel** e no **Resend** criadas pelo cliente (ou acesso concedido) | Bloqueia o lançamento | Desenvolvimento local |
+
+### Pendências já resolvidas (2026-09-29)
+- **Horário de atendimento:** 8h às 20h (dias da semana a confirmar).
+- **Facebook:** https://www.facebook.com/portugalseguros
+- **Instagram:** https://www.instagram.com/portugalcorretora/
+- **Link de avaliação:** `/avaliar` redireciona para `https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3`. Esse link abre a janela "escrever avaliação" no Google. Se ele falhar no celular durante os testes, trocamos pelo link oficial do Perfil da Empresa no Google.
+- **Encarregado de dados (DPO):** atendimento@portugalcorretora.com.br
 
 ---
 
@@ -50,11 +53,14 @@ Legenda:
 - Endereço: Av. Portugal, 1285 – Jardim Bela Vista, Santo André – SP, 09040-011
 - WhatsApp Business: (11) 93805-2598 (`5511938052598`)
 - E-mail que recebe os pedidos: atendimento@portugalcorretora.com.br
+- Horário de atendimento: 8h às 20h
+- Redes sociais: Facebook (facebook.com/portugalseguros) e Instagram (@portugalcorretora)
+- Encarregado de dados (DPO): atendimento@portugalcorretora.com.br
 - Tempo de mercado: +12 anos
 - Google: nota 4,8 com 19 avaliações
 - Seguradoras parceiras (11): Porto Seguro, Allianz, Tokio Marine, HDI, Suhai, Yelum, Bradesco Seguros, Pier, Azul Seguros, Itaú Seguros, Mitsui Sumitomo e SulAmérica Saúde
 - Diferenciais:
-  - atendimento pelo WhatsApp em horário estendido;
+  - atendimento pelo WhatsApp das 8h às 20h;
   - acompanhamento em caso de sinistro;
   - "comparamos mais de 10 seguradoras para encontrar o melhor preço para você";
   - Prêmio Porto Elite (consórcio).
