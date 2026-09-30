@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "arial",
+        "files": [
+          "src/lib/lead-email.ts"
+        ],
+        "createdAt": "2026-09-30T03:44:45.660Z",
+        "reason": "Claude: e-mail HTML transacional precisa de fonte web-safe; clientes de e-mail não carregam fontes customizadas"
+      }
+    ]
+  }
+}
