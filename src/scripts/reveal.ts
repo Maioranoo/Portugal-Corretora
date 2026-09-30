@@ -12,7 +12,9 @@ if (!reduce && 'IntersectionObserver' in window && items.length) {
         observer.unobserve(entry.target);
       }
     },
-    { rootMargin: '0px 0px -8% 0px' },
+    // A área observada se estende muito para cima: o que a página pulou (tecla End, link para o fim, rolagem rápida)
+    // fica acima da tela e também conta como visto, em vez de continuar escondido.
+    { rootMargin: '100000px 0px -8% 0px' },
   );
 
   for (const el of items) {

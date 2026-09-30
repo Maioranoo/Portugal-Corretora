@@ -3,6 +3,7 @@
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, normalize } from 'node:path';
+import { createBrotliCompress, createGzip } from 'node:zlib';
 import { SECURITY_HEADERS } from '../integrations/security-headers.mjs';
 
 const root = join(process.cwd(), '.vercel/output/static');
@@ -31,9 +32,24 @@ function resolve(urlPath) {
   return null;
 }
 
+// Comprime texto como a Vercel faz (brotli ou gzip), para a medição local ser fiel à produção
+const compressible = new Set(['.html', '.js', '.css', '.svg', '.xml', '.txt']);
+
 createServer((req, res) => {
   const file = resolve(req.url ?? '/');
   const target = file ?? join(root, '404.html');
-  res.writeHead(file ? 200 : 404, { ...SECURITY_HEADERS, 'content-type': types[extname(target)] ?? 'application/octet-stream' });
-  createReadStream(target).pipe(res);
+  const ext = extname(target);
+  const headers = { ...SECURITY_HEADERS, 'content-type': types[ext] ?? 'application/octet-stream' };
+  if (req.url?.startsWith('/_astro/') || req.url?.startsWith('/fonts/')) headers['cache-control'] = 'public, max-age=31536000, immutable';
+  const accept = String(req.headers['accept-encoding'] ?? '');
+  let stream = createReadStream(target);
+  if (compressible.has(ext) && /\bbr\b/.test(accept)) {
+    headers['content-encoding'] = 'br';
+    stream = stream.pipe(createBrotliCompress());
+  } else if (compressible.has(ext) && /gzip/.test(accept)) {
+    headers['content-encoding'] = 'gzip';
+    stream = stream.pipe(createGzip());
+  }
+  res.writeHead(file ? 200 : 404, headers);
+  stream.pipe(res);
 }).listen(port, () => console.log(`Servindo ${root} em http://localhost:${port}`));

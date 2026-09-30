@@ -33,7 +33,11 @@ export default function securityHeaders(headers = SECURITY_HEADERS) {
       'astro:build:done': async ({ logger }) => {
         const file = new URL('../.vercel/output/config.json', import.meta.url);
         const config = JSON.parse(await readFile(file, 'utf-8'));
-        config.routes.unshift({ src: '^/(.*)$', headers, continue: true });
+        config.routes.unshift(
+          { src: '^/(.*)$', headers, continue: true },
+          // A fonte fica em /public com nome fixo: se um dia mudar, troque o nome do arquivo
+          { src: '^/fonts/(.*)$', headers: { 'cache-control': 'public, max-age=31536000, immutable' }, continue: true },
+        );
         await writeFile(file, JSON.stringify(config, null, 2));
         logger.info('headers de segurança adicionados ao config.json da Vercel');
       },

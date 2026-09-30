@@ -8,6 +8,8 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [securityHeaders()],
   trailingSlash: 'never',
+  // CSS dentro do HTML: evita 4 arquivos que bloqueavam o primeiro desenho no celular (LCP)
+  build: { inlineStylesheets: 'always' },
   // A barra de ferramentas do modo dev injeta títulos (h1) que o Playwright enxerga nos testes.
   devToolbar: { enabled: false },
   // Endereços do site antigo (Wix) levados para as páginas novas; /consorcio, /seguro-de-vida, /seguro-viagem e

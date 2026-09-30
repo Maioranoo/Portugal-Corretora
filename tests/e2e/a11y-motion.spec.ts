@@ -44,6 +44,13 @@ test('seções abaixo da dobra aparecem ao rolar', async ({ page }) => {
   await expect.poll(() => faq.evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
 });
 
+test('pular direto para o fim da página revela tudo o que ficou para trás', async ({ page }) => {
+  await page.goto('/fianca-locaticia');
+  await page.evaluate(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' }));
+  // Sem o conserto, 18 blocos ficavam ocultos para sempre; no navegador sem janela o aviso do observador leva ~750ms
+  await expect.poll(() => page.evaluate(() => document.querySelectorAll('.reveal-pending').length), { timeout: 3000 }).toBe(0);
+});
+
 test('arcos do globo se desenham na abertura (sem reduzir movimento)', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/');
