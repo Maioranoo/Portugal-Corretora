@@ -25,6 +25,7 @@ Legenda:
 | 14 | Confirmação dos telefones de assistência 24h de cada seguradora (a pesquisa dos números públicos fica com o desenvolvimento) | Não bloqueia | Números públicos pesquisados, marcados para conferência |
 | 16 | Revisão jurídica da política de privacidade | Recomendado antes do lançamento | Política-base escrita pelo desenvolvimento |
 | 18 | Revisar as faixas de valor do formulário: Consórcio (até R$ 50 mil / R$ 50–150 mil / R$ 150–400 mil / acima de R$ 400 mil) e aluguel da Fiança (até R$ 1.500 / R$ 1.500–3.000 / R$ 3.000–6.000 / acima de R$ 6.000), em `src/content/product-fields.ts` | Não bloqueia | Faixas estimadas pelo desenvolvimento |
+| 19 | Lista completa das operadoras de plano de saúde (hoje: SulAmérica Saúde, Bradesco Saúde e Porto Saúde) | Não bloqueia | As três operadoras confirmadas |
 | 17 | Contas na **Vercel** e no **Resend** criadas pelo cliente (ou acesso concedido) | Bloqueia o lançamento | Desenvolvimento local |
 
 ### Pendências já resolvidas (2026-09-29)
