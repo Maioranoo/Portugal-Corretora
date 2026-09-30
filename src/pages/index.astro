@@ -6,6 +6,7 @@ import Faq from '../components/Faq.astro';
 import FinalCta from '../components/FinalCta.astro';
 import Hero from '../components/Hero.astro';
 import InsurerLogos from '../components/InsurerLogos.astro';
+import LeadForm from '../components/LeadForm.astro';
 import ProductGrid from '../components/ProductGrid.astro';
 import Reviews from '../components/Reviews.astro';
 import Steps from '../components/Steps.astro';
@@ -52,5 +53,7 @@ const jsonLd = {
   <About />
   <ClientStrip />
   <Faq faqs={GENERAL_FAQS} name="faq-home" />
-  <FinalCta />
+  <FinalCta>
+    <LeadForm />
+  </FinalCta>
 </BaseLayout>

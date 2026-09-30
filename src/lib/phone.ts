@@ -23,7 +23,8 @@ export function formatBrPhone(digits: string): string {
 }
 
 export function maskBrPhoneInput(raw: string): string {
-  const d = onlyDigits(raw).slice(0, 11);
+  // Remove +55 e o 0 da operadora antes de cortar, para o código do país não virar DDD.
+  const d = stripPrefixes(onlyDigits(raw)).slice(0, 11);
   if (d.length === 0) return '';
   if (d.length <= 2) return `(${d}`;
   const ddd = d.slice(0, 2);

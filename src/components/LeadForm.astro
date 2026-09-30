@@ -1,0 +1,296 @@
+---
+import { WHATSAPP_NUMBER } from '../content/contact';
+import { PRODUCT_FORMS, PRODUCT_SLUGS, type ProductSlug } from '../content/product-fields';
+import { buildGenericMessage, buildWhatsAppUrl } from '../lib/whatsapp';
+import Icon from './Icon.astro';
+
+interface Props {
+  product?: ProductSlug;
+}
+const { product } = Astro.props;
+const slugs = product ? [product] : [...PRODUCT_SLUGS];
+const fallbackUrl = buildWhatsAppUrl(WHATSAPP_NUMBER, buildGenericMessage(product ? PRODUCT_FORMS[product].name : undefined));
+---
+<div class="lead" data-lead-root>
+  <form class="lead__form" data-lead-form novalidate>
+    <div class="field">
+      <label for="lead-nome">Seu nome</label>
+      <input id="lead-nome" name="nome" type="text" autocomplete="name" maxlength="80" required aria-describedby="lead-nome-erro" />
+      <p class="field__error" id="lead-nome-erro" data-error-for="nome"></p>
+    </div>
+    <div class="field">
+      <label for="lead-whatsapp">WhatsApp</label>
+      <input
+        id="lead-whatsapp"
+        name="whatsapp"
+        type="tel"
+        inputmode="numeric"
+        autocomplete="tel-national"
+        placeholder="(11) 98765-4321"
+        maxlength="20"
+        required
+        aria-describedby="lead-whatsapp-erro"
+      />
+      <p class="field__error" id="lead-whatsapp-erro" data-error-for="whatsapp"></p>
+    </div>
+
+    {
+      product ? (
+        <input type="hidden" name="produto" value={product} />
+      ) : (
+        <div class="field">
+          <label for="lead-produto">Tipo de seguro</label>
+          <select id="lead-produto" name="produto" data-product-select required aria-describedby="lead-produto-erro">
+            <option value="">Escolha uma opção</option>
+            {PRODUCT_SLUGS.map((s) => (
+              <option value={s}>{PRODUCT_FORMS[s].name}</option>
+            ))}
+          </select>
+          <p class="field__error" id="lead-produto-erro" data-error-for="produto"></p>
+        </div>
+      )
+    }
+
+    {
+      slugs.map((slug) => (
+        <fieldset class="lead__product" data-product-fields={slug} hidden={!product} disabled={!product}>
+          <legend class="visually-hidden">Detalhes de {PRODUCT_FORMS[slug].name}</legend>
+          {PRODUCT_FORMS[slug].fields.map((field) => {
+            const id = `lead-${slug}-${field.id}`;
+            const name = `detalhes.${field.id}`;
+            return (
+              <div class="field">
+                <label for={id}>{field.label}</label>
+                {field.kind === 'select' ? (
+                  <select id={id} name={name} required aria-describedby={`${id}-erro`}>
+                    <option value="">Escolha uma opção</option>
+                    {field.options.map((o) => (
+                      <option value={o}>{o}</option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    id={id}
+                    name={name}
+                    type="text"
+                    placeholder={field.placeholder}
+                    maxlength={field.maxLength}
+                    required
+                    aria-describedby={`${id}-erro`}
+                  />
+                )}
+                <p class="field__error" id={`${id}-erro`} data-error-for={name} />
+              </div>
+            );
+          })}
+        </fieldset>
+      ))
+    }
+
+    <div class="field">
+      <label for="lead-cidade">Cidade <span class="field__optional">(opcional)</span></label>
+      <input id="lead-cidade" name="cidade" type="text" autocomplete="address-level2" maxlength="60" aria-describedby="lead-cidade-erro" />
+      <p class="field__error" id="lead-cidade-erro" data-error-for="cidade"></p>
+    </div>
+
+    <div class="lead__hp" aria-hidden="true">
+      <label for="lead-website">Não preencha este campo</label>
+      <input id="lead-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <p class="lead__status" data-form-status role="alert"></p>
+    <button class="button button--primary lead__submit" type="submit">Falar com um especialista</button>
+    <p class="lead__notice">
+      Ao enviar, você concorda em ser contatado pela Portugal Corretora. Veja nossa{' '}
+      <a href="/privacidade">Política de Privacidade</a>.
+    </p>
+  </form>
+
+  <div class="lead__success" data-lead-success hidden tabindex="-1">
+    <span class="lead__check"><Icon name="check" size={28} /></span>
+    <h3>Pronto! Abrimos o WhatsApp para você.</h3>
+    <p data-success-hours></p>
+    <a class="button button--wa-outline" data-success-fallback href={fallbackUrl} target="_blank" rel="noopener">
+      <Icon name="whatsapp" size={20} />
+      Não abriu? Toque aqui
+    </a>
+  </div>
+
+  <noscript>
+    <p class="lead__noscript"><a href={fallbackUrl} target="_blank" rel="noopener">Falar pelo WhatsApp</a></p>
+  </noscript>
+</div>
+
+<script>
+  import '../scripts/lead-form';
+</script>
+
+<style>
+  .lead {
+    position: relative;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-2);
+  }
+
+  .lead__form,
+  .lead__product {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .lead__product {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+
+  /* O display: grid acima venceria o atributo hidden; sem isto o formulário ficaria visível após o envio */
+  .lead__form[hidden],
+  .lead__product[hidden] {
+    display: none;
+  }
+
+  .field {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .field label {
+    font-weight: 700;
+    font-size: var(--step--1);
+    color: var(--color-ink);
+  }
+
+  .field__optional {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  .field input,
+  .field select {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 var(--space-4);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--color-ink);
+    font-size: 1rem;
+    transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .field select {
+    appearance: none;
+    padding-right: var(--space-7);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23003780' d='M213.66 101.66l-80 80a8 8 0 0 1-11.32 0l-80-80a8 8 0 0 1 11.32-11.32L128 164.69l74.34-74.35a8 8 0 0 1 11.32 11.32Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-4) center;
+    background-size: 18px;
+  }
+
+  .field input::placeholder {
+    color: #6b778a;
+  }
+
+  .field input:hover,
+  .field select:hover {
+    border-color: #b9c3d3;
+  }
+
+  .field input:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 3px rgb(0 55 128 / 0.16);
+  }
+
+  .field [aria-invalid='true'],
+  .field [aria-invalid='true']:focus {
+    border-color: var(--color-error);
+  }
+
+  .field [aria-invalid='true']:focus {
+    box-shadow: 0 0 0 3px rgb(180 35 24 / 0.16);
+  }
+
+  .field__error {
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--color-error);
+  }
+
+  .field__error:empty {
+    display: none;
+  }
+
+  .lead__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .lead__status {
+    font-weight: 600;
+    color: var(--color-error);
+  }
+
+  .lead__status:empty {
+    display: none;
+  }
+
+  .lead__submit {
+    width: 100%;
+    margin-top: var(--space-2);
+  }
+
+  .lead__notice {
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .lead__success {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-4);
+  }
+
+  .lead__success[hidden] {
+    display: none;
+  }
+
+  .lead__success:focus {
+    outline: none;
+  }
+
+  .lead__check {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--color-globe-disc);
+    color: var(--color-success);
+  }
+
+  .lead__success h3 {
+    font-size: var(--step-3);
+    color: var(--color-brand);
+  }
+
+  .lead__success p {
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .lead {
+      padding: var(--space-5) var(--space-4);
+    }
+  }
+</style>
