@@ -55,33 +55,24 @@ const list = (ids ? INSURERS.filter((i) => ids.includes(i.id)) : INSURERS).map((
     margin-inline: auto;
   }
 
+  /* Flex centralizado: linhas incompletas (11, 3 ou 2 seguradoras) ficam no meio, sem célula vazia */
   .insurers__grid {
+    --cols: 6;
     list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    border-top: 1px solid var(--color-border);
-    border-left: 1px solid var(--color-border);
-  }
-
-  .insurers__grid[data-count='2'],
-  .insurers__grid[data-count='3'] {
-    grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
-    max-width: 720px;
-    margin-inline: auto;
-  }
-
-  .insurers__grid[data-count='2'] {
-    --cols: 2;
+    padding: 0 1px 1px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .insurers__grid li {
     display: grid;
     place-items: center;
+    flex: 0 0 calc(100% / var(--cols));
     min-height: 104px;
+    margin: 0 -1px -1px 0;
     padding: var(--space-4);
-    border-right: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+    border: 1px solid var(--color-border);
   }
 
   /* Todos os logos na mesma caixa (até 132x44): largos encostam na largura, quadrados na altura */
@@ -117,15 +108,13 @@ const list = (ids ? INSURERS.filter((i) => ids.includes(i.id)) : INSURERS).map((
 
   @media (max-width: 1080px) {
     .insurers__grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      --cols: 4;
     }
   }
 
   @media (max-width: 640px) {
-    .insurers__grid,
-    .insurers__grid[data-count='2'],
-    .insurers__grid[data-count='3'] {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .insurers__grid {
+      --cols: 2;
     }
 
     .insurers__grid li {

@@ -138,3 +138,14 @@ export const SECTIONS = {
     lead: 'Conte o que você precisa. A gente compara as seguradoras e responde pelo WhatsApp, de segunda a sexta, das 8h às 20h.',
   },
 } as const;
+
+// Títulos das seções das páginas de produto
+export const PRODUCT_PAGE = {
+  audiencesTitle: 'Para quem é',
+  stepsTitle: 'Como funciona',
+  insurersTitle: 'Seguradoras parceiras para',
+  insurersLead: 'Comparamos as opções dessas seguradoras para encontrar a proposta certa para você.',
+  faqTitle: 'Dúvidas sobre',
+  closeTitle: 'Pronto para ficar protegido?',
+  closeLead: 'Fale com um especialista e receba as opções das seguradoras para o seu perfil.',
+} as const;
