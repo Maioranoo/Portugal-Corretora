@@ -15,10 +15,11 @@ const {
   lead = SECTIONS.insurers.lead,
 } = Astro.props;
 
-// Logos oficiais em src/assets/insurers/<id>.svg|png (fontes em FONTES.md). Sem arquivo, o nome aparece em texto.
+// Logos oficiais em src/assets/insurers/<id>[.vN].svg|png (fontes em FONTES.md). Sem arquivo, o nome aparece em texto.
+// O sufixo .vN troca o endereço do arquivo quando o logo muda, para o navegador não mostrar a versão guardada.
 const files = import.meta.glob<{ default: ImageMetadata }>('../assets/insurers/*.{svg,png}', { eager: true });
 const logoFor = (id: InsurerId) =>
-  files[`../assets/insurers/${id}.svg`]?.default ?? files[`../assets/insurers/${id}.png`]?.default;
+  Object.entries(files).find(([path]) => path.split('/').pop()?.split('.')[0] === id)?.[1].default;
 
 const list = (ids ? INSURERS.filter((i) => ids.includes(i.id)) : INSURERS).map((i) => ({ ...i, logo: logoFor(i.id) }));
 ---
