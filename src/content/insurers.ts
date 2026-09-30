@@ -10,7 +10,9 @@ export type InsurerId =
   | 'azul'
   | 'itau'
   | 'mitsui-sumitomo'
-  | 'sulamerica-saude';
+  | 'sulamerica-saude'
+  | 'zurich'
+  | 'mapfre';
 
 export interface AssistancePhone {
   number: string; // como publicado pela seguradora
@@ -144,6 +146,30 @@ export const INSURERS: readonly Insurer[] = [
       phones: [
         { number: '4004 5900', label: 'Central Saúde, capitais e regiões metropolitanas' },
         { number: '0800 970 0500', label: 'Central Saúde, demais localidades' },
+      ],
+      conferir: true,
+    },
+  },
+  {
+    id: 'zurich',
+    name: 'Zurich Seguros',
+    assistance: {
+      phones: [
+        { number: '0800 729 1400', label: 'Assistência 24h Auto e Residência, todo o Brasil' },
+        { number: '+55 11 4133 6932', label: 'Assistência 24h no exterior' },
+        { number: '0800 729 1400', label: 'Vida (opção 5)' },
+      ],
+      conferir: true,
+    },
+  },
+  {
+    id: 'mapfre',
+    name: 'Mapfre Seguros',
+    assistance: {
+      phones: [
+        { number: '0800 775 4545', label: 'Assistência e sinistro 24h' },
+        { number: '0800 775 7196', label: 'Vida' },
+        { number: '+55 11 2565 8400', label: 'Segurado brasileiro no exterior' },
       ],
       conferir: true,
     },

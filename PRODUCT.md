@@ -8,7 +8,7 @@ web
 
 ## Users
 
-- **Principal:** pessoas que viram um anúncio da corretora no Facebook ou Instagram (Meta Ads), na maioria pelo celular, e ainda não conhecem a Portugal. Querem entender rápido se a corretora resolve o que procuram (seguro auto, residencial, plano de saúde, consórcio, fiança locatícia ou seguro de vida) e falar com alguém sem burocracia.
+- **Principal:** pessoas que viram um anúncio da corretora no Facebook ou Instagram (Meta Ads), na maioria pelo celular, e ainda não conhecem a Portugal. Querem entender rápido se a corretora resolve o que procuram (seguro auto, residencial, plano de saúde, consórcio, fiança locatícia, seguro de vida, seguro viagem ou seguro empresarial) e falar com alguém sem burocracia.
 - **Secundário:** quem já ouviu falar da corretora, por indicação, e visita o site para conferir se é confiável.
 - **Terciário:** clientes atuais que precisam acionar o seguro, a assistência 24h da seguradora ou pedir segunda via.
 
@@ -18,12 +18,12 @@ Site institucional que é o principal meio de divulgação da corretora. Em pouc
 
 ## Positioning
 
-Corretora com atendimento humano e próximo, antes e depois da contratação: compara mais de 10 seguradoras para encontrar o melhor preço para o perfil do cliente, atende pelo WhatsApp em horário estendido e acompanha o cliente no sinistro. Tem escritório físico em Santo André (SP), mais de 12 anos de mercado e o Prêmio Porto Elite em consórcio.
+Corretora com atendimento humano e próximo, antes e depois da contratação: compara mais de 10 seguradoras para encontrar o melhor preço para o perfil do cliente, atende pelo WhatsApp em horário estendido e acompanha o cliente no sinistro. Tem escritório físico em Santo André (SP), mais de 12 anos de mercado e é Porto Elite desde 2021.
 
 ## Operating Context
 
 - O tráfego vem de anúncios; cada produto tem uma página de destino própria, com um único objetivo.
-- O atendimento acontece no WhatsApp Business da corretora: (11) 93805-2598, segunda a sexta, das 8h às 20h.
+- O atendimento acontece no WhatsApp Business da corretora: (11) 93805-2598, segunda a sexta, das 9h às 18h.
 - Cada pedido do formulário abre o WhatsApp com a mensagem pronta e também chega por e-mail em atendimento@portugalcorretora.com.br, com a campanha de origem.
 - O dono atualiza o conteúdo cerca de uma vez a cada 3 meses, editando arquivos de conteúdo, sem painel.
 
@@ -46,9 +46,10 @@ Corretora com atendimento humano e próximo, antes e depois da contratação: co
 
 - SUSEP 2022910; CNPJ 21.427.722/0001-05; endereço Av. Portugal, 1285 – Jardim Bela Vista, Santo André – SP.
 - Google: nota 4,8 com 19 avaliações.
-- 12 seguradoras parceiras: Porto Seguro, Allianz, Tokio Marine, HDI, Suhai, Yelum, Bradesco Seguros, Pier, Azul, Itaú Seguros, Mitsui Sumitomo, SulAmérica Saúde.
+- 14 seguradoras parceiras: Porto Seguro, Allianz, Tokio Marine, HDI, Suhai, Yelum, Bradesco Seguros, Pier, Azul, Itaú Seguros, Mitsui Sumitomo, SulAmérica Saúde, Zurich, Mapfre.
+- Razão social: Portugal Administradora e Corretora de Seguros Limitada. Porto Elite desde 2021.
 - Textos do site aprovados pelo cliente: `src/content/` (resumo em `docs/revisao-textos.md`).
-- **Ausentes, não inventar:** números de clientes e apólices (marcador `1000`), depoimentos (o cliente escolherá 3 do Google), fotos reais da equipe e do escritório, ano e categoria do Prêmio Porto Elite, razão social.
+- **Ausentes, não inventar:** números de clientes e apólices (marcador `1000`), depoimentos (o cliente escolherá 3 do Google), fotos reais da equipe e do escritório.
 
 ## Product Principles
 

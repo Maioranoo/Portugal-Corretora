@@ -7,7 +7,8 @@ import { buildWhatsAppUrl } from '../lib/whatsapp';
 
 const waUrl = buildWhatsAppUrl(COMPANY.whatsapp, CLIENT_PAGE.whatsappMessage);
 const withAssistance = INSURERS.filter((i) => i.assistance);
-const tel = (n: string) => `tel:${n.replace(/\D/g, '')}`;
+// Mantém o + dos números internacionais (ex.: +55 11 ...); o resto vira só dígitos.
+const tel = (n: string) => `tel:${n.trim().startsWith('+') ? '+' : ''}${n.replace(/\D/g, '')}`;
 ---
 <BaseLayout title={CLIENT_PAGE.seo.title} description={CLIENT_PAGE.seo.description} path="/ja-sou-cliente">
   <section class="c-hero" aria-labelledby="cliente-titulo">

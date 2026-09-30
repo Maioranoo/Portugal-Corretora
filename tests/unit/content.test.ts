@@ -40,9 +40,9 @@ describe('produtos', () => {
 });
 
 describe('seguradoras', () => {
-  test('12 seguradoras sem repetição', () => {
-    expect(INSURERS).toHaveLength(12);
-    expect(new Set(INSURERS.map((i) => i.id)).size).toBe(12);
+  test('14 seguradoras sem repetição', () => {
+    expect(INSURERS).toHaveLength(14);
+    expect(new Set(INSURERS.map((i) => i.id)).size).toBe(14);
   });
 });
 
@@ -52,11 +52,21 @@ describe('corretora', () => {
     expect(site.COMPANY.susep).toBe('2022910');
     expect(site.COMPANY.whatsapp).toBe('5511938052598');
     expect(site.COMPANY.email).toBe('atendimento@portugalcorretora.com.br');
-    expect(site.COMPANY.hoursLabel).toBe('Segunda a sexta, das 8h às 20h');
+    expect(site.COMPANY.hoursLabel).toBe('Segunda a sexta, das 9h às 18h');
+    expect(site.COMPANY.legalName).toBe('Portugal Administradora e Corretora de Seguros Limitada');
+    expect(site.COMPANY.portoElite.label).toBe('Porto Elite');
   });
 });
 
 describe('regras de redação', () => {
+  test('nenhum texto cita o horário antigo (8h às 20h)', () => {
+    const all = [...strings(PRODUCTS), ...strings(site)];
+    for (const text of all) expect(text, text).not.toMatch(/8h às 20h|20h/);
+  });
+  test('o prêmio aparece só como "Porto Elite"', () => {
+    const all = [...strings(PRODUCTS), ...strings(site)];
+    for (const text of all) expect(text, text).not.toMatch(/Prêmio Porto Elite/);
+  });
   test('sem travessão (— ou –) em nenhum texto visível', () => {
     const all = [...strings(PRODUCTS), ...strings(site), ...strings(INSURERS)];
     for (const text of all) expect(text, text).not.toMatch(/[–—]/);

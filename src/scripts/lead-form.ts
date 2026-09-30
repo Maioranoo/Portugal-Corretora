@@ -9,7 +9,7 @@ import { buildLeadMessage, buildWhatsAppUrl } from '../lib/whatsapp';
 const OFFLINE_MSG = 'Parece que você está sem internet. Verifique a conexão e tente de novo. Seus dados continuam aqui.';
 const IN_HOURS_MSG = 'Nossa equipe continua a conversa com você por lá.';
 const OFF_HOURS_MSG =
-  'Recebemos seu contato! Nosso atendimento funciona de segunda a sexta, das 8h às 20h. Retornamos no próximo dia útil.';
+  'Recebemos seu contato! Nosso atendimento funciona de segunda a sexta, das 9h às 18h. Retornamos no próximo dia útil.';
 
 function sessionStore(): Storage | null {
   try {

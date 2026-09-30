@@ -78,7 +78,7 @@ test('fora do horário mostra aviso de retorno no próximo dia útil', async ({ 
   await page.getByLabel('Modalidade').selectOption('Individual');
   await page.getByRole('button', { name: 'Falar com um especialista' }).click();
   await expect(page.locator('[data-success-hours]')).toHaveText(
-    'Recebemos seu contato! Nosso atendimento funciona de segunda a sexta, das 8h às 20h. Retornamos no próximo dia útil.',
+    'Recebemos seu contato! Nosso atendimento funciona de segunda a sexta, das 9h às 18h. Retornamos no próximo dia útil.',
   );
 });
 

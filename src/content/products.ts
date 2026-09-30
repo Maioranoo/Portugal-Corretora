@@ -87,7 +87,7 @@ export const PRODUCTS: readonly Product[] = [
       },
     ],
     // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
-    insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'suhai', 'yelum', 'bradesco', 'pier', 'azul', 'itau', 'mitsui-sumitomo'],
+    insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'suhai', 'yelum', 'bradesco', 'pier', 'azul', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },
   {
     slug: 'seguro-residencial',
@@ -144,7 +144,7 @@ export const PRODUCTS: readonly Product[] = [
       },
     ],
     // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
-    insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'pier', 'itau', 'mitsui-sumitomo'],
+    insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'pier', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },
   {
     slug: 'plano-de-saude',
@@ -263,7 +263,7 @@ export const PRODUCTS: readonly Product[] = [
     ],
     // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
     insurers: ['porto', 'itau', 'bradesco'],
-    badge: 'Prêmio Porto Elite',
+    badge: 'Porto Elite desde 2021',
   },
   {
     slug: 'fianca-locaticia',
@@ -375,7 +375,7 @@ export const PRODUCTS: readonly Product[] = [
       },
     ],
     // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
-    insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'itau', 'mitsui-sumitomo'],
+    insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },
   {
     slug: 'seguro-viagem',
@@ -432,7 +432,7 @@ export const PRODUCTS: readonly Product[] = [
       },
     ],
     // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
-    insurers: ['porto', 'allianz', 'tokio-marine'],
+    insurers: ['porto', 'allianz', 'tokio-marine', 'zurich', 'mapfre'],
   },
   {
     slug: 'seguro-empresarial',
@@ -489,7 +489,7 @@ export const PRODUCTS: readonly Product[] = [
       },
     ],
     // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
-    insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'itau', 'mitsui-sumitomo'],
+    insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },
 ];
 

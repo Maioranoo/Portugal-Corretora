@@ -3,7 +3,7 @@ import type { Faq, Item } from './products';
 
 export const COMPANY = {
   name: 'Portugal Corretora de Seguros',
-  legalName: '[RAZÃO SOCIAL]', // PENDENTE: cliente envia
+  legalName: 'Portugal Administradora e Corretora de Seguros Limitada',
   cnpj: '21.427.722/0001-05',
   susep: '2022910',
   address: {
@@ -19,7 +19,7 @@ export const COMPANY = {
   whatsappDisplay: WHATSAPP_DISPLAY,
   email: 'atendimento@portugalcorretora.com.br',
   dpoEmail: 'atendimento@portugalcorretora.com.br',
-  hoursLabel: 'Segunda a sexta, das 8h às 20h',
+  hoursLabel: 'Segunda a sexta, das 9h às 18h',
   yearsLabel: '+12 anos',
   google: {
     rating: 4.8,
@@ -34,7 +34,7 @@ export const COMPANY = {
     facebook: 'https://www.facebook.com/portugalseguros',
     instagram: 'https://www.instagram.com/portugalcorretora/',
   },
-  portoElite: { label: 'Prêmio Porto Elite, Consórcio', conferir: true }, // PENDENTE: ano e categoria
+  portoElite: { label: 'Porto Elite', since: 2021 },
 } as const;
 
 export const HOME = {
@@ -54,13 +54,13 @@ export const STATS = [
   { value: '1000', label: 'clientes atendidos' }, // PENDENTE: número real
   { value: '1000', label: 'apólices ativas' }, // PENDENTE: número real
   { value: '+12', label: 'anos de mercado' },
-  { value: '12', label: 'seguradoras parceiras' },
+  { value: '14', label: 'seguradoras parceiras' },
 ] as const;
 
 export const DIFFERENTIALS: readonly Item[] = [
   {
     title: 'Atendimento pelo WhatsApp',
-    text: 'Das 8h às 20h, em dias úteis, com gente de verdade do outro lado.',
+    text: 'De segunda a sexta, das 9h às 18h, com gente de verdade do outro lado.',
   },
   {
     title: 'Acompanhamento no sinistro',
@@ -71,8 +71,8 @@ export const DIFFERENTIALS: readonly Item[] = [
     text: 'Comparamos as opções para encontrar o melhor preço e a cobertura certa.',
   },
   {
-    title: 'Prêmio Porto Elite',
-    text: 'Reconhecimento da Porto pelo nosso trabalho com consórcio.', // conferir: ano e categoria
+    title: 'Porto Elite',
+    text: 'Corretora Porto Elite desde 2021, reconhecida pela Porto pelo nosso trabalho.',
   },
 ];
 
@@ -135,7 +135,7 @@ export const SECTIONS = {
   faq: { title: 'Perguntas frequentes' },
   contact: {
     title: 'Fale com um especialista',
-    lead: 'Conte o que você precisa. A gente compara as seguradoras e responde pelo WhatsApp, de segunda a sexta, das 8h às 20h.',
+    lead: 'Conte o que você precisa. A gente compara as seguradoras e responde pelo WhatsApp, de segunda a sexta, das 9h às 18h.',
   },
 } as const;
 

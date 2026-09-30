@@ -10,6 +10,8 @@ test('já sou cliente: WhatsApp de sinistro e telefones de assistência', async 
   );
   await expect(page.locator('a[href^="tel:"]').first()).toBeAttached();
   await expect(page.locator('a[href="tel:08003186546"]')).toHaveCount(1); // Tokio Marine
+  await expect(page.locator('a[href="tel:+551125658400"]')).toHaveCount(1); // Mapfre no exterior, com o +
+  await expect(page.locator('a[href="tel:08007291400"]').first()).toBeAttached(); // Zurich
 });
 
 test('privacidade: dados da corretora, encarregado e cookies', async ({ page }) => {

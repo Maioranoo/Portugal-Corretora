@@ -7,8 +7,8 @@ export interface BusinessHours {
 
 export const DEFAULT_HOURS: BusinessHours = {
   timeZone: 'America/Sao_Paulo',
-  openHour: 8,
-  closeHour: 20,
+  openHour: 9,
+  closeHour: 18,
   days: [1, 2, 3, 4, 5],
 };
 

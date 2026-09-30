@@ -17,9 +17,7 @@ Legenda:
 | 2 | **Quem fornece o e-mail atendimento@portugalcorretora.com.br** (Google Workspace, Microsoft 365, Wix ou outro). Necessário para preservar os registros MX ao trocar o DNS e para configurar SPF/DKIM do Resend | Bloqueia o lançamento | Formulário testado com e-mail de teste |
 | 4 | Números da corretora: clientes atendidos, apólices ativas, sinistros resolvidos | Não bloqueia | Marcador `1000` |
 | 5 | Fotos reais da equipe e/ou do escritório | Não bloqueia | Imagens de banco provisórias |
-| 6 | Prêmio Porto Elite: ano(s) e nome exato da categoria | Não bloqueia | Selo com texto genérico "Prêmio Porto Elite – Consórcio" marcado para revisão |
 | 7 | Quais seguradoras trabalham com cada produto | Não bloqueia | Divisão provável, marcada para revisão |
-| 9 | Razão social da empresa (vai para o rodapé e a política de privacidade) | Não bloqueia | Marcador `[RAZÃO SOCIAL]` |
 | 12 | 3 avaliações do Google escolhidas para exibir no site | Não bloqueia | Seção mostra só a nota 4,8 e o link |
 | 13 | Código (ID) do Pixel da Meta | Não bloqueia | Nada é carregado enquanto não houver ID |
 | 14 | Confirmação dos telefones de assistência 24h de cada seguradora (a pesquisa dos números públicos fica com o desenvolvimento) | Não bloqueia | Números públicos pesquisados, marcados para conferência |
@@ -29,11 +27,15 @@ Legenda:
 | 17 | Contas na **Vercel** e no **Resend** criadas pelo cliente (ou acesso concedido) | Bloqueia o lançamento | Desenvolvimento local |
 
 ### Pendências já resolvidas (2026-09-29)
-- **Horário de atendimento:** 8h às 20h, de segunda a sexta (sem atendimento nos fins de semana).
+- **Horário de atendimento:** 9h às 18h, de segunda a sexta (sem atendimento nos fins de semana). Atualizado pelo cliente em 30/09/2026; antes era 8h às 20h.
 - **Facebook:** https://www.facebook.com/portugalseguros
 - **Instagram:** https://www.instagram.com/portugalcorretora/
 - **Link de avaliação:** `/avaliar` redireciona para `https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3`. Esse link abre a janela "escrever avaliação" no Google. Se ele falhar no celular durante os testes, trocamos pelo link oficial do Perfil da Empresa no Google.
 - **Encarregado de dados (DPO):** atendimento@portugalcorretora.com.br
+- **Razão social:** Portugal Administradora e Corretora de Seguros Limitada.
+- **Porto Elite:** a corretora é Porto Elite desde 2021; exibir apenas como "Porto Elite" (sem "Prêmio").
+- **Seguradoras:** mais 2, Zurich e Mapfre (total 14).
+- **Produtos:** mais 2, Seguro Viagem e Seguro Empresarial (patrimonial), com páginas próprias (total 8).
 - **Logo:** arquivos em `brand/Logos/`.
   - Cor do logo medida no arquivo: `#003780`.
   - Versão colorida principal: `Logo Portugal.png` (1913×756, transparente).
@@ -62,17 +64,17 @@ Legenda:
 - Endereço: Av. Portugal, 1285 – Jardim Bela Vista, Santo André – SP, 09040-011
 - WhatsApp Business: (11) 93805-2598 (`5511938052598`)
 - E-mail que recebe os pedidos: atendimento@portugalcorretora.com.br
-- Horário de atendimento: 8h às 20h, de segunda a sexta
+- Horário de atendimento: 9h às 18h, de segunda a sexta
 - Redes sociais: Facebook (facebook.com/portugalseguros) e Instagram (@portugalcorretora)
 - Encarregado de dados (DPO): atendimento@portugalcorretora.com.br
 - Tempo de mercado: +12 anos
 - Google: nota 4,8 com 19 avaliações
-- Seguradoras parceiras (12): Porto Seguro, Allianz, Tokio Marine, HDI, Suhai, Yelum, Bradesco Seguros, Pier, Azul Seguros, Itaú Seguros, Mitsui Sumitomo e SulAmérica Saúde
+- Seguradoras parceiras (14): Porto Seguro, Allianz, Tokio Marine, HDI, Suhai, Yelum, Bradesco Seguros, Pier, Azul Seguros, Itaú Seguros, Mitsui Sumitomo, SulAmérica Saúde, Zurich e Mapfre
 - Diferenciais:
-  - atendimento pelo WhatsApp das 8h às 20h, em dias úteis;
+  - atendimento pelo WhatsApp das 9h às 18h, em dias úteis;
   - acompanhamento em caso de sinistro;
   - "comparamos mais de 10 seguradoras para encontrar o melhor preço para você";
-  - Prêmio Porto Elite (consórcio).
+  - Porto Elite desde 2021.
 - Redação: não usar promessas absolutas ("os melhores preços", "24 horas") por causa das políticas da Meta e do CDC.
 
 ## 3. Produtos
@@ -113,7 +115,7 @@ Legenda:
 3. **Como funciona**, em 3 passos.
 4. **Diferenciais.**
 5. **Números** (marcador `1000` enquanto faltar o dado).
-6. **Logos das 12 seguradoras**, em escala de cinza e ganhando cor ao passar o mouse.
+6. **Logos das 14 seguradoras**, em escala de cinza e ganhando cor ao passar o mouse.
 7. **Avaliações:** nota, link para o Google e até 3 depoimentos reais.
 8. **Sobre a Portugal:** texto curto, foto e endereço.
 9. **Faixa "Já sou cliente".**
@@ -158,7 +160,7 @@ Base legal: procedimentos preliminares a pedido do titular (LGPD, art. 7º, V).
 3. Em paralelo, os dados são enviados para `POST /api/lead` de forma que sobrevivam à troca de aba ou app (`fetch` com `keepalive`).
 4. O servidor envia um e-mail pelo Resend para atendimento@ com nome, WhatsApp, produto, detalhe, cidade, página de origem, UTMs (source, medium, campaign, content, term), data e hora.
 5. A página mostra a confirmação "Pronto! Abrimos o WhatsApp…", com um botão de reserva.
-   - **Fora do horário de atendimento** (antes das 8h, depois das 20h, sábado ou domingo, no fuso America/Sao_Paulo), a confirmação diz: *"Recebemos seu contato! Nosso atendimento funciona de segunda a sexta, das 8h às 20h. Retornamos no próximo dia útil."*
+   - **Fora do horário de atendimento** (antes das 9h, depois das 18h, sábado ou domingo, no fuso America/Sao_Paulo), a confirmação diz: *"Recebemos seu contato! Nosso atendimento funciona de segunda a sexta, das 9h às 18h. Retornamos no próximo dia útil."*
    - Feriados não são considerados no lançamento.
 6. Se o Pixel estiver consentido, dispara o evento `Lead` com o produto.
 
