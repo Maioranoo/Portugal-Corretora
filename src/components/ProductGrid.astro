@@ -23,14 +23,14 @@ const ICONS: Record<Product['slug'], IconName> = {
 ---
 <section class="section products" id={id} aria-labelledby={`${id}-titulo`}>
   <div class="container">
-    <div class="section__head">
+    <div class="section__head" data-reveal>
       <h2 class="section__title" id={`${id}-titulo`}>{title}</h2>
     </div>
 
     <ul class="products__grid">
       {
         products.map((p) => (
-          <li>
+          <li data-reveal>
             <a class="tile" href={`/${p.slug}`}>
               <svg class="tile__arc" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
                 <path d="M10 118 C 40 40, 130 10, 198 12" pathLength="1" />
@@ -86,9 +86,14 @@ const ICONS: Record<Product['slug'], IconName> = {
 
   .tile:hover {
     border-color: var(--color-brand);
-    box-shadow: var(--shadow-2);
-    transform: translateY(-2px);
     text-decoration: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .tile:hover {
+      box-shadow: var(--shadow-2);
+      transform: translateY(-2px);
+    }
   }
 
   .tile__arc {

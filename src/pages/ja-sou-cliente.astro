@@ -30,7 +30,7 @@ const tel = (n: string) => `tel:${n.trim().startsWith('+') ? '+' : ''}${n.replac
       <ul class="c-topics">
         {
           CLIENT_PAGE.topics.map((t) => (
-            <li>
+            <li data-reveal>
               <h2>{t.title}</h2>
               <p>{t.text}</p>
               <a href={waUrl} target="_blank" rel="noopener" data-wa-contact data-wa-context="Já sou cliente">
@@ -46,14 +46,14 @@ const tel = (n: string) => `tel:${n.trim().startsWith('+') ? '+' : ''}${n.replac
 
   <section class="section" aria-labelledby="telefones-titulo">
     <div class="container">
-      <div class="section__head">
+      <div class="section__head" data-reveal>
         <h2 class="section__title" id="telefones-titulo">{CLIENT_PAGE.phonesTitle}</h2>
         <p class="section__lead">{CLIENT_PAGE.phonesNote}</p>
       </div>
       <ul class="c-phones">
         {
           withAssistance.map((i) => (
-            <li>
+            <li data-reveal>
               <h3>{i.name}</h3>
               {i.assistance!.phones.length > 0 ? (
                 <ul>

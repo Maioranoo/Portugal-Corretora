@@ -11,14 +11,14 @@ const ICONS: IconName[] = ['whatsapp', 'shield', 'check', 'star'];
 ---
 <section class="section section--surface diff" aria-labelledby="diferenciais-titulo">
   <div class="container diff__grid">
-    <div>
+    <div data-reveal>
       <h2 class="section__title" id="diferenciais-titulo">{SECTIONS.differentials.title}</h2>
       <p class="section__lead">{SECTIONS.differentials.lead}</p>
     </div>
     <ul class="diff__list">
       {
         items.map((item, i) => (
-          <li>
+          <li data-reveal>
             <Icon name={ICONS[i % ICONS.length]} size={26} />
             <h3>{item.title}</h3>
             <p>{item.text}</p>

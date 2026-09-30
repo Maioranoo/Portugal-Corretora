@@ -54,13 +54,13 @@ const jsonLd = {
 
   <section class="section section--surface coverages" aria-labelledby="coberturas-titulo">
     <div class="container">
-      <div class="section__head">
+      <div class="section__head" data-reveal>
         <h2 class="section__title" id="coberturas-titulo">{product.coveragesTitle}</h2>
       </div>
       <ul class="coverages__list">
         {
           product.coverages.map((c) => (
-            <li>
+            <li data-reveal>
               <span class="coverages__check"><Icon name="check" size={20} /></span>
               <div>
                 <h3>{c.title}</h3>
@@ -75,11 +75,11 @@ const jsonLd = {
 
   <section class="section audiences" aria-labelledby="publico-titulo">
     <div class="container audiences__grid">
-      <h2 class="section__title" id="publico-titulo">{PRODUCT_PAGE.audiencesTitle}</h2>
+      <h2 class="section__title" id="publico-titulo" data-reveal>{PRODUCT_PAGE.audiencesTitle}</h2>
       <ul class="audiences__list">
         {
           product.audiences.map((a) => (
-            <li>
+            <li data-reveal>
               <h3>{a.title}</h3>
               <p>{a.text}</p>
             </li>
@@ -95,7 +95,7 @@ const jsonLd = {
   <Faq faqs={product.faqs} title={`${PRODUCT_PAGE.faqTitle} ${product.name}`} name={`faq-${product.slug}`} />
 
   <section class="section p-close" aria-labelledby="fechamento-titulo">
-    <div class="container p-close__inner">
+    <div class="container p-close__inner" data-reveal>
       <h2 class="section__title" id="fechamento-titulo">{PRODUCT_PAGE.closeTitle}</h2>
       <p class="section__lead">{PRODUCT_PAGE.closeLead}</p>
       <div class="p-close__actions">

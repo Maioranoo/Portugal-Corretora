@@ -35,9 +35,9 @@ const items = PRODUCTS.slice(0, ANGLES.length).map((product, i) => {
     {
       items.map(({ d, end }, i) => (
         <g class="orbit__arc" data-arc={i}>
-          <path class="orbit__track" d={d} />
+          <path class="orbit__track" d={d} pathLength="1" style={`--i:${i}`} />
           <path class="orbit__draw" d={d} pathLength="1" />
-          <circle class="orbit__dot" cx={end.x.toFixed(1)} cy={end.y.toFixed(1)} r="7" />
+          <circle class="orbit__dot" cx={end.x.toFixed(1)} cy={end.y.toFixed(1)} r="7" style={`--i:${i}`} />
         </g>
       ))
     }
@@ -106,6 +106,36 @@ const items = PRODUCTS.slice(0, ANGLES.length).map((product, i) => {
     stroke-opacity: 0.22;
     stroke-width: 2;
     vector-effect: non-scaling-stroke;
+  }
+
+  /* Abertura: os seis arcos se desenham do globo até os rótulos, em cascata, uma única vez */
+  @media (prefers-reduced-motion: no-preference) {
+    .orbit__track {
+      stroke-dasharray: 1;
+      animation: orbit-draw 900ms var(--ease-out) calc(250ms + var(--i) * 70ms) both;
+    }
+
+    .orbit__dot {
+      animation: orbit-dot 300ms var(--ease-out) calc(750ms + var(--i) * 70ms) both;
+    }
+  }
+
+  @keyframes orbit-draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes orbit-dot {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .orbit__draw {

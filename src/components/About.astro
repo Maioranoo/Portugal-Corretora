@@ -6,7 +6,7 @@ import Icon from './Icon.astro';
 <section class="section section--tint about" id="sobre" aria-labelledby="sobre-titulo">
   <Globe class="about__globe" disc={false} />
   <div class="container about__grid">
-    <div class="about__text">
+    <div class="about__text" data-reveal>
       <h2 class="section__title" id="sobre-titulo">{ABOUT.title}</h2>
       {ABOUT.paragraphs.map((p) => <p>{p}</p>)}
       <p class="about__address">
@@ -16,7 +16,7 @@ import Icon from './Icon.astro';
         </a>
       </p>
     </div>
-    <dl class="about__facts">
+    <dl class="about__facts" data-reveal>
       {
         STATS.map((s) => (
           <div>

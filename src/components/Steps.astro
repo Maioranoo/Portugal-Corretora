@@ -10,10 +10,10 @@ const { steps, title, id = 'como-funciona' } = Astro.props;
 ---
 <section class="section steps" id={id} aria-labelledby={`${id}-titulo`}>
   <div class="container">
-    <div class="section__head">
+    <div class="section__head" data-reveal>
       <h2 class="section__title" id={`${id}-titulo`}>{title}</h2>
     </div>
-    <div class="steps__route">
+    <div class="steps__route" data-reveal>
       <svg class="steps__arc" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <path d="M60 100 C 300 10, 700 10, 940 100" />
       </svg>

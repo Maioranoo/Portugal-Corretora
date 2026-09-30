@@ -13,7 +13,7 @@ const waUrl = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(productName
 ---
 <section class="section final" id="contato" aria-labelledby="contato-titulo">
   <div class="container final__grid">
-    <div class="final__text">
+    <div class="final__text" data-reveal>
       <h2 class="section__title" id="contato-titulo">{SECTIONS.contact.title}</h2>
       <p class="section__lead">{SECTIONS.contact.lead}</p>
       <a class="button button--wa-outline" href={waUrl} target="_blank" rel="noopener" data-wa-contact data-wa-context="Chamada final">
@@ -21,7 +21,7 @@ const waUrl = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(productName
         Falar no WhatsApp
       </a>
     </div>
-    <div class="final__form">
+    <div class="final__form" data-reveal>
       <slot />
     </div>
   </div>

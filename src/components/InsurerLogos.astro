@@ -25,11 +25,11 @@ const list = (ids ? INSURERS.filter((i) => ids.includes(i.id)) : INSURERS).map((
 ---
 <section class="section insurers" aria-labelledby="seguradoras-titulo">
   <div class="container">
-    <div class="section__head insurers__head">
+    <div class="section__head insurers__head" data-reveal>
       <h2 class="section__title" id="seguradoras-titulo">{title}</h2>
       <p class="section__lead">{lead}</p>
     </div>
-    <ul class="insurers__grid" data-count={list.length}>
+    <ul class="insurers__grid" data-count={list.length} data-reveal>
       {
         list.map((i) => (
           <li data-insurer={i.id}>

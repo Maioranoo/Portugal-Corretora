@@ -43,7 +43,12 @@ const href = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(context));
 
   .wa-float:hover {
     background: var(--color-whatsapp-hover);
-    transform: translateY(-2px);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .wa-float:hover {
+      transform: translateY(-2px);
+    }
   }
 
   .wa-float__label {

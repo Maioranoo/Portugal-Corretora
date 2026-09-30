@@ -4,14 +4,14 @@ import Icon from './Icon.astro';
 ---
 <section class="section section--surface reviews" aria-labelledby="avaliacoes-titulo">
   <div class="container reviews__grid">
-    <div class="reviews__score">
+    <div class="reviews__score" data-reveal>
       <p class="reviews__number" aria-hidden="true">{COMPANY.google.ratingLabel}</p>
       <div class="reviews__stars" role="img" aria-label={`Nota ${COMPANY.google.ratingLabel} de 5 no Google`}>
         {[0, 1, 2, 3, 4].map(() => <Icon name="star-fill" size={24} />)}
       </div>
       <p class="reviews__count">{COMPANY.google.count} avaliações no Google</p>
     </div>
-    <div class="reviews__body">
+    <div class="reviews__body" data-reveal>
       <h2 class="section__title" id="avaliacoes-titulo">{SECTIONS.reviews.title}</h2>
       {
         TESTIMONIALS.length > 0 ? (

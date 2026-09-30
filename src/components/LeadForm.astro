@@ -265,6 +265,19 @@ const fallbackUrl = buildWhatsAppUrl(WHATSAPP_NUMBER, buildGenericMessage(produc
     display: none;
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    .lead__success {
+      transition:
+        opacity 320ms var(--ease-out),
+        transform 320ms var(--ease-out);
+
+      @starting-style {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+    }
+  }
+
   .lead__success:focus {
     outline: none;
   }

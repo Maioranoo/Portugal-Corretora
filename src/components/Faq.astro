@@ -12,8 +12,8 @@ const { faqs, title = SECTIONS.faq.title, name = 'faq' } = Astro.props;
 ---
 <section class="section faq" aria-labelledby={`${name}-titulo`}>
   <div class="container faq__grid">
-    <h2 class="section__title" id={`${name}-titulo`}>{title}</h2>
-    <div class="faq__list">
+    <h2 class="section__title" id={`${name}-titulo`} data-reveal>{title}</h2>
+    <div class="faq__list" data-reveal>
       {
         faqs.map((f) => (
           <details name={name}>
