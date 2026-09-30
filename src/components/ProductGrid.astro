@@ -18,8 +18,6 @@ const ICONS: Record<Product['slug'], IconName> = {
   'fianca-locaticia': 'key',
   'seguro-de-vida': 'heart',
 };
-const featured = products.filter((p) => p.featured);
-const others = products.filter((p) => !p.featured);
 ---
 <section class="section products" id={id} aria-labelledby={`${id}-titulo`}>
   <div class="container">
@@ -27,9 +25,9 @@ const others = products.filter((p) => !p.featured);
       <h2 class="section__title" id={`${id}-titulo`}>{title}</h2>
     </div>
 
-    <ul class="products__featured">
+    <ul class="products__grid">
       {
-        featured.map((p) => (
+        products.map((p) => (
           <li>
             <a class="tile" href={`/${p.slug}`}>
               <svg class="tile__arc" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
@@ -47,37 +45,19 @@ const others = products.filter((p) => !p.featured);
         ))
       }
     </ul>
-
-    <ul class="products__others">
-      {
-        others.map((p) => (
-          <li>
-            <a class="row" href={`/${p.slug}`}>
-              <span class="tile__icon tile__icon--small"><Icon name={ICONS[p.slug]} size={22} /></span>
-              <span class="row__text">
-                <span class="row__name">{p.name}</span>
-                <span class="row__desc">{p.cardText}</span>
-              </span>
-              <Icon name="arrow" size={20} class="row__arrow" />
-            </a>
-          </li>
-        ))
-      }
-    </ul>
   </div>
 </section>
 
 <style>
-  .products__featured {
+  .products__grid {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-4);
   }
 
-  .products__featured li,
-  .products__others li {
+  .products__grid li {
     display: grid;
   }
 
@@ -88,7 +68,7 @@ const others = products.filter((p) => !p.featured);
     align-items: flex-start;
     gap: var(--space-3);
     height: 100%;
-    min-height: 260px;
+    min-height: 240px;
     padding: var(--space-5);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
@@ -111,9 +91,9 @@ const others = products.filter((p) => !p.featured);
 
   .tile__arc {
     position: absolute;
-    right: -8px;
+    right: -6px;
     top: -4px;
-    width: 58%;
+    width: min(40%, 150px);
     fill: none;
     stroke: var(--color-brand);
     stroke-width: 1.5;
@@ -135,12 +115,6 @@ const others = products.filter((p) => !p.featured);
     border-radius: var(--radius);
     background: var(--color-globe-disc);
     color: var(--color-brand);
-  }
-
-  .tile__icon--small {
-    width: 44px;
-    height: 44px;
-    flex: none;
   }
 
   .tile__name {
@@ -177,67 +151,14 @@ const others = products.filter((p) => !p.featured);
     transition: transform var(--duration) var(--ease-out);
   }
 
-  .products__others {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-4);
-    margin-top: var(--space-4);
-  }
-
-  .row {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-    min-height: 84px;
-    padding: var(--space-4) var(--space-5);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: transparent;
-    color: var(--color-ink);
-    text-decoration: none;
-    transition: border-color var(--duration) var(--ease-out), background-color var(--duration) var(--ease-out);
-  }
-
-  .row:hover {
-    border-color: var(--color-brand);
-    background: var(--color-surface);
-    text-decoration: none;
-  }
-
-  .row__text {
-    display: grid;
-    gap: 2px;
-  }
-
-  .row__name {
-    font-weight: 800;
-    font-stretch: var(--width-display);
-    font-size: var(--step-1);
-    color: var(--color-brand);
-  }
-
-  .row__desc {
-    font-size: var(--step--1);
-    color: var(--color-text-muted);
-  }
-
-  .row :global(.row__arrow) {
-    margin-left: auto;
-    flex: none;
-    color: var(--color-brand);
-  }
-
   @media (max-width: 1080px) {
-    .products__featured {
+    .products__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 640px) {
-    .products__featured,
-    .products__others {
+    .products__grid {
       grid-template-columns: 1fr;
     }
 

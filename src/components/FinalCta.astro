@@ -2,6 +2,7 @@
 import type { ProductSlug } from '../content/product-fields';
 import { COMPANY, SECTIONS } from '../content/site';
 import { buildGenericMessage, buildWhatsAppUrl } from '../lib/whatsapp';
+import Globe from './Globe.astro';
 import Icon from './Icon.astro';
 
 interface Props {
@@ -12,6 +13,7 @@ const { productName } = Astro.props;
 const waUrl = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(productName));
 ---
 <section class="section final" id="contato" aria-labelledby="contato-titulo">
+  <Globe class="final__globe" />
   <div class="container final__grid">
     <div class="final__text">
       <h2 class="section__title" id="contato-titulo">{SECTIONS.contact.title}</h2>
@@ -28,7 +30,26 @@ const waUrl = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(productName
 </section>
 
 <style>
+  .final {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Globo discreto: disco azul muito claro e traços quase transparentes, sangrando pela direita */
+  .final :global(.final__globe) {
+    position: absolute;
+    right: -6%;
+    top: 50%;
+    width: min(480px, 46vw);
+    height: auto;
+    transform: translateY(-50%);
+    --globe-disc: rgb(232 238 247 / 0.7);
+    --globe-line: rgb(0 55 128 / 0.1);
+    pointer-events: none;
+  }
+
   .final__grid {
+    position: relative;
     display: grid;
     grid-template-columns: 5fr 7fr;
     gap: var(--space-8);
@@ -50,6 +71,14 @@ const waUrl = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(productName
   }
 
   @media (max-width: 900px) {
+    .final :global(.final__globe) {
+      top: auto;
+      bottom: -18%;
+      right: -30%;
+      width: 90vw;
+      transform: none;
+    }
+
     .final__grid {
       grid-template-columns: 1fr;
       gap: var(--space-6);
