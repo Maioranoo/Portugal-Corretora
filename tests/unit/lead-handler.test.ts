@@ -83,6 +83,21 @@ describe('handleLeadRequest', () => {
     expect(res.status).toBe(200);
     expect(deps.sendEmail).not.toHaveBeenCalled();
   });
+  test('pessoa rápida (1,6s) é aceita', async () => {
+    await handleLeadRequest(req({ ...valid, elapsedMs: 1600 }), deps);
+    expect(deps.sendEmail).toHaveBeenCalledOnce();
+  });
+  test('excesso de pedidos do mesmo endereço responde 429 sem enviar', async () => {
+    const limited = { ...deps, allowRequest: () => false };
+    const res = await handleLeadRequest(req(valid), limited);
+    expect(res.status).toBe(429);
+    expect(deps.sendEmail).not.toHaveBeenCalled();
+  });
+  test('pedido de outra origem não consome o limite', async () => {
+    const allowRequest = vi.fn(() => true);
+    await handleLeadRequest(req(valid, { origin: 'https://mal.com' }), { ...deps, allowRequest });
+    expect(allowRequest).not.toHaveBeenCalled();
+  });
   test('elapsedMs ausente é tratado como robô', async () => {
     const { elapsedMs, ...semTempo } = valid;
     await handleLeadRequest(req(semTempo), deps);

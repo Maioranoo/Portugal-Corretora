@@ -23,14 +23,15 @@ function showErrors(form: HTMLFormElement, errors: LeadErrors) {
   let first: HTMLElement | null = null;
   form.querySelectorAll<HTMLElement>('[data-error-for]').forEach((slot) => {
     const key = slot.dataset.errorFor as string;
-    const message = errors[key] ?? '';
+    // Dois produtos podem ter campos com o mesmo nome: o erro só vale para o produto escolhido.
+    const inactive = !!slot.closest('fieldset[disabled]');
+    const message = inactive ? '' : (errors[key] ?? '');
     slot.textContent = message;
-    // Procura o campo no mesmo bloco do aviso: dois produtos podem ter campos com o mesmo nome.
     const control = slot.closest('.field')?.querySelector<HTMLElement>('input, select, textarea');
     if (!control) return;
     if (message) {
       control.setAttribute('aria-invalid', 'true');
-      if (!first && !control.closest('fieldset[disabled]')) first = control;
+      if (!first) first = control;
     } else {
       control.removeAttribute('aria-invalid');
     }
@@ -53,6 +54,10 @@ function initLeadForm(root: HTMLElement) {
       const active = !select || fs.dataset.productFields === select.value;
       fs.hidden = !active;
       fs.disabled = !active;
+      if (!active) {
+        fs.querySelectorAll('[data-error-for]').forEach((slot) => (slot.textContent = ''));
+        fs.querySelectorAll('[aria-invalid]').forEach((c) => c.removeAttribute('aria-invalid'));
+      }
     });
   };
   if (select) {

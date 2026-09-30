@@ -162,6 +162,22 @@ test('home: campo com o mesmo nome em dois produtos marca o erro no produto esco
   await expect(form.locator('[data-product-fields="seguro-empresarial"] [data-error-for="detalhes.imovel"]')).toBeEmpty();
 });
 
+test('home: trocar de produto não leva o erro do produto anterior', async ({ page }) => {
+  await stubOpen(page);
+  await captureApi(page);
+  await page.goto('/');
+  const form = page.locator('#contato [data-lead-form]');
+  await form.locator('[data-product-select]').selectOption('seguro-empresarial');
+  await form.getByLabel('Seu nome').fill('Ana');
+  await form.getByLabel('WhatsApp', { exact: true }).fill('11987654321');
+  await form.getByRole('button', { name: 'Falar com um especialista' }).click();
+  await expect(form.getByLabel('O imóvel da empresa é')).toHaveAttribute('aria-invalid', 'true');
+  await form.locator('[data-product-select]').selectOption('seguro-residencial');
+  const residencial = form.getByLabel('Tipo de imóvel');
+  await expect(residencial).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(form.locator('[data-product-fields="seguro-residencial"] [data-error-for="detalhes.imovel"]')).toBeEmpty();
+});
+
 test('sem internet mostra aviso e mantém os dados', async ({ page, context }) => {
   await stubOpen(page);
   await page.goto('/seguro-de-vida');

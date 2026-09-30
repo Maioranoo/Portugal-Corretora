@@ -64,9 +64,15 @@ Em **Vercel → projeto → Settings → Environment Variables**:
 | Variável | Para quê | Obrigatória? |
 |---|---|---|
 | `RESEND_API_KEY` | Chave do Resend para enviar o e-mail do formulário | Sim, para receber os pedidos por e-mail |
-| `LEAD_TO_EMAIL` | Quem recebe os pedidos | Não (padrão: atendimento@portugalcorretora.com.br) |
-| `LEAD_FROM_EMAIL` | Remetente do e-mail (domínio verificado no Resend) | Não (padrão: site@portugalcorretora.com.br) |
+| `LEAD_TO_EMAIL` | Quem recebe os pedidos | Não (padrão, mesmo se ficar vazia: atendimento@portugalcorretora.com.br) |
+| `LEAD_FROM_EMAIL` | Remetente do e-mail (domínio verificado no Resend) | Não (padrão, mesmo se ficar vazia: site@portugalcorretora.com.br) |
 | `PUBLIC_META_PIXEL_ID` | ID do Pixel da Meta | Não. Vazio = Pixel desligado |
+
+### Limite de envios do formulário (Firewall da Vercel)
+
+O próprio site já barra mais de 5 pedidos em 10 minutos vindos do mesmo endereço, mas cada cópia da função conta
+separado. Para completar, em **Vercel → projeto → Firewall → Rules**, crie uma regra de **Rate Limit** para o caminho
+`/api/lead`: 10 pedidos por minuto por IP, ação **Deny**.
 
 ### Ativar o Pixel da Meta
 
@@ -118,7 +124,7 @@ docs/superpowers/ especificação e plano de implementação
 ### Decisões importantes
 
 - **Formulário:** abre o WhatsApp no mesmo clique e envia o pedido para `/api/lead` (função da Vercel), que valida,
-  barra robôs (campo invisível, tempo mínimo, origem) e envia o e-mail pelo Resend. Nenhum dado pessoal fica guardado
+  barra robôs (campo invisível, tempo mínimo, origem, limite por endereço) e envia o e-mail pelo Resend. Nenhum dado pessoal fica guardado
   nem vai para os logs.
 - **LGPD:** o Pixel só carrega depois do "Aceitar"; "Recusar" tem o mesmo peso visual; a escolha vale 6 meses.
 - **Segurança:** os headers (CSP, HSTS etc.) são escritos no `.vercel/output/config.json` por

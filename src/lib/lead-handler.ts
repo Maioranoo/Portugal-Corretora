@@ -2,12 +2,15 @@ import { validateLead } from './lead';
 import { renderLeadEmail, type EmailMessage } from './lead-email';
 
 export const MAX_BODY_BYTES = 8192;
-export const MIN_ELAPSED_MS = 3000;
+// Tempo mínimo entre abrir a página e enviar: abaixo disso é robô (uma pessoa leva bem mais para preencher)
+export const MIN_ELAPSED_MS = 1500;
 
 export interface LeadDeps {
   sendEmail: (msg: EmailMessage) => Promise<void>;
   now: () => Date;
   log: (message: string, data?: Record<string, unknown>) => void;
+  /** Limite de pedidos por endereço; sem ele, não há limite (testes). */
+  allowRequest?: (request: Request) => boolean;
 }
 
 function json(status: number, data: unknown): Response {
@@ -33,6 +36,7 @@ export function isSameOrigin(request: Request): boolean {
 export async function handleLeadRequest(request: Request, deps: LeadDeps): Promise<Response> {
   if (request.method !== 'POST') return json(405, { ok: false });
   if (!isSameOrigin(request)) return json(403, { ok: false });
+  if (deps.allowRequest && !deps.allowRequest(request)) return json(429, { ok: false });
   if (!(request.headers.get('content-type') ?? '').toLowerCase().startsWith('application/json')) {
     return json(415, { ok: false });
   }

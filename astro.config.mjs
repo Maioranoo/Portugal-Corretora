@@ -35,16 +35,9 @@ export default defineConfig({
   env: {
     schema: {
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
-      LEAD_TO_EMAIL: envField.string({
-        context: 'server',
-        access: 'secret',
-        default: 'atendimento@portugalcorretora.com.br',
-      }),
-      LEAD_FROM_EMAIL: envField.string({
-        context: 'server',
-        access: 'secret',
-        default: 'Site Portugal Corretora <site@portugalcorretora.com.br>',
-      }),
+      // Os endereços padrão ficam em src/pages/api/lead.ts (valem também quando a variável é criada vazia)
+      LEAD_TO_EMAIL: envField.string({ context: 'server', access: 'secret', optional: true }),
+      LEAD_FROM_EMAIL: envField.string({ context: 'server', access: 'secret', optional: true }),
       PUBLIC_META_PIXEL_ID: envField.string({ context: 'client', access: 'public', optional: true }),
     },
   },

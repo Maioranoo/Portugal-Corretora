@@ -24,7 +24,13 @@ const types = {
 };
 
 function resolve(urlPath) {
-  const clean = normalize(decodeURIComponent(urlPath.split('?')[0])).replace(/^(\.\.[/\\])+/, '');
+  let decoded;
+  try {
+    decoded = decodeURIComponent(urlPath.split('?')[0]);
+  } catch {
+    return null; // endereço malformado: responde 404 em vez de derrubar o servidor
+  }
+  const clean = normalize(decoded).replace(/^(\.\.[/\\])+/, '');
   for (const candidate of [clean, `${clean}.html`, join(clean, 'index.html')]) {
     const file = join(root, candidate);
     if (file.startsWith(root) && existsSync(file) && statSync(file).isFile()) return file;
