@@ -93,6 +93,21 @@ Ao terminar cada página ou mudança visual relevante:
 
 ---
 
+## Resultados do teste prático (2026-09-29)
+
+Os dois pontos que ficariam para o deploy foram testados num projeto descartável com as mesmas versões (Astro 7.3.5 e @astrojs/vercel 11.0.11), no build de produção, no `astro dev`, executando a função gerada e simulando o roteamento da Vercel:
+
+- **Redirecionamentos do Astro** (`redirects` no config) viram rotas no `.vercel/output/config.json`:
+  - com status 301 por padrão (ou o status informado, como `302`);
+  - **preservando o fragmento** (`/servicos` → `/#produtos`);
+  - aceitando **URL externa** com fragmento (Google `#lrd=…,3`).
+- No `astro dev`, os redirecionamentos respondem 301 com o mesmo `location`. Com barra no final (`/servicos/`), o dev responde 404, mas em produção a regra 308 da Vercel remove a barra e o redirecionamento acontece normalmente.
+- **O `vercel.json` não aparece na saída de build do adaptador** e não há garantia documentada de que a Vercel o aplique. Solução adotada: a integração local `integrations/security-headers.mjs` (sem dependência) insere a rota de headers no começo do `config.json` depois que o adaptador o escreve. Isso foi verificado no build e na simulação de roteamento; os headers valem para todas as páginas, a API e os redirecionamentos.
+- **Origem na API:** executando a função gerada com requisições simuladas:
+  - `request.url` usa o domínio público (www, sem www e `*.vercel.app`);
+  - um `x-forwarded-host` forjado é ignorado;
+  - a proteção embutida do Astro (`checkOrigin`) **só barra envios de formulário tradicionais, não JSON**. A verificação própria `isSameOrigin` da Tarefa 4 continua necessária.
+
 ## Estrutura de arquivos
 
 ```
@@ -101,7 +116,8 @@ package.json                scripts e dependências
 tsconfig.json               TypeScript estrito do Astro
 vitest.config.ts            testes unitários (tests/unit)
 playwright.config.ts        testes e2e (tests/e2e) contra `astro dev`
-vercel.json                 headers de segurança
+integrations/security-headers.mjs  escreve os headers de segurança no .vercel/output/config.json após o build
+vitest.build.config.ts      testes da saída de build (tests/build)
 .env.example                variáveis de ambiente documentadas (sem valores reais)
 .gitignore
 README.md                   como rodar, testar, editar o conteúdo e publicar
@@ -145,11 +161,12 @@ src/
     insurers/               logos das seguradoras
     photos/                 fotos, com CREDITOS.md
   pages/
-    index.astro  [produto].astro  ja-sou-cliente.astro  privacidade.astro  avaliar.astro  404.astro
+    index.astro  [produto].astro  ja-sou-cliente.astro  privacidade.astro  404.astro
     sitemap.xml.ts
     api/lead.ts
 tests/
   unit/*.test.ts
+  build/*.test.ts           confere a saída de build da Vercel (headers e redirecionamentos)
   e2e/*.spec.ts
 ```
 
@@ -1455,6 +1472,8 @@ export async function handleLeadRequest(request: Request, deps: LeadDeps): Promi
 
 Rode: `npm test`
 Esperado: todos os testes passam.
+
+Não desative o `security.checkOrigin` do Astro. Ele complementa a nossa verificação, barrando envios de formulário tradicionais vindos de outros sites, mas não cobre JSON (ver "Resultados do teste prático").
 
 - [ ] **Passo 6: Criar o endpoint `src/pages/api/lead.ts`**
 
@@ -3215,11 +3234,11 @@ git commit -m "feat: páginas de destino dos 6 produtos"
 - Criar:
   - `src/pages/ja-sou-cliente.astro`
   - `src/pages/privacidade.astro`
-  - `src/pages/avaliar.astro`
   - `src/pages/404.astro`
   - `src/pages/sitemap.xml.ts`
-- Modificar: `astro.config.mjs` (redirecionamentos)
-- Teste: `tests/e2e/support-pages.spec.ts`
+  - `vitest.build.config.ts`
+- Modificar: `astro.config.mjs` (redirecionamentos, inclusive `/avaliar`) e `package.json` (script `test:build`)
+- Testes: `tests/e2e/support-pages.spec.ts` e `tests/build/vercel-output.test.ts`
 
 **Interfaces:**
 - Consome: `COMPANY` e `INSURERS` (Tarefa 6); BaseLayout (Tarefa 7).
@@ -3255,7 +3274,7 @@ test('privacidade: dados da corretora, encarregado e cookies', async ({ page }) 
   }
 });
 
-test('avaliar: redireciona para a avaliação no Google', async ({ page }) => {
+test('avaliar: redireciona (302) para a avaliação no Google', async ({ page }) => {
   await page.route('https://www.google.com/**', (r) => r.fulfill({ status: 200, body: 'google' }));
   await page.goto('/avaliar');
   await page.waitForURL(/google\.com\/search.*#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3/);
@@ -3270,7 +3289,7 @@ test('404 personalizado com links para os produtos', async ({ page }) => {
 test('redirecionamentos do site antigo', async ({ request }) => {
   for (const [from, to] of [['/servicos', '/#produtos'], ['/contato', '/#contato'], ['/portugal', '/#sobre']]) {
     const res = await request.get(from, { maxRedirects: 0 });
-    expect([301, 308]).toContain(res.status());
+    expect(res.status()).toBe(301);
     expect(res.headers()['location']).toBe(to);
   }
 });
@@ -3286,7 +3305,42 @@ test('sitemap lista as páginas públicas', async ({ request }) => {
 });
 ```
 
-Se o `astro dev` responder aos redirecionamentos com outro status, ou com `location` sem o fragmento (`#`), investigue com a skill systematic-debugging. Se o Astro não preservar o fragmento, use o destino sem fragmento (`/`) e atualize a spec e o teste, avisando o cliente.
+`tests/build/vercel-output.test.ts`, que confere a saída real que vai para a Vercel:
+```ts
+import { readFileSync } from 'node:fs';
+import { describe, expect, test } from 'vitest';
+
+const config = JSON.parse(readFileSync('.vercel/output/config.json', 'utf-8')) as {
+  routes: { src?: string; status?: number; headers?: Record<string, string>; continue?: boolean }[];
+};
+const route = (src: string) => config.routes.find((r) => r.src === src);
+
+describe('redirecionamentos na saída da Vercel', () => {
+  test.each([
+    ['^/servicos$', 301, '/#produtos'],
+    ['^/contato$', 301, '/#contato'],
+    ['^/portugal$', 301, '/#sobre'],
+    ['^/avaliar$', 302, 'https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3'],
+  ])('%s → %i %s', (src, status, location) => {
+    expect(route(src)?.status).toBe(status);
+    expect(route(src)?.headers?.Location).toBe(location);
+  });
+  test('barra final é removida antes dos redirecionamentos (308)', () => {
+    const i = config.routes.findIndex((r) => r.src === '^/(.*)/$' && r.status === 308);
+    expect(i).toBeGreaterThanOrEqual(0);
+    expect(i).toBeLessThan(config.routes.findIndex((r) => r.src === '^/servicos$'));
+  });
+});
+```
+
+`vitest.build.config.ts`:
+```ts
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({ test: { include: ['tests/build/**/*.test.ts'], environment: 'node' } });
+```
+
+Em `package.json`, adicione o script `"test:build": "astro build && vitest run --config vitest.build.config.ts"`.
 
 - [ ] **Passo 3: Rodar e confirmar que falha**
 
@@ -3295,34 +3349,19 @@ Esperado: FALHA.
 
 - [ ] **Passo 4: Implementar**
 
-Em `astro.config.mjs`, adicione (com as linhas extras mapeadas no Passo 1):
+Em `astro.config.mjs`, adicione (com as linhas extras mapeadas no Passo 1). O `/avaliar` usa **302 (temporário)** para o navegador não guardar o destino para sempre, caso o link do Google mude:
 ```js
 redirects: {
   '/servicos': '/#produtos',
   '/contato': '/#contato',
   '/portugal': '/#sobre',
+  '/avaliar': {
+    status: 302,
+    destination: 'https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3',
+  },
 },
 ```
-
-`src/pages/avaliar.astro`. A página estática com refresh preserva o fragmento `#lrd` e funciona em qualquer hospedagem:
-```astro
----
-import { COMPANY } from '../content/site';
-const url = COMPANY.google.writeReviewUrl;
----
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="robots" content="noindex" />
-    <meta http-equiv="refresh" content={`0;url=${url}`} />
-    <title>Avalie a Portugal Corretora</title>
-  </head>
-  <body>
-    <p>Abrindo a página de avaliação… <a href={url}>Clique aqui se não abrir.</a></p>
-  </body>
-</html>
-```
+Mantenha esse destino igual a `COMPANY.google.writeReviewUrl` (Tarefa 6). O `astro.config.mjs` não importa arquivos `.ts`, por isso o valor é repetido. O teste de build confere o valor.
 
 `src/pages/sitemap.xml.ts`:
 ```ts
@@ -3374,17 +3413,15 @@ Coloque no topo do arquivo o comentário `<!-- Recomenda-se revisão jurídica a
 Rode: `npx playwright test tests/e2e/support-pages.spec.ts`
 Esperado: todos os testes passam.
 
-Depois rode `npm run build` e confira em `.vercel/output/config.json` que os redirecionamentos aparecem como rotas com status 301 ou 308 e destino correto:
-```bash
-node -e "const c=require('./.vercel/output/config.json');console.log(JSON.stringify(c.routes.filter(r=>r.status),null,1))"
-```
+Depois rode `npm run test:build`.
+Esperado: todos os testes de build passam.
 
 - [ ] **Passo 6: Prints das 3 páginas em 1440px e 390px,** com análise e correções.
 
 - [ ] **Passo 7: Commit**
 
 ```bash
-git add src astro.config.mjs tests/e2e/support-pages.spec.ts
+git add src astro.config.mjs package.json vitest.build.config.ts tests/e2e/support-pages.spec.ts tests/build
 git commit -m "feat: já sou cliente, privacidade, avaliar, 404, sitemap e redirecionamentos"
 ```
 
@@ -3398,8 +3435,11 @@ git commit -m "feat: já sou cliente, privacidade, avaliar, 404, sitemap e redir
 - Criar:
   - `src/components/CookieBanner.astro`
   - `src/scripts/cookie-consent.ts`
-  - `vercel.json`
-- Modificar: `src/layouts/BaseLayout.astro` (inclui o `<CookieBanner />` antes de `<Analytics />`)
+  - `integrations/security-headers.mjs`
+- Modificar:
+  - `src/layouts/BaseLayout.astro` (inclui o `<CookieBanner />` antes de `<Analytics />`)
+  - `astro.config.mjs` (registra a integração)
+  - `tests/build/vercel-output.test.ts` (confere os headers)
 - Teste: `tests/e2e/consent.spec.ts`
 
 **Interfaces:**
@@ -3570,32 +3610,69 @@ document.querySelectorAll<HTMLElement>('[data-cookie-preferences]').forEach((el)
 
 - [ ] **Passo 5: Incluir o `<CookieBanner />` no BaseLayout,** antes de `<Analytics />`.
 
-- [ ] **Passo 6: Criar o `vercel.json` com os headers de segurança**
+- [ ] **Passo 6: Headers de segurança pela integração local** (validada no teste prático; o `vercel.json` não é usado)
 
-```json
-{
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.facebook.com; font-src 'self'; connect-src 'self' https://www.facebook.com https://connect.facebook.net; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
-        }
-      ]
+`integrations/security-headers.mjs`:
+```js
+import { readFile, writeFile } from 'node:fs/promises';
+
+export const SECURITY_HEADERS = {
+  'Strict-Transport-Security': 'max-age=31536000',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
+  'Content-Security-Policy': [
+    "default-src 'self'",
+    "script-src 'self' https://connect.facebook.net",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: https://www.facebook.com",
+    "font-src 'self'",
+    "connect-src 'self' https://www.facebook.com https://connect.facebook.net",
+    "frame-src 'none'",
+    "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "object-src 'none'",
+    'upgrade-insecure-requests',
+  ].join('; '),
+};
+
+/** Insere os headers no começo das rotas da Vercel, depois que o adaptador escreve o config.json. */
+export default function securityHeaders(headers = SECURITY_HEADERS) {
+  return {
+    name: 'security-headers',
+    hooks: {
+      'astro:build:done': async ({ logger }) => {
+        const file = new URL('../.vercel/output/config.json', import.meta.url);
+        const config = JSON.parse(await readFile(file, 'utf-8'));
+        config.routes.unshift({ src: '^/(.*)$', headers, continue: true });
+        await writeFile(file, JSON.stringify(config, null, 2));
+        logger.info('headers de segurança adicionados ao config.json da Vercel');
+      },
     },
-    {
-      "source": "/_astro/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-    }
-  ]
+  };
 }
 ```
+
+Em `astro.config.mjs`: `import securityHeaders from './integrations/security-headers.mjs';` e `integrations: [securityHeaders()]`.
+
+Acrescente a `tests/build/vercel-output.test.ts`:
+```ts
+import { SECURITY_HEADERS } from '../../integrations/security-headers.mjs';
+
+describe('headers de segurança na saída da Vercel', () => {
+  test('primeira rota aplica os headers a tudo e continua', () => {
+    expect(config.routes[0]).toEqual({ src: '^/(.*)$', headers: SECURITY_HEADERS, continue: true });
+  });
+  test('aparecem uma única vez', () => {
+    expect(config.routes.filter((r) => r.headers?.['Content-Security-Policy'])).toHaveLength(1);
+  });
+});
+```
+
+Rode `npm run test:build`.
+Esperado: todos os testes de build passam.
 
 - [ ] **Passo 7: Conferir scripts inline, que a CSP acima bloquearia**
 
@@ -3628,7 +3705,7 @@ Esperado: todos os testes passam.
 - [ ] **Passo 10: Commit**
 
 ```bash
-git add src vercel.json tests/e2e/consent.spec.ts
+git add src integrations astro.config.mjs tests/build tests/e2e/consent.spec.ts
 git commit -m "feat: aviso de cookies, Pixel condicionado ao consentimento, Analytics e headers de segurança"
 ```
 
@@ -3848,7 +3925,7 @@ git commit -m "chore: medição de desempenho, prints de verificação e manual 
 - [ ] **Passo 2: Invocar a skill `security-review`** (obrigatória). Pontos de atenção:
   - `/api/lead`: validação, limite de tamanho, origem e escape;
   - ausência de dados pessoais em logs;
-  - CSP, e se `'unsafe-inline'` precisou ser usado;
+  - CSP (`integrations/security-headers.mjs`), e se `'unsafe-inline'` precisou ser usado;
   - segredos fora do repositório (`git log -p | grep -i "re_"` para chaves do Resend);
   - `rel="noopener"` em todos os `target="_blank"`;
   - Pixel condicionado ao consentimento.
@@ -3863,12 +3940,12 @@ git commit -m "chore: medição de desempenho, prints de verificação e manual 
   3. **Antes de mexer no DNS:** descobrir o provedor do e-mail (pendência 2) e anotar os registros MX, SPF e DKIM atuais.
   4. No Resend, verificar o domínio adicionando os registros SPF e DKIM **sem remover** os registros do provedor de e-mail atual. Pode haver só um registro SPF por domínio: junte os `include:` num único registro.
   5. Primeiro deploy num endereço `*.vercel.app` e testes reais:
-     - `curl -sI https://<projeto>.vercel.app/ | grep -iE "content-security|strict-transport|x-frame"`: os headers estão presentes? Se não estiverem, investigue com systematic-debugging se o `vercel.json` é respeitado com o adaptador do Astro.
+     - `curl -sI https://<projeto>.vercel.app/ | grep -iE "content-security|strict-transport|x-frame"`: confirmação final dos headers já validados localmente (teste de build e simulação de roteamento).
      - Envio real do formulário: o e-mail chega em atendimento@? Olhe também a caixa de spam.
      - `curl -s -X POST https://<projeto>.vercel.app/api/lead -H "content-type: application/json" -H "origin: https://mal.com" -d '{}' -w "%{http_code}"` deve responder `403`.
-     - O `isSameOrigin` funciona atrás do proxy da Vercel? Um envio legítimo pelo navegador precisa responder 200.
+     - Envio legítimo pelo navegador responde 200: confirma no ambiente real o que a simulação da função já mostrou.
      - `/avaliar` no celular abre a janela de avaliação do Google? Se não abrir, peça ao cliente o link oficial do Perfil da Empresa.
-     - `/servicos` redireciona?
+     - `/servicos` e `/servicos/` redirecionam para `/#produtos`?
   6. Apontar o domínio `www.portugalcorretora.com.br` (e o domínio sem `www`, redirecionando para `www`) para a Vercel, **preservando os registros MX**.
   7. Depois da propagação, enviar um e-mail de teste para atendimento@ e confirmar que chega.
   8. Atualizar o site no Perfil da Empresa no Google.
