@@ -1,0 +1,2 @@
+export const WHATSAPP_NUMBER = '5511938052598';
+export const WHATSAPP_DISPLAY = '(11) 93805-2598';
