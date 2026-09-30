@@ -224,3 +224,35 @@ a:hover {
 .on-brand :focus-visible {
   outline-color: var(--color-focus-on-brand);
 }
+
+/* Seções */
+.section {
+  padding-block: var(--section-y);
+}
+
+.section--tint {
+  background: var(--color-globe-disc);
+}
+
+.section--surface {
+  background: var(--color-surface);
+  border-block: 1px solid var(--color-border);
+}
+
+.section__title {
+  font-size: var(--step-4);
+  color: var(--color-brand);
+  max-width: 22ch;
+}
+
+.section__lead {
+  margin-top: var(--space-4);
+  max-width: 60ch;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.section__head {
+  margin-bottom: var(--space-7);
+}

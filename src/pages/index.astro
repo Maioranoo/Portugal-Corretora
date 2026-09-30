@@ -1,8 +1,56 @@
 ---
+import About from '../components/About.astro';
+import ClientStrip from '../components/ClientStrip.astro';
+import Differentials from '../components/Differentials.astro';
+import Faq from '../components/Faq.astro';
+import FinalCta from '../components/FinalCta.astro';
 import Hero from '../components/Hero.astro';
+import InsurerLogos from '../components/InsurerLogos.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import Reviews from '../components/Reviews.astro';
+import Steps from '../components/Steps.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { HOME } from '../content/site';
+import { PRODUCTS } from '../content/products';
+import { COMPANY, DIFFERENTIALS, GENERAL_FAQS, HOME, HOME_STEPS, SECTIONS } from '../content/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'InsuranceAgency',
+  name: COMPANY.name,
+  url: 'https://www.portugalcorretora.com.br/',
+  logo: 'https://www.portugalcorretora.com.br/icon-512.png',
+  image: 'https://www.portugalcorretora.com.br/og.jpg',
+  telephone: '+55-11-93805-2598',
+  email: COMPANY.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: COMPANY.address.street,
+    addressLocality: COMPANY.address.city,
+    addressRegion: COMPANY.address.state,
+    postalCode: COMPANY.address.zip,
+    addressCountry: 'BR',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '20:00',
+    },
+  ],
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: COMPANY.google.rating, reviewCount: COMPANY.google.count },
+  sameAs: [COMPANY.social.facebook, COMPANY.social.instagram],
+};
 ---
-<BaseLayout title={HOME.seo.title} description={HOME.seo.description} path="/">
+<BaseLayout title={HOME.seo.title} description={HOME.seo.description} path="/" jsonLd={jsonLd}>
   <Hero />
+  <ProductGrid products={PRODUCTS} />
+  <Steps steps={HOME_STEPS} title={SECTIONS.steps.title} />
+  <Differentials items={DIFFERENTIALS} />
+  <InsurerLogos />
+  <Reviews />
+  <About />
+  <ClientStrip />
+  <Faq faqs={GENERAL_FAQS} name="faq-home" />
+  <FinalCta />
 </BaseLayout>

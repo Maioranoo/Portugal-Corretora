@@ -8,4 +8,6 @@ dist/
 test-results/
 playwright-report/
 .playwright-mcp/
-.superpowers/*.log
+.superpowers/
+.impeccable/questions/
+.impeccable/decision-*.json

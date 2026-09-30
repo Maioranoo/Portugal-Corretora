@@ -1,0 +1,16 @@
+# Fontes dos logos das seguradoras
+
+id | arquivo | URL de origem | observações
+---|---|---|---
+porto | porto.svg | https://portoseguro.cdn.prismic.io/portoseguro/aScbuWGnmrmGqW3T_porto-logo.svg | SVG do cabeçalho de portoseguro.com.br (identidade "Porto" nova). Removidos width/height fixos.
+allianz | allianz.svg | https://upload.wikimedia.org/wikipedia/commons/4/4b/Allianz.svg | Wikimedia Commons, autor Allianz SE, origem declarada https://www.allianz.it/content/dam/onemarketing/system/allianz-logo.svg. Mesmo arquivo servido no cabeçalho de allianz.com.br (/content/dam/onemarketing/system/allianz-logo.svg), que bloqueia download direto (Cloudflare).
+tokio-marine | tokio-marine.png | https://upload.wikimedia.org/wikipedia/commons/f/f5/Tokio_Marine_Logo.svg | Raster PNG embutido nesse SVG do Commons (autor Tokio Marine Holdings, origem tokiomarinehd.com), extraído, recortado e redimensionado para 80px de altura. O site brasileiro (https://www.tokiomarine.com.br/documents/d/guest/logo) só tem um PNG de 170x40 com "TOKIO MARINE SEGURADORA", pequeno demais.
+hdi | hdi.svg | https://www.hdiseguros.com.br/assets/portal/img/logos/logo.svg | SVG do cabeçalho/rodapé de hdiseguros.com.br (imagem de fundo via CSS). Comentário do Illustrator removido.
+suhai | suhai.svg | https://suhaiseguradora.com/wp-content/uploads/2026/07/logo-suhai-dark-1.svg | SVG do cabeçalho de suhaiseguradora.com. Removidos width/height 100%, preserveAspectRatio="none" e style inline. O logo inclui o selo retangular verde-limão.
+yelum | yelum.svg | https://www.yelumseguros.com.br/SiteAssets/img/logo-cia-primary.svg | SVG principal do cabeçalho de yelumseguros.com.br.
+bradesco | bradesco.svg | https://www.bradescoseguros.com.br/ | SVG inline do cabeçalho (figure.bs-header__logo), extraído do HTML. Removidos width/height fixos.
+pier | pier.svg | https://www.pier.digital/ | SVG inline do cabeçalho (link "Pier Logo"), extraído do HTML. Cor #FF80A1 original. Removidos width/height fixos.
+azul | azul.svg | https://www.azulseguros.com.br/wp-content/themes/azul-seguros/assets/img/azul-seguros.svg | SVG do cabeçalho de azulseguros.com.br (tema padrão, imagem de fundo via CSS).
+itau | itau.png | https://upload.wikimedia.org/wikipedia/commons/2/2d/2023_Ita%C3%BA_Unibanco_Logo.png | Wikimedia Commons, autor Itaú Unibanco Holding S.A., recorte da imagem oficial https://www.itau.com.br/media/dam/m/3728062fc365b51b/original/Section-4_Image-with-text.png. itau.com.br bloqueia acesso automatizado (Akamai "Access Denied"). Redimensionado para 80x80. Não usei o SVG do Commons porque é uma vetorização feita por terceiros.
+mitsui-sumitomo | mitsui-sumitomo.svg | https://msig.com.br/wp-content/uploads/2024/09/mitsui-logo.svg | SVG do cabeçalho de msig.com.br (inclui "MSIG" e "A Member of MS&AD Insurance Group").
+sulamerica-saude | sulamerica-saude.svg | https://upload.wikimedia.org/wikipedia/commons/0/01/Logotipo_da_SulAm%C3%A9rica.svg | Wikimedia Commons, autor SulAmérica, origem declarada: Relato Integrado 2025 (PDF em portal.sulamericaseguros.com.br). Adicionado viewBox 0 0 500 128 e removidos width/height. O site oficial só tem o PNG comemorativo "130 anos" (https://portal.sulamericaseguros.com.br/assets/logo-sula130.png).

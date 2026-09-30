@@ -1,0 +1,60 @@
+---
+import { SECTIONS } from '../content/site';
+import Icon from './Icon.astro';
+---
+<section class="client" aria-labelledby="cliente-titulo">
+  <div class="container client__inner">
+    <Icon name="phone" size={28} />
+    <div>
+      <h2 id="cliente-titulo">{SECTIONS.client.title}</h2>
+      <p>{SECTIONS.client.text}</p>
+    </div>
+    <a class="button button--ghost" href="/ja-sou-cliente">Já sou cliente</a>
+  </div>
+</section>
+
+<style>
+  .client {
+    padding-block: var(--space-6);
+  }
+
+  .client__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .client__inner > :global(svg) {
+    color: var(--color-brand);
+  }
+
+  .client h2 {
+    font-size: var(--step-2);
+    color: var(--color-ink);
+  }
+
+  .client p {
+    margin-top: var(--space-1);
+    color: var(--color-text-muted);
+  }
+
+  .client__inner {
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  @media (max-width: 760px) {
+    .client__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      padding: var(--space-5);
+    }
+
+    .client .button {
+      width: 100%;
+    }
+  }
+</style>

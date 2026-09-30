@@ -1,0 +1,135 @@
+---
+import type { Item } from '../content/products';
+
+interface Props {
+  steps: readonly Item[];
+  title: string;
+  id?: string;
+}
+const { steps, title, id = 'como-funciona' } = Astro.props;
+---
+<section class="section steps" id={id} aria-labelledby={`${id}-titulo`}>
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title" id={`${id}-titulo`}>{title}</h2>
+    </div>
+    <div class="steps__route">
+      <svg class="steps__arc" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M60 100 C 300 10, 700 10, 940 100" />
+      </svg>
+      <ol class="steps__list">
+        {
+          steps.map((s, i) => (
+            <li class="step">
+              <span class="step__dot" aria-hidden="true">{i + 1}</span>
+              <h3 class="step__title">{s.title}</h3>
+              <p class="step__text">{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .steps__route {
+    position: relative;
+  }
+
+  .steps__arc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 96px;
+    fill: none;
+    stroke: var(--color-brand);
+    stroke-width: 1.5;
+    stroke-dasharray: 6 8;
+    stroke-opacity: 0.35;
+  }
+
+  .steps__arc path {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .steps__list {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .step {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-3);
+  }
+
+  .step:nth-child(1),
+  .step:nth-child(3) {
+    padding-top: 64px;
+  }
+
+  .step__dot {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--color-brand);
+    border-radius: 50%;
+    background: var(--color-bg);
+    color: var(--color-brand);
+    font-weight: 800;
+    font-size: var(--step-1);
+    font-stretch: var(--width-display);
+  }
+
+  .step:nth-child(3) .step__dot {
+    background: var(--color-brand);
+    color: var(--color-on-brand);
+  }
+
+  .step__title {
+    font-size: var(--step-2);
+    color: var(--color-ink);
+  }
+
+  .step__text {
+    max-width: 30ch;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 760px) {
+    .steps__arc {
+      display: none;
+    }
+
+    .steps__list {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      padding-left: 28px;
+      border-left: 2px dashed rgb(0 55 128 / 0.35);
+      margin-left: 28px;
+    }
+
+    .step,
+    .step:nth-child(1),
+    .step:nth-child(3) {
+      justify-items: start;
+      text-align: left;
+      padding-top: 0;
+      grid-template-columns: auto 1fr;
+      column-gap: var(--space-4);
+      margin-left: -58px;
+    }
+
+    .step__dot {
+      grid-row: span 2;
+    }
+  }
+</style>

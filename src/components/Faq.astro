@@ -1,0 +1,97 @@
+---
+import type { Faq } from '../content/products';
+import { SECTIONS } from '../content/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  faqs: readonly Faq[];
+  title?: string;
+  name?: string;
+}
+const { faqs, title = SECTIONS.faq.title, name = 'faq' } = Astro.props;
+---
+<section class="section faq" aria-labelledby={`${name}-titulo`}>
+  <div class="container faq__grid">
+    <h2 class="section__title" id={`${name}-titulo`}>{title}</h2>
+    <div class="faq__list">
+      {
+        faqs.map((f) => (
+          <details name={name}>
+            <summary>
+              <span>{f.q}</span>
+              <Icon name="chevron" size={22} />
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__grid {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .faq__list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  details {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 64px;
+    padding-block: var(--space-4);
+    list-style: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: var(--step-1);
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary :global(svg) {
+    flex: none;
+    color: var(--color-brand);
+    transition: transform var(--duration) var(--ease-out);
+  }
+
+  details[open] summary :global(svg) {
+    transform: rotate(180deg);
+  }
+
+  summary:hover {
+    color: var(--color-brand);
+  }
+
+  details p {
+    max-width: 65ch;
+    padding-bottom: var(--space-5);
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .faq__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+
+    summary {
+      font-size: var(--step-0);
+    }
+  }
+</style>

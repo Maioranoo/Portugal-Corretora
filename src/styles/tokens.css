@@ -73,7 +73,7 @@
   --space-7: 3rem;
   --space-8: 4rem;
   --space-9: 6rem;
-  --section-y: clamp(4rem, 3rem + 4vw, 7rem);
+  --section-y: clamp(3.5rem, 2.5rem + 3vw, 5.5rem);
 
   /* Forma e profundidade */
   --radius-sm: 6px;

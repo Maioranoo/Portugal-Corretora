@@ -114,3 +114,27 @@ export const ABOUT = {
     'Nossa equipe tem especialistas em diferentes ramos e se mantém atualizada com cursos oferecidos pelas próprias seguradoras. Assim, você recebe uma orientação clara em todo o processo de cotação, contratação e pós-venda.',
   ],
 } as const;
+
+// Títulos e textos de apoio das seções da home
+export const SECTIONS = {
+  products: { title: 'Qual seguro você procura?' },
+  steps: { title: 'Como funciona' },
+  differentials: {
+    title: 'Gente de verdade cuidando do seu seguro',
+    lead: 'Atendimento próximo antes, durante e depois da contratação.',
+  },
+  insurers: {
+    title: 'Comparamos mais de 10 seguradoras para você',
+    lead: 'Trabalhamos com as principais seguradoras do país para encontrar a proposta certa para o seu perfil.',
+  },
+  reviews: { title: 'Quem já é cliente recomenda' },
+  client: {
+    title: 'Já é cliente e precisa acionar o seguro?',
+    text: 'Sinistro, assistência 24h da seguradora ou segunda via: veja como falar com a gente.',
+  },
+  faq: { title: 'Perguntas frequentes' },
+  contact: {
+    title: 'Fale com um especialista',
+    lead: 'Conte o que você precisa. A gente compara as seguradoras e responde pelo WhatsApp, de segunda a sexta, das 8h às 20h.',
+  },
+} as const;

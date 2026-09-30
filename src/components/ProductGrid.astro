@@ -1,0 +1,269 @@
+---
+import type { Product } from '../content/products';
+import { SECTIONS } from '../content/site';
+import Icon, { type IconName } from './Icon.astro';
+
+interface Props {
+  products: readonly Product[];
+  title?: string;
+  id?: string;
+}
+const { products, title = SECTIONS.products.title, id = 'produtos' } = Astro.props;
+
+const ICONS: Record<Product['slug'], IconName> = {
+  'seguro-auto': 'car',
+  'seguro-residencial': 'home',
+  'plano-de-saude': 'health',
+  consorcio: 'coin',
+  'fianca-locaticia': 'key',
+  'seguro-de-vida': 'heart',
+};
+const featured = products.filter((p) => p.featured);
+const others = products.filter((p) => !p.featured);
+---
+<section class="section products" id={id} aria-labelledby={`${id}-titulo`}>
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title" id={`${id}-titulo`}>{title}</h2>
+    </div>
+
+    <ul class="products__featured">
+      {
+        featured.map((p) => (
+          <li>
+            <a class="tile" href={`/${p.slug}`}>
+              <svg class="tile__arc" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
+                <path d="M10 118 C 40 40, 130 10, 198 12" pathLength="1" />
+              </svg>
+              <span class="tile__icon"><Icon name={ICONS[p.slug]} size={28} /></span>
+              <span class="tile__name">{p.name}</span>
+              <span class="tile__text">{p.cardText}</span>
+              <span class="tile__go">
+                Conhecer
+                <Icon name="arrow" size={18} />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="products__others">
+      {
+        others.map((p) => (
+          <li>
+            <a class="row" href={`/${p.slug}`}>
+              <span class="tile__icon tile__icon--small"><Icon name={ICONS[p.slug]} size={22} /></span>
+              <span class="row__text">
+                <span class="row__name">{p.name}</span>
+                <span class="row__desc">{p.cardText}</span>
+              </span>
+              <Icon name="arrow" size={20} class="row__arrow" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .products__featured {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .products__featured li,
+  .products__others li {
+    display: grid;
+  }
+
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    height: 100%;
+    min-height: 260px;
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+      border-color var(--duration) var(--ease-out),
+      transform var(--duration) var(--ease-out),
+      box-shadow var(--duration) var(--ease-out);
+  }
+
+  .tile:hover {
+    border-color: var(--color-brand);
+    box-shadow: var(--shadow-2);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .tile__arc {
+    position: absolute;
+    right: -8px;
+    top: -4px;
+    width: 58%;
+    fill: none;
+    stroke: var(--color-brand);
+    stroke-width: 1.5;
+    stroke-opacity: 0.18;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    transition: stroke-opacity var(--duration) var(--ease-out);
+  }
+
+  .tile:hover .tile__arc {
+    stroke-opacity: 0.6;
+  }
+
+  .tile__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius);
+    background: var(--color-globe-disc);
+    color: var(--color-brand);
+  }
+
+  .tile__icon--small {
+    width: 44px;
+    height: 44px;
+    flex: none;
+  }
+
+  .tile__name {
+    margin-top: var(--space-2);
+    font-size: var(--step-2);
+    font-weight: 800;
+    font-stretch: var(--width-display);
+    line-height: 1.1;
+    color: var(--color-brand);
+  }
+
+  .tile__text {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    line-height: 1.5;
+  }
+
+  .tile__go {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-3);
+    font-weight: 700;
+    font-size: var(--step--1);
+    color: var(--color-brand);
+  }
+
+  .tile:hover .tile__go :global(svg) {
+    transform: translateX(3px);
+  }
+
+  .tile__go :global(svg) {
+    transition: transform var(--duration) var(--ease-out);
+  }
+
+  .products__others {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 84px;
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: border-color var(--duration) var(--ease-out), background-color var(--duration) var(--ease-out);
+  }
+
+  .row:hover {
+    border-color: var(--color-brand);
+    background: var(--color-surface);
+    text-decoration: none;
+  }
+
+  .row__text {
+    display: grid;
+    gap: 2px;
+  }
+
+  .row__name {
+    font-weight: 800;
+    font-stretch: var(--width-display);
+    font-size: var(--step-1);
+    color: var(--color-brand);
+  }
+
+  .row__desc {
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  .row :global(.row__arrow) {
+    margin-left: auto;
+    flex: none;
+    color: var(--color-brand);
+  }
+
+  @media (max-width: 1080px) {
+    .products__featured {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .products__featured,
+    .products__others {
+      grid-template-columns: 1fr;
+    }
+
+    .tile {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: var(--space-4);
+      align-items: center;
+    }
+
+    .tile__icon {
+      grid-row: span 2;
+    }
+
+    .tile__name {
+      margin-top: 0;
+    }
+
+    .tile__text {
+      grid-column: 2;
+    }
+
+    .tile__go,
+    .tile__arc {
+      display: none;
+    }
+  }
+</style>

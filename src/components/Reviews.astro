@@ -1,0 +1,116 @@
+---
+import { COMPANY, SECTIONS, TESTIMONIALS } from '../content/site';
+import Icon from './Icon.astro';
+---
+<section class="section section--surface reviews" aria-labelledby="avaliacoes-titulo">
+  <div class="container reviews__grid">
+    <div class="reviews__score">
+      <p class="reviews__number" aria-hidden="true">{COMPANY.google.ratingLabel}</p>
+      <div class="reviews__stars" role="img" aria-label={`Nota ${COMPANY.google.ratingLabel} de 5 no Google`}>
+        {[0, 1, 2, 3, 4].map(() => <Icon name="star-fill" size={24} />)}
+      </div>
+      <p class="reviews__count">{COMPANY.google.count} avaliações no Google</p>
+    </div>
+    <div class="reviews__body">
+      <h2 class="section__title" id="avaliacoes-titulo">{SECTIONS.reviews.title}</h2>
+      {
+        TESTIMONIALS.length > 0 ? (
+          <ul class="reviews__quotes">
+            {TESTIMONIALS.map((t) => (
+              <li>
+                <blockquote>“{t.text}”</blockquote>
+                <p class="reviews__who">{t.name}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="section__lead">
+            Nota {COMPANY.google.ratingLabel} de 5 em {COMPANY.google.count} avaliações de clientes no Google.
+          </p>
+        )
+      }
+      <div class="reviews__actions">
+        <a class="button button--ghost" href={COMPANY.google.reviewsUrl} target="_blank" rel="noopener">Ver avaliações no Google</a>
+        <a class="reviews__write" href="/avaliar">Já é cliente? Avalie a Portugal</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .reviews__score {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    border-radius: var(--radius);
+    background: var(--color-globe-disc);
+  }
+
+  .reviews__number {
+    font-size: clamp(3.5rem, 2rem + 5vw, 5.5rem);
+    font-weight: 850;
+    font-stretch: var(--width-display);
+    line-height: 1;
+    color: var(--color-brand);
+  }
+
+  .reviews__stars {
+    display: flex;
+    gap: 2px;
+    color: var(--color-brand);
+  }
+
+  .reviews__count {
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .reviews__quotes {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+  }
+
+  .reviews__quotes blockquote {
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  .reviews__who {
+    margin-top: var(--space-1);
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  .reviews__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+    margin-top: var(--space-6);
+  }
+
+  .reviews__write {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 700;
+  }
+
+  @media (max-width: 760px) {
+    .reviews__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+</style>

@@ -1,0 +1,113 @@
+---
+import { ABOUT, COMPANY, STATS } from '../content/site';
+import Globe from './Globe.astro';
+import Icon from './Icon.astro';
+---
+<section class="section section--tint about" id="sobre" aria-labelledby="sobre-titulo">
+  <Globe class="about__globe" disc={false} />
+  <div class="container about__grid">
+    <div class="about__text">
+      <h2 class="section__title" id="sobre-titulo">{ABOUT.title}</h2>
+      {ABOUT.paragraphs.map((p) => <p>{p}</p>)}
+      <p class="about__address">
+        <Icon name="map" size={20} />
+        <a href={COMPANY.address.mapsUrl} target="_blank" rel="noopener">
+          {COMPANY.address.street}, {COMPANY.address.district}, {COMPANY.address.city} - {COMPANY.address.state}
+        </a>
+      </p>
+    </div>
+    <dl class="about__facts">
+      {
+        STATS.map((s) => (
+          <div>
+            <dt>{s.label}</dt>
+            <dd>{s.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .about {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about :global(.about__globe) {
+    position: absolute;
+    right: -12%;
+    top: 50%;
+    width: min(680px, 70vw);
+    height: auto;
+    transform: translateY(-50%);
+    --globe-line: rgb(0 55 128 / 0.08);
+    pointer-events: none;
+  }
+
+  .about__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .about__text {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 62ch;
+  }
+
+  .about__text p {
+    color: var(--color-text-muted);
+  }
+
+  .about__address {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 600;
+  }
+
+  .about__address :global(svg) {
+    flex: none;
+    color: var(--color-brand);
+  }
+
+  .about__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .about__facts div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--space-1);
+    padding: var(--space-5);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .about__facts dd {
+    font-size: var(--step-3);
+    font-weight: 850;
+    font-stretch: var(--width-display);
+    line-height: 1;
+    color: var(--color-brand);
+  }
+
+  .about__facts dt {
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+</style>
