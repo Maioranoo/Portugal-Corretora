@@ -1,0 +1,83 @@
+---
+import { COMPANY } from '../content/site';
+import { buildGenericMessage, buildWhatsAppUrl } from '../lib/whatsapp';
+import Icon from './Icon.astro';
+
+interface Props {
+  context?: string;
+}
+const { context } = Astro.props;
+const href = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(context));
+---
+<a
+  class="wa-float"
+  data-wa-contact
+  data-wa-context={context ?? 'Botão flutuante'}
+  href={href}
+  target="_blank"
+  rel="noopener"
+  aria-label="Falar pelo WhatsApp"
+>
+  <Icon name="whatsapp" size={28} />
+  <span class="wa-float__label">Falar no WhatsApp</span>
+</a>
+
+<style>
+  .wa-float {
+    position: fixed;
+    right: var(--space-5);
+    bottom: var(--space-5);
+    z-index: 30;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-pill);
+    background: var(--color-whatsapp);
+    color: var(--color-whatsapp-ink);
+    box-shadow: 0 6px 20px rgb(6 48 26 / 0.28);
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+  }
+
+  .wa-float:hover {
+    background: var(--color-whatsapp-hover);
+    transform: translateY(-2px);
+  }
+
+  .wa-float__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .wa-float {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: calc(var(--wa-bar-h) + env(safe-area-inset-bottom));
+      padding-bottom: env(safe-area-inset-bottom);
+      gap: var(--space-2);
+      border-radius: 0;
+      box-shadow: 0 -4px 16px rgb(11 27 51 / 0.12);
+      font-weight: 700;
+    }
+
+    .wa-float:hover {
+      transform: none;
+    }
+
+    .wa-float__label {
+      position: static;
+      width: auto;
+      height: auto;
+      clip: auto;
+    }
+  }
+</style>

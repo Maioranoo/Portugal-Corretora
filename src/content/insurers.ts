@@ -30,10 +30,10 @@ export const INSURERS: readonly Insurer[] = [
     name: 'Porto Seguro',
     assistance: {
       phones: [
-        { number: '333 76786', label: 'Auto – Grande São Paulo' },
-        { number: '0300 337 6786', label: 'Auto – demais localidades' },
-        { number: '11 3366 3110', label: 'Residencial 24h – Grande São Paulo' },
-        { number: '0800 727 8118', label: 'Residencial 24h – demais localidades' },
+        { number: '333 76786', label: 'Auto, Grande São Paulo' },
+        { number: '0300 337 6786', label: 'Auto, demais localidades' },
+        { number: '11 3366 3110', label: 'Residencial 24h, Grande São Paulo' },
+        { number: '0800 727 8118', label: 'Residencial 24h, demais localidades' },
       ],
       conferir: true,
     },
@@ -59,8 +59,8 @@ export const INSURERS: readonly Insurer[] = [
     name: 'HDI Seguros',
     assistance: {
       phones: [
-        { number: '3003 5390', label: 'Assistência 24h – capitais e regiões metropolitanas' },
-        { number: '0800 434 4340', label: 'Assistência 24h – demais localidades' },
+        { number: '3003 5390', label: 'Assistência 24h, capitais e regiões metropolitanas' },
+        { number: '0800 434 4340', label: 'Assistência 24h, demais localidades' },
       ],
       conferir: true,
     },
@@ -71,7 +71,7 @@ export const INSURERS: readonly Insurer[] = [
     assistance: {
       phones: [
         { number: '0800 327 8424', label: 'Assistência 24h (também WhatsApp)' },
-        { number: '3003 0335', label: 'Aviso de roubo ou furto – SP e RJ' },
+        { number: '3003 0335', label: 'Aviso de roubo ou furto, SP e RJ' },
       ],
       conferir: true,
     },
@@ -92,8 +92,8 @@ export const INSURERS: readonly Insurer[] = [
     name: 'Bradesco Seguros',
     assistance: {
       phones: [
-        { number: '4004 2757', label: 'Assistência 24h – capitais e regiões metropolitanas' },
-        { number: '0800 701 2757', label: 'Assistência 24h – demais regiões' },
+        { number: '4004 2757', label: 'Assistência 24h, capitais e regiões metropolitanas' },
+        { number: '0800 701 2757', label: 'Assistência 24h, demais regiões' },
       ],
       conferir: true,
     },
@@ -108,8 +108,8 @@ export const INSURERS: readonly Insurer[] = [
     name: 'Azul Seguros',
     assistance: {
       phones: [
-        { number: '4004 3700', label: 'Sinistros e assistência 24h – capitais e grandes centros' },
-        { number: '0800 703 0203', label: 'Sinistros e assistência 24h – outras regiões' },
+        { number: '4004 3700', label: 'Sinistros e assistência 24h, capitais e grandes centros' },
+        { number: '0800 703 0203', label: 'Sinistros e assistência 24h, outras regiões' },
       ],
       conferir: true,
     },
@@ -119,8 +119,8 @@ export const INSURERS: readonly Insurer[] = [
     name: 'Itaú Seguros',
     assistance: {
       phones: [
-        { number: '3003 1010', label: 'Auto e residencial – capitais e regiões metropolitanas' },
-        { number: '0800 720 1010', label: 'Auto – demais localidades' },
+        { number: '3003 1010', label: 'Auto e residencial, capitais e regiões metropolitanas' },
+        { number: '0800 720 1010', label: 'Auto, demais localidades' },
       ],
       conferir: true,
     },
@@ -130,9 +130,9 @@ export const INSURERS: readonly Insurer[] = [
     name: 'Mitsui Sumitomo Seguros',
     assistance: {
       phones: [
-        { number: '3004 6206', label: 'Auto – capitais e regiões metropolitanas' },
-        { number: '0800 727 3101', label: 'Auto – demais localidades' },
-        { number: '0800 707 7883', label: 'Assistência 24h – demais ramos' },
+        { number: '3004 6206', label: 'Auto, capitais e regiões metropolitanas' },
+        { number: '0800 727 3101', label: 'Auto, demais localidades' },
+        { number: '0800 707 7883', label: 'Assistência 24h, demais ramos' },
       ],
       conferir: true,
     },
@@ -142,8 +142,8 @@ export const INSURERS: readonly Insurer[] = [
     name: 'SulAmérica Saúde',
     assistance: {
       phones: [
-        { number: '4004 5900', label: 'Central Saúde – capitais e regiões metropolitanas' },
-        { number: '0800 970 0500', label: 'Central Saúde – demais localidades' },
+        { number: '4004 5900', label: 'Central Saúde, capitais e regiões metropolitanas' },
+        { number: '0800 970 0500', label: 'Central Saúde, demais localidades' },
       ],
       conferir: true,
     },

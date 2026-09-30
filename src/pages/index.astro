@@ -1,6 +1,8 @@
 ---
+import Hero from '../components/Hero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { HOME } from '../content/site';
 ---
-<html lang="pt-BR">
-  <head><meta charset="utf-8" /><title>Portugal Corretora de Seguros</title></head>
-  <body><h1>Portugal Corretora de Seguros</h1></body>
-</html>
+<BaseLayout title={HOME.seo.title} description={HOME.seo.description} path="/">
+  <Hero />
+</BaseLayout>

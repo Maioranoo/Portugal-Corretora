@@ -1,0 +1,183 @@
+---
+/**
+ * Assinatura da direção "Meridianos": o globo do logo com seis arcos que terminam nos 6 produtos.
+ * Tudo no mesmo quadro de 1000x1000: globo com centro (700,500) e raio 360; rótulos a raio 450.
+ * Ao passar o mouse ou focar um produto, o arco dele se desenha do globo até o rótulo.
+ */
+import { PRODUCTS } from '../content/products';
+import Globe from './Globe.astro';
+
+const CX = 700;
+const CY = 500;
+const R_GLOBE = 360;
+const R_LABEL = 450;
+const ANGLES = [216, 201, 186, 171, 156, 141];
+
+const rad = (deg: number) => (deg * Math.PI) / 180;
+const at = (r: number, deg: number) => ({ x: CX + r * Math.cos(rad(deg)), y: CY + r * Math.sin(rad(deg)) });
+
+const items = PRODUCTS.map((product, i) => {
+  const angle = ANGLES[i];
+  const start = at(R_GLOBE, angle + 12);
+  const end = at(R_LABEL, angle);
+  const ctrl = at(R_LABEL + 10, angle + 10);
+  return {
+    product,
+    end,
+    d: `M${start.x.toFixed(1)},${start.y.toFixed(1)} Q${ctrl.x.toFixed(1)},${ctrl.y.toFixed(1)} ${end.x.toFixed(1)},${end.y.toFixed(1)}`,
+  };
+});
+---
+<div class="orbit" data-orbit>
+  <Globe class="orbit__globe" />
+  <svg class="orbit__arcs" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
+    {
+      items.map(({ d, end }, i) => (
+        <g class="orbit__arc" data-arc={i}>
+          <path class="orbit__track" d={d} />
+          <path class="orbit__draw" d={d} pathLength="1" />
+          <circle class="orbit__dot" cx={end.x.toFixed(1)} cy={end.y.toFixed(1)} r="7" />
+        </g>
+      ))
+    }
+  </svg>
+  <ul class="orbit__labels" aria-label="Escolha o seu seguro">
+    {
+      items.map(({ product, end }, i) => (
+        <li style={`--x:${(end.x / 10).toFixed(2)}%;--y:${(end.y / 10).toFixed(2)}%`}>
+          <a class="orbit__chip" href={`/${product.slug}`} data-arc-link={i} aria-label={product.name}>
+            {product.shortName}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-orbit]').forEach((orbit) => {
+    const set = (i: string | undefined, on: boolean) => {
+      if (i === undefined) return;
+      orbit.querySelector(`[data-arc="${i}"]`)?.classList.toggle('is-active', on);
+    };
+    orbit.querySelectorAll<HTMLAnchorElement>('[data-arc-link]').forEach((link) => {
+      const i = link.dataset.arcLink;
+      for (const [on, events] of [
+        [true, ['pointerenter', 'focus']],
+        [false, ['pointerleave', 'blur']],
+      ] as const) {
+        for (const ev of events) link.addEventListener(ev, () => set(i, on));
+      }
+    });
+  });
+</script>
+
+<style>
+  .orbit {
+    position: relative;
+    aspect-ratio: 1;
+    width: 100%;
+    --globe-disc: var(--color-globe-disc);
+    --globe-line: var(--color-brand);
+  }
+
+  /* O globo é outro componente: o estilo isolado do Astro não chega nele sem :global */
+  .orbit :global(.orbit__globe) {
+    position: absolute;
+    /* globo de raio 360 no quadro de 1000: o SVG de 600 (raio 250) ocupa 86,4% */
+    left: 26.8%;
+    top: 6.8%;
+    width: 86.4%;
+    height: 86.4%;
+  }
+
+  .orbit__arcs {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    fill: none;
+  }
+
+  .orbit__track {
+    stroke: var(--color-brand);
+    stroke-opacity: 0.22;
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .orbit__draw {
+    stroke: var(--color-brand);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    vector-effect: non-scaling-stroke;
+    transition: stroke-dashoffset var(--duration-draw) var(--ease-out);
+  }
+
+  .orbit__dot {
+    fill: var(--color-bg);
+    stroke: var(--color-brand);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    transition: fill var(--duration) var(--ease-out);
+  }
+
+  .orbit__arc.is-active .orbit__draw {
+    stroke-dashoffset: 0;
+  }
+
+  .orbit__arc.is-active .orbit__dot {
+    fill: var(--color-accent);
+  }
+
+  .orbit__labels {
+    list-style: none;
+    padding: 0;
+  }
+
+  .orbit__labels li {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: translate(calc(-100% - 14px), -50%);
+  }
+
+  .orbit__chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-weight: 700;
+    font-size: var(--step--1);
+    font-stretch: var(--width-display);
+    white-space: nowrap;
+    text-decoration: none;
+    box-shadow: var(--shadow-1);
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .orbit__chip:hover,
+  .orbit__chip:focus-visible {
+    background: var(--color-brand);
+    border-color: var(--color-brand);
+    color: var(--color-on-brand);
+  }
+
+  @media (max-width: 640px) {
+    .orbit__chip {
+      min-height: 44px;
+      padding: 0 var(--space-3);
+      font-size: 0.8125rem;
+    }
+  }
+</style>

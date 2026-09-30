@@ -26,6 +26,8 @@ describe('produtos', () => {
     expect(p.cardText.length).toBeLessThanOrEqual(90);
     expect(p.hero.title).toBeTruthy();
     expect(p.coveragesTitle).toBeTruthy();
+    expect(p.shortName.length).toBeGreaterThan(0);
+    expect(p.shortName.length).toBeLessThanOrEqual(12);
     expect(p.coverages.length).toBeGreaterThanOrEqual(4);
     expect(p.coverages.length).toBeLessThanOrEqual(6);
     expect(p.audiences.length).toBeGreaterThanOrEqual(2);
@@ -54,6 +56,10 @@ describe('corretora', () => {
 });
 
 describe('regras de redação', () => {
+  test('sem travessão (— ou –) em nenhum texto visível', () => {
+    const all = [...strings(PRODUCTS), ...strings(site), ...strings(INSURERS)];
+    for (const text of all) expect(text, text).not.toMatch(/[–—]/);
+  });
   test('sem promessas absolutas em nenhum texto', () => {
     const all = [...strings(PRODUCTS), ...strings(site)];
     for (const text of all) for (const re of FORBIDDEN) expect(text, text).not.toMatch(re);

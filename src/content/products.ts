@@ -12,6 +12,7 @@ export interface Item {
 export interface Product {
   slug: ProductSlug;
   name: string;
+  shortName: string; // rótulo curto do trilho de produtos
   priority: 1 | 2 | 3 | 4 | 5 | 6;
   featured: boolean;
   cardText: string; // até 90 caracteres
@@ -30,6 +31,7 @@ export const PRODUCTS: readonly Product[] = [
   {
     slug: 'seguro-auto',
     name: PRODUCT_FORMS['seguro-auto'].name,
+    shortName: 'Auto',
     priority: 1,
     featured: true,
     cardText: 'Proteção contra batida, roubo e danos a terceiros, com assistência 24h.',
@@ -90,6 +92,7 @@ export const PRODUCTS: readonly Product[] = [
   {
     slug: 'seguro-residencial',
     name: PRODUCT_FORMS['seguro-residencial'].name,
+    shortName: 'Residencial',
     priority: 2,
     featured: true,
     cardText: 'Casa ou apartamento protegidos contra incêndio, roubo e danos elétricos.',
@@ -146,6 +149,7 @@ export const PRODUCTS: readonly Product[] = [
   {
     slug: 'plano-de-saude',
     name: PRODUCT_FORMS['plano-de-saude'].name,
+    shortName: 'Saúde',
     priority: 3,
     featured: true,
     cardText: 'Planos para você, sua família ou sua empresa, a partir de 2 vidas.',
@@ -206,6 +210,7 @@ export const PRODUCTS: readonly Product[] = [
   {
     slug: 'consorcio',
     name: PRODUCT_FORMS.consorcio.name,
+    shortName: 'Consórcio',
     priority: 4,
     featured: true,
     cardText: 'Imóvel ou veículo sem juros, com parcelas que cabem no seu planejamento.',
@@ -263,6 +268,7 @@ export const PRODUCTS: readonly Product[] = [
   {
     slug: 'fianca-locaticia',
     name: PRODUCT_FORMS['fianca-locaticia'].name,
+    shortName: 'Fiança',
     priority: 5,
     featured: false,
     cardText: 'Alugue sem fiador e sem depósito caução.',
@@ -318,6 +324,7 @@ export const PRODUCTS: readonly Product[] = [
   {
     slug: 'seguro-de-vida',
     name: PRODUCT_FORMS['seguro-de-vida'].name,
+    shortName: 'Vida',
     priority: 6,
     featured: false,
     cardText: 'Proteção financeira para a sua família e benefício para a sua empresa.',

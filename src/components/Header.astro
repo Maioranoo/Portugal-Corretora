@@ -1,0 +1,231 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo.png';
+import { PRODUCTS } from '../content/products';
+import { COMPANY } from '../content/site';
+import { buildGenericMessage, buildWhatsAppUrl } from '../lib/whatsapp';
+import Icon from './Icon.astro';
+
+interface Props {
+  simple?: boolean;
+  context?: string;
+}
+const { simple = false, context } = Astro.props;
+const waUrl = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(context));
+const current = Astro.url.pathname.replace(/\/$/, '');
+---
+<header class:list={['header', { 'header--simple': simple }]}>
+  <div class="container header__inner">
+    <a class="header__logo" href="/" aria-label="Portugal Corretora de Seguros, página inicial">
+      <Image src={logo} alt="Portugal Corretora de Seguros" width={168} widths={[168, 336]} sizes="168px" loading="eager" />
+    </a>
+
+    {
+      simple ? (
+        <a class="header__back" href="/#produtos">Outros seguros</a>
+      ) : (
+        <>
+          <button class="header__toggle" type="button" data-menu-toggle aria-controls="menu-principal" aria-expanded="false" aria-label="Abrir menu">
+            <Icon name="menu" size={26} class="icon-open" />
+            <Icon name="close" size={26} class="icon-close" />
+          </button>
+          <nav id="menu-principal" class="header__nav" data-menu data-open="false" aria-label="Principal">
+            <ul class="header__products">
+              {PRODUCTS.map((p) => (
+                <li>
+                  <a href={`/${p.slug}`} aria-current={current === `/${p.slug}` ? 'page' : undefined}>
+                    {p.shortName}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a class="header__client" href="/ja-sou-cliente">Já sou cliente</a>
+          </nav>
+        </>
+      )
+    }
+
+    <a class="button button--wa-outline header__wa" href={waUrl} target="_blank" rel="noopener" data-wa-contact data-wa-context="Cabeçalho">
+      <Icon name="whatsapp" size={20} />
+      <span>Falar no WhatsApp</span>
+    </a>
+  </div>
+</header>
+
+<script>
+  import '../scripts/header';
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgb(246 243 238 / 0.94);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    height: var(--header-h);
+  }
+
+  .header__logo {
+    flex: none;
+    display: block;
+    border-radius: var(--radius-sm);
+  }
+
+  .header__logo img {
+    width: 150px;
+    height: auto;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    margin-left: auto;
+  }
+
+  .header__products {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .header__products a,
+  .header__client,
+  .header__back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink);
+    font-weight: 600;
+    font-size: var(--step--1);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+  }
+
+  .header__products a:hover,
+  .header__client:hover,
+  .header__back:hover {
+    background: var(--color-meridian-soft);
+    color: var(--color-brand);
+  }
+
+  .header__products a[aria-current='page'] {
+    color: var(--color-brand);
+    box-shadow: inset 0 -2px 0 var(--color-brand);
+    border-radius: 0;
+  }
+
+  .header__client {
+    border-left: 1px solid var(--color-border);
+    border-radius: 0;
+    padding-left: var(--space-5);
+  }
+
+  .header__back {
+    margin-left: auto;
+  }
+
+  .header__wa {
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    font-size: var(--step--1);
+  }
+
+  .header__toggle {
+    display: none;
+  }
+
+  @media (max-width: 1080px) {
+    .header__toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      margin-left: auto;
+      border: 0;
+      border-radius: var(--radius);
+      background: transparent;
+      color: var(--color-brand);
+    }
+
+    .header__toggle :global(.icon-close),
+    .header__toggle[aria-expanded='true'] :global(.icon-open) {
+      display: none;
+    }
+
+    .header__toggle[aria-expanded='true'] :global(.icon-close) {
+      display: block;
+    }
+
+    .header__nav {
+      position: fixed;
+      inset: var(--header-h) 0 auto 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--gutter) var(--space-6);
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow-2);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition:
+        opacity var(--duration) var(--ease-out),
+        transform var(--duration) var(--ease-out),
+        visibility 0s linear var(--duration);
+    }
+
+    .header__nav[data-open='true'] {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      transition:
+        opacity var(--duration) var(--ease-out),
+        transform var(--duration) var(--ease-out);
+    }
+
+    .header__products {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+
+    .header__products a,
+    .header__client {
+      width: 100%;
+      min-height: 52px;
+      font-size: var(--step-0);
+      padding: 0 var(--space-4);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+    }
+
+    .header__client {
+      padding-left: var(--space-4);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .header__logo img {
+      width: 128px;
+    }
+
+    .header__wa {
+      display: none;
+    }
+  }
+</style>

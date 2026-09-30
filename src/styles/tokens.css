@@ -1,0 +1,103 @@
+/*
+  Variáveis de design da Portugal Corretora (direção "Meridianos").
+  Contrastes medidos (WCAG), calculados em 30/09/2026:
+  - --color-ink sobre --color-bg ................. 15,6:1
+  - --color-text-muted sobre --color-bg .......... 8,0:1
+  - --color-brand sobre --color-bg ............... 10,2:1
+  - --color-on-brand sobre --color-brand ......... 10,8:1
+  - --color-meridian sobre --color-brand ......... 8,6:1 (texto secundário sobre o azul)
+  - --color-whatsapp-ink sobre --color-whatsapp .. 7,3:1
+  - --color-error sobre --color-surface .......... 6,4:1
+  - --color-accent sobre --color-brand ........... 5,2:1 (foco sobre áreas azuis)
+  - --color-accent sobre --color-bg .............. 1,9:1 (não usar como texto nem foco no claro)
+*/
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-latin-var.woff2') format('woff2');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Marca */
+  --color-brand: #003780;
+  --color-brand-deep: #002a63;
+  --color-brand-night: #001d45;
+  --color-on-brand: #fbfaf7;
+  --color-meridian: #d6e2f3;
+  --color-meridian-soft: rgb(0 55 128 / 0.16);
+  --color-accent: #e8a33d;
+
+  /* Superfícies e texto */
+  --color-bg: #f6f3ee;
+  --color-surface: #fdfcfa;
+  --color-ink: #0b1b33;
+  --color-text-muted: #3d4b63;
+  --color-border: #ddd6ca;
+
+  /* WhatsApp (só em botões de WhatsApp) */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1fbd5b;
+  --color-whatsapp-ink: #06301a;
+  --color-whatsapp-icon: #128c4a; /* ícone do WhatsApp sobre fundo claro (4,2:1) */
+
+  /* Globo */
+  --color-globe-disc: #e8eef7;
+
+  /* Estados */
+  --color-error: #b42318;
+  --color-success: #146c43;
+  --color-focus: #003780;
+  --color-focus-on-brand: #e8a33d;
+
+  /* Tipografia */
+  --font-sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --width-display: 82%;
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.5rem;
+  --step-3: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+  --step-4: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --step-5: clamp(2.25rem, 1.3rem + 3.3vw, 3.75rem);
+
+  /* Espaçamento */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --section-y: clamp(4rem, 3rem + 4vw, 7rem);
+
+  /* Forma e profundidade */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-pill: 999px;
+  --shadow-1: 0 1px 2px rgb(11 27 51 / 0.06), 0 4px 12px rgb(11 27 51 / 0.06);
+  --shadow-2: 0 2px 4px rgb(11 27 51 / 0.06), 0 12px 32px rgb(0 55 128 / 0.12);
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration: 280ms;
+  --duration-draw: 700ms;
+
+  /* Layout */
+  --container: 72rem;
+  --gutter: clamp(1rem, 0.5rem + 2vw, 2rem);
+  --header-h: 72px;
+  --wa-bar-h: 0px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-h: 60px;
+    --wa-bar-h: 56px;
+  }
+}

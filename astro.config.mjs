@@ -6,6 +6,8 @@ export default defineConfig({
   output: 'static',
   adapter: vercel(),
   trailingSlash: 'never',
+  // A barra de ferramentas do modo dev injeta títulos (h1) que o Playwright enxerga nos testes.
+  devToolbar: { enabled: false },
   vite: { build: { assetsInlineLimit: 0 } },
   env: {
     schema: {

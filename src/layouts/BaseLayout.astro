@@ -1,0 +1,59 @@
+---
+import Analytics from '@vercel/analytics/astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import '../styles/tokens.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  productName?: string;
+  simpleHeader?: boolean;
+  jsonLd?: Record<string, unknown>;
+  noindex?: boolean;
+}
+const { title, description, path, productName, simpleHeader = false, jsonLd, noindex = false } = Astro.props;
+const canonical = new URL(path, Astro.site).href;
+const ogImage = new URL('/og.jpg', Astro.site).href;
+const ld = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : null;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Portugal Corretora de Seguros" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="theme-color" content="#003780" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/archivo-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    {ld && <script type="application/ld+json" set:html={ld} />}
+  </head>
+  <body data-product-name={productName}>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <Header simple={simpleHeader} context={productName} />
+    <main id="conteudo"><slot /></main>
+    <Footer />
+    <WhatsAppFloat context={productName} />
+    <Analytics />
+    <script>
+      import '../scripts/tracking';
+    </script>
+  </body>
+</html>

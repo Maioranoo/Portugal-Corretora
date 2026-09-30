@@ -1,0 +1,39 @@
+---
+/**
+ * Globo no traço do logo da Portugal: anel afunilado (grosso à esquerda, some à direita),
+ * eixo inclinado e latitudes em lâmina. Geometria num quadro de 600x600, centro (300,300), raio 250.
+ * Cores por variáveis: --globe-disc (fundo do disco) e --globe-line (traços).
+ */
+interface Props {
+  class?: string;
+  disc?: boolean;
+}
+const { class: className, disc = true } = Astro.props;
+const id = `globe-${Math.random().toString(36).slice(2, 8)}`;
+
+// Lâmina: começa larga à esquerda e afina até um ponto à direita.
+function blade(x1: number, y1: number, x2: number, y2: number, cx: number, cy: number, t: number) {
+  return `M${x1},${y1 - t / 2} Q${cx},${cy - t / 2} ${x2},${y2} Q${cx},${cy + t / 2} ${x1},${y1 + t / 2} Z`;
+}
+const blades = [
+  blade(52, 246, 506, 104, 290, 228, 20),
+  blade(48, 308, 552, 322, 300, 318, 30),
+  blade(88, 416, 544, 196, 330, 380, 16),
+  blade(170, 498, 552, 348, 368, 468, 13),
+];
+---
+<svg class={className} viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id={`${id}-clip`}>
+      <circle cx="300" cy="300" r="246" />
+    </clipPath>
+  </defs>
+  {disc && <circle cx="300" cy="300" r="250" fill="var(--globe-disc, #003780)" />}
+  <g fill="var(--globe-line, #d6e2f3)">
+    <path fill-rule="evenodd" d="M300,50 a250,250 0 1,0 0.01,0 Z M314,62 a238,238 0 1,0 0.01,0 Z" />
+    <g clip-path={`url(#${id}-clip)`}>
+      <path d="M196,58 L214,52 L408,540 L402,542 Z" />
+      {blades.map((d) => <path d={d} />)}
+    </g>
+  </g>
+</svg>

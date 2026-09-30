@@ -34,12 +34,12 @@ export const COMPANY = {
     facebook: 'https://www.facebook.com/portugalseguros',
     instagram: 'https://www.instagram.com/portugalcorretora/',
   },
-  portoElite: { label: 'Prêmio Porto Elite – Consórcio', conferir: true }, // PENDENTE: ano e categoria
+  portoElite: { label: 'Prêmio Porto Elite, Consórcio', conferir: true }, // PENDENTE: ano e categoria
 } as const;
 
 export const HOME = {
   seo: {
-    title: 'Portugal Corretora de Seguros | Santo André – SP',
+    title: 'Portugal Corretora de Seguros | Santo André, SP',
     description:
       'Seguro auto, residencial, plano de saúde e consórcio. Comparamos mais de 10 seguradoras para encontrar o melhor preço para você. Fale pelo WhatsApp.',
   },
