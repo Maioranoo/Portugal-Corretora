@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
+import { SECURITY_HEADERS } from '../../integrations/security-headers.mjs';
 
 const config = JSON.parse(readFileSync('.vercel/output/config.json', 'utf-8')) as {
   routes: { src?: string; status?: number; headers?: Record<string, string>; continue?: boolean }[];
@@ -22,5 +23,21 @@ describe('redirecionamentos na saída da Vercel', () => {
     const i = config.routes.findIndex((r) => r.src === '^/(.*)/$' && r.status === 308);
     expect(i).toBeGreaterThanOrEqual(0);
     expect(i).toBeLessThan(config.routes.findIndex((r) => r.src === '^/servicos$'));
+  });
+});
+
+describe('headers de segurança na saída da Vercel', () => {
+  test('primeira rota aplica os headers a tudo e continua', () => {
+    expect(config.routes[0]).toEqual({ src: '^/(.*)$', headers: SECURITY_HEADERS, continue: true });
+  });
+  test('aparecem uma única vez', () => {
+    expect(config.routes.filter((r) => r.headers?.['Content-Security-Policy'])).toHaveLength(1);
+  });
+  test('CSP libera só o necessário para o Pixel e bloqueia o resto', () => {
+    const csp = SECURITY_HEADERS['Content-Security-Policy'];
+    expect(csp).toContain("default-src 'self'");
+    expect(csp).toContain('https://connect.facebook.net');
+    expect(csp).toContain("frame-ancestors 'none'");
+    expect(csp).toContain("object-src 'none'");
   });
 });

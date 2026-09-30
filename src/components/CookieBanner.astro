@@ -1,0 +1,80 @@
+---
+import { COOKIE_BANNER } from '../content/site';
+---
+<section class="cookie" data-cookie-banner hidden aria-labelledby="cookie-titulo" aria-describedby="cookie-texto">
+  <h2 id="cookie-titulo" class="cookie__title">{COOKIE_BANNER.title}</h2>
+  <p id="cookie-texto" class="cookie__text">
+    {COOKIE_BANNER.text}{' '}
+    <a href="/privacidade#cookies">{COOKIE_BANNER.link}</a>.
+  </p>
+  <div class="cookie__actions">
+    <button type="button" class="button cookie__button" data-consent="denied">Recusar</button>
+    <button type="button" class="button cookie__button" data-consent="granted">Aceitar</button>
+  </div>
+</section>
+
+<script>
+  import '../scripts/cookie-consent';
+</script>
+
+<style>
+  .cookie {
+    position: fixed;
+    left: var(--space-5);
+    bottom: var(--space-5);
+    z-index: 35;
+    display: grid;
+    gap: var(--space-3);
+    width: min(440px, calc(100vw - 2 * var(--space-5)));
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-2);
+  }
+
+  .cookie[hidden] {
+    display: none;
+  }
+
+  .cookie__title {
+    font-size: var(--step-1);
+    color: var(--color-ink);
+  }
+
+  .cookie__text {
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  /* Recusar e Aceitar com o mesmo peso visual (LGPD/ANPD: recusar tão fácil quanto aceitar) */
+  .cookie__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .cookie__button {
+    min-height: 48px;
+    border: 1.5px solid var(--color-brand);
+    background: var(--color-surface);
+    color: var(--color-brand);
+  }
+
+  .cookie__button:hover {
+    background: var(--color-brand);
+    color: var(--color-on-brand);
+  }
+
+  @media (max-width: 640px) {
+    .cookie {
+      left: 0;
+      right: 0;
+      bottom: calc(var(--wa-bar-h) + env(safe-area-inset-bottom));
+      width: auto;
+      padding: var(--space-4);
+      border-radius: var(--radius) var(--radius) 0 0;
+      border-bottom: 0;
+    }
+  }
+</style>

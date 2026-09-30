@@ -1,10 +1,12 @@
 import { defineConfig, envField } from 'astro/config';
 import vercel from '@astrojs/vercel';
+import securityHeaders from './integrations/security-headers.mjs';
 
 export default defineConfig({
   site: 'https://www.portugalcorretora.com.br',
   output: 'static',
   adapter: vercel(),
+  integrations: [securityHeaders()],
   trailingSlash: 'never',
   // A barra de ferramentas do modo dev injeta títulos (h1) que o Playwright enxerga nos testes.
   devToolbar: { enabled: false },

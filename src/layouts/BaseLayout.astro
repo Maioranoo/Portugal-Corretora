@@ -1,5 +1,6 @@
 ---
 import Analytics from '@vercel/analytics/astro';
+import CookieBanner from '../components/CookieBanner.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
@@ -51,6 +52,7 @@ const ld = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : null;
     <main id="conteudo"><slot /></main>
     <Footer />
     <WhatsAppFloat context={productName} />
+    <CookieBanner />
     <Analytics />
     <script>
       import '../scripts/tracking';

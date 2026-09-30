@@ -4,7 +4,8 @@ export default defineConfig({
   testDir: 'tests/e2e',
   fullyParallel: true,
   retries: 0,
-  use: { baseURL: 'http://localhost:4321', trace: 'retain-on-failure' },
+  // Porta própria dos testes: o servidor sobe sempre com o ID de teste do Pixel, nunca reaproveita o de desenvolvimento
+  use: { baseURL: 'http://localhost:4399', trace: 'retain-on-failure' },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
     {
@@ -19,9 +20,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev -- --port 4321',
-    url: 'http://localhost:4321',
-    reuseExistingServer: true,
+    command: 'npm run dev -- --port 4399',
+    url: 'http://localhost:4399',
+    reuseExistingServer: false,
     env: { PUBLIC_META_PIXEL_ID: '1234567890123456' },
   },
 });

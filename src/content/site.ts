@@ -169,3 +169,10 @@ export const CLIENT_PAGE = {
   phonesTitle: 'Telefones de assistência das seguradoras',
   phonesNote: 'Números informados pelas seguradoras em seus sites oficiais. Em caso de dúvida, fale com a gente.',
 } as const;
+
+// Aviso de cookies
+export const COOKIE_BANNER = {
+  title: 'Cookies',
+  text: 'Usamos cookies de marketing da Meta para medir nossos anúncios, apenas se você aceitar.',
+  link: 'Saiba mais',
+} as const;
