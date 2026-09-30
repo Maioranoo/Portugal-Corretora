@@ -65,7 +65,7 @@ Legenda:
 - Encarregado de dados (DPO): atendimento@portugalcorretora.com.br
 - Tempo de mercado: +12 anos
 - Google: nota 4,8 com 19 avaliações
-- Seguradoras parceiras (11): Porto Seguro, Allianz, Tokio Marine, HDI, Suhai, Yelum, Bradesco Seguros, Pier, Azul Seguros, Itaú Seguros, Mitsui Sumitomo e SulAmérica Saúde
+- Seguradoras parceiras (12): Porto Seguro, Allianz, Tokio Marine, HDI, Suhai, Yelum, Bradesco Seguros, Pier, Azul Seguros, Itaú Seguros, Mitsui Sumitomo e SulAmérica Saúde
 - Diferenciais:
   - atendimento pelo WhatsApp das 8h às 20h, em dias úteis;
   - acompanhamento em caso de sinistro;
@@ -111,7 +111,7 @@ Legenda:
 3. **Como funciona**, em 3 passos.
 4. **Diferenciais.**
 5. **Números** (marcador `1000` enquanto faltar o dado).
-6. **Logos das seguradoras**, em escala de cinza e ganhando cor ao passar o mouse.
+6. **Logos das 12 seguradoras**, em escala de cinza e ganhando cor ao passar o mouse.
 7. **Avaliações:** nota, link para o Google e até 3 depoimentos reais.
 8. **Sobre a Portugal:** texto curto, foto e endereço.
 9. **Faixa "Já sou cliente".**
