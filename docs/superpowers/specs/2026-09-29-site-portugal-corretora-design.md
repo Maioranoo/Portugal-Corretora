@@ -156,6 +156,8 @@ Base legal: procedimentos preliminares a pedido do titular (LGPD, art. 7º, V).
 3. Em paralelo, os dados são enviados para `POST /api/lead` de forma que sobrevivam à troca de aba ou app (`fetch` com `keepalive`).
 4. O servidor envia um e-mail pelo Resend para atendimento@ com nome, WhatsApp, produto, detalhe, cidade, página de origem, UTMs (source, medium, campaign, content, term), data e hora.
 5. A página mostra a confirmação "Pronto! Abrimos o WhatsApp…", com um botão de reserva.
+   - **Fora do horário de atendimento** (antes das 8h, depois das 20h, sábado ou domingo, no fuso America/Sao_Paulo), a confirmação diz: *"Recebemos seu contato! Nosso atendimento funciona de segunda a sexta, das 8h às 20h. Retornamos no próximo dia útil."*
+   - Feriados não são considerados no lançamento.
 6. Se o Pixel estiver consentido, dispara o evento `Lead` com o produto.
 
 ### UTMs
@@ -281,6 +283,7 @@ Recomenda-se revisão jurídica antes do lançamento.
 
 - **Testes unitários (Vitest):**
   - montagem da mensagem do WhatsApp para cada produto;
+  - regra de horário de atendimento (dentro e fora do horário, fins de semana e fuso);
   - validação do formulário;
   - validação e proteções de `/api/lead` (honeypot, tempo mínimo, origem, tamanhos, escape de HTML).
 - **Playwright:**
