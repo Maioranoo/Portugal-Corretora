@@ -85,6 +85,8 @@ import Icon from './Icon.astro';
   .about__facts div {
     display: flex;
     flex-direction: column-reverse;
+    /* Com column-reverse, flex-end é o topo: números alinhados mesmo quando um rótulo quebra em duas linhas */
+    justify-content: flex-end;
     gap: var(--space-1);
     padding: var(--space-5);
     border-radius: var(--radius);

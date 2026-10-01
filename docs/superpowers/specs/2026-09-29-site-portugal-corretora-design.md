@@ -13,14 +13,15 @@ Legenda:
 
 | # | Item | Bloqueia? | Enquanto isso |
 |---|------|-----------|---------------|
-| 4 | Números da corretora: clientes atendidos, apólices ativas, sinistros resolvidos | Não bloqueia | Marcador `1000` |
 | 5 | Fotos reais da equipe e/ou do escritório | Não bloqueia | Imagens de banco provisórias |
 | 13 | Código (ID) do Pixel da Meta | Não bloqueia | Nada é carregado enquanto não houver ID |
-| 16 | Revisão jurídica da política de privacidade | Recomendado antes do lançamento | Política-base escrita pelo desenvolvimento |
 | 18 | Revisar as faixas de valor do formulário: Consórcio (até R$ 50 mil / R$ 50–150 mil / R$ 150–400 mil / acima de R$ 400 mil) e aluguel da Fiança (até R$ 1.500 / R$ 1.500–3.000 / R$ 3.000–6.000 / acima de R$ 6.000), em `src/content/product-fields.ts` | Não bloqueia | Faixas estimadas pelo desenvolvimento |
-| 19 | Lista completa das operadoras de plano de saúde (hoje: SulAmérica Saúde, Bradesco Saúde e Porto Saúde) | Não bloqueia | As três operadoras confirmadas |
 
 ### Pendências resolvidas em 01/10/2026
+- **Números:** +1.500 clientes atendidos por ano e +1.200 apólices ativas.
+- **Operadoras de saúde:** SulAmérica Saúde, Bradesco Saúde, Porto Saúde, Seguros Unimed, Amil, NotreDame Intermédica, Omint, Prevent Senior e MedSênior.
+- **Política de privacidade:** revisada e aprovada pelo jurídico do cliente.
+- **DNS:** saiu do Wix para a Vercel (ns1/ns2.vercel-dns.com) em 01/10/2026, com os registros do Microsoft 365 (MX, SPF, autodiscover) e do Resend (DKIM, send, rsend, DMARC) recriados antes da troca.
 - **Domínio:** registrado no Registro.br.
 - **E-mail atendimento@:** Microsoft 365. Ao apontar o domínio para a Vercel, preservar o registro MX (`*.mail.protection.outlook.com`), o SPF (`include:spf.protection.outlook.com`), o CNAME `autodiscover` e os CNAMEs de DKIM (`selector1`/`selector2._domainkey`). O Resend usa o subdomínio `send.` (MX e SPF próprios) e o registro `resend._domainkey`, então não conflita com o SPF do Microsoft 365.
 - **Contas na Vercel e no Resend:** o cliente já tem as duas.
@@ -84,7 +85,6 @@ Legenda:
 | Prioridade | Produto | Página | Campo específico do formulário |
 |---|---|---|---|
 | 3 | Plano de Saúde | `/plano-de-saude` | Para quem (só eu, família ou empresa) e nº de pessoas |
-| 4 | Consórcio | `/consorcio` | Tipo (imóvel, veículo ou outro) e valor aproximado da carta |
 | 5 | Fiança Locatícia | `/fianca-locaticia` | Valor do aluguel |
 | 6 | Seguro de Vida (individual e empresarial) | `/seguro-de-vida` | Individual ou empresarial |
 

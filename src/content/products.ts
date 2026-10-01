@@ -199,7 +199,7 @@ export const PRODUCTS: readonly Product[] = [
       },
       {
         q: 'Com quais operadoras vocês trabalham?',
-        a: 'Trabalhamos com operadoras como SulAmérica Saúde, Bradesco Saúde e Porto Saúde. Indicamos a que faz mais sentido para o seu perfil.', // conferir: cliente vai completar a lista de operadoras
+        a: 'Trabalhamos com SulAmérica Saúde, Bradesco Saúde, Porto Saúde, Seguros Unimed, Amil, NotreDame Intermédica, Omint, Prevent Senior e MedSênior. Indicamos a que faz mais sentido para o seu perfil.',
       },
     ],
     insurers: ['sulamerica-saude', 'bradesco', 'porto'],

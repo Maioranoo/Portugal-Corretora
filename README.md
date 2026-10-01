@@ -37,13 +37,6 @@ Todos os textos, números e dados ficam em **`src/content/`**. Você não precis
 3. Veja o resultado com `npm run dev` e abra http://localhost:4321.
 4. Salve no git e envie (`git push`). A Vercel publica sozinha em cerca de 1 minuto.
 
-### Marcadores que ainda precisam de dados reais
-
-Procure no VS Code (Ctrl+Shift+F) por:
-
-- **`1000`**, em `STATS` de `src/content/site.ts`: número de clientes e de apólices;
-- **`conferir`**, em `src/content/products.ts`: lista de operadoras de plano de saúde.
-
 ### Avisos
 
 - **Perguntas do formulário** (`product-fields.ts`): você pode mudar os rótulos e as opções das listas. Se criar ou

@@ -52,8 +52,8 @@ export const HOME = {
 } as const;
 
 export const STATS = [
-  { value: '1000', label: 'clientes atendidos' }, // PENDENTE: número real
-  { value: '1000', label: 'apólices ativas' }, // PENDENTE: número real
+  { value: '+1.500', label: 'clientes atendidos por ano' },
+  { value: '+1.200', label: 'apólices ativas' },
   { value: '+12', label: 'anos de mercado' },
   { value: '14', label: 'seguradoras parceiras' },
 ] as const;
