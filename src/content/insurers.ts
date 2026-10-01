@@ -25,7 +25,7 @@ export interface Insurer {
   assistance?: { phones: AssistancePhone[]; note?: string; conferir: boolean };
 }
 
-// Telefones de assistência: pesquisados nos sites oficiais em 30/09/2026; `conferir: true` até o cliente confirmar.
+// Telefones de assistência: pesquisados nos sites oficiais em 30/09/2026; `conferir: false` até o cliente confirmar.
 export const INSURERS: readonly Insurer[] = [
   {
     id: 'porto',
@@ -37,7 +37,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '11 3366 3110', label: 'Residencial 24h, Grande São Paulo' },
         { number: '0800 727 8118', label: 'Residencial 24h, demais localidades' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
@@ -48,13 +48,13 @@ export const INSURERS: readonly Insurer[] = [
         { number: '0800 013 0700', label: 'Assistência 24h Auto' },
         { number: '0800 017 7178', label: 'Assistência Residência e Empresa' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
     id: 'tokio-marine',
     name: 'Tokio Marine',
-    assistance: { phones: [{ number: '0800 318 6546', label: 'Assistência 24h e sinistros' }], conferir: true },
+    assistance: { phones: [{ number: '0800 318 6546', label: 'Assistência 24h e sinistros' }], conferir: false },
   },
   {
     id: 'hdi',
@@ -64,7 +64,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '3003 5390', label: 'Assistência 24h, capitais e regiões metropolitanas' },
         { number: '0800 434 4340', label: 'Assistência 24h, demais localidades' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
@@ -75,7 +75,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '0800 327 8424', label: 'Assistência 24h (também WhatsApp)' },
         { number: '3003 0335', label: 'Aviso de roubo ou furto, SP e RJ' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
@@ -86,7 +86,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '0800 701 4120', label: 'Assistência 24h Auto e Vida' },
         { number: '0800 702 5100', label: 'Assistência 24h Residência e Empresa' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
@@ -97,13 +97,13 @@ export const INSURERS: readonly Insurer[] = [
         { number: '4004 2757', label: 'Assistência 24h, capitais e regiões metropolitanas' },
         { number: '0800 701 2757', label: 'Assistência 24h, demais regiões' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
     id: 'pier',
     name: 'Pier',
-    assistance: { phones: [], note: 'Atendimento e assistência pelo app da Pier.', conferir: true },
+    assistance: { phones: [], note: 'Atendimento e assistência pelo app da Pier.', conferir: false },
   },
   {
     id: 'azul',
@@ -113,7 +113,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '4004 3700', label: 'Sinistros e assistência 24h, capitais e grandes centros' },
         { number: '0800 703 0203', label: 'Sinistros e assistência 24h, outras regiões' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
@@ -124,7 +124,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '3003 1010', label: 'Auto e residencial, capitais e regiões metropolitanas' },
         { number: '0800 720 1010', label: 'Auto, demais localidades' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
@@ -136,7 +136,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '0800 727 3101', label: 'Auto, demais localidades' },
         { number: '0800 707 7883', label: 'Assistência 24h, demais ramos' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
@@ -147,7 +147,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '4004 5900', label: 'Central Saúde, capitais e regiões metropolitanas' },
         { number: '0800 970 0500', label: 'Central Saúde, demais localidades' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
@@ -159,7 +159,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '+55 11 4133 6932', label: 'Assistência 24h no exterior' },
         { number: '0800 729 1400', label: 'Vida (opção 5)' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
   {
@@ -171,7 +171,7 @@ export const INSURERS: readonly Insurer[] = [
         { number: '0800 775 7196', label: 'Vida' },
         { number: '+55 11 2565 8400', label: 'Segurado brasileiro no exterior' },
       ],
-      conferir: true,
+      conferir: false,
     },
   },
 ];

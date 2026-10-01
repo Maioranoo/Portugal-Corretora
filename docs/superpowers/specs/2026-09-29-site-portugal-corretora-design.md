@@ -13,18 +13,20 @@ Legenda:
 
 | # | Item | Bloqueia? | Enquanto isso |
 |---|------|-----------|---------------|
-| 1 | **Onde o domínio portugalcorretora.com.br está registrado** (Registro.br direto ou dentro do Wix) | Bloqueia o lançamento | Desenvolvimento segue normalmente; publicação em endereço temporário da Vercel |
-| 2 | **Quem fornece o e-mail atendimento@portugalcorretora.com.br** (Google Workspace, Microsoft 365, Wix ou outro). Necessário para preservar os registros MX ao trocar o DNS e para configurar SPF/DKIM do Resend | Bloqueia o lançamento | Formulário testado com e-mail de teste |
 | 4 | Números da corretora: clientes atendidos, apólices ativas, sinistros resolvidos | Não bloqueia | Marcador `1000` |
 | 5 | Fotos reais da equipe e/ou do escritório | Não bloqueia | Imagens de banco provisórias |
-| 7 | Quais seguradoras trabalham com cada produto | Não bloqueia | Divisão provável, marcada para revisão |
-| 12 | 3 avaliações do Google escolhidas para exibir no site | Não bloqueia | Seção mostra só a nota 4,8 e o link |
 | 13 | Código (ID) do Pixel da Meta | Não bloqueia | Nada é carregado enquanto não houver ID |
-| 14 | Confirmação dos telefones de assistência 24h de cada seguradora (a pesquisa dos números públicos fica com o desenvolvimento) | Não bloqueia | Números públicos pesquisados, marcados para conferência |
 | 16 | Revisão jurídica da política de privacidade | Recomendado antes do lançamento | Política-base escrita pelo desenvolvimento |
 | 18 | Revisar as faixas de valor do formulário: Consórcio (até R$ 50 mil / R$ 50–150 mil / R$ 150–400 mil / acima de R$ 400 mil) e aluguel da Fiança (até R$ 1.500 / R$ 1.500–3.000 / R$ 3.000–6.000 / acima de R$ 6.000), em `src/content/product-fields.ts` | Não bloqueia | Faixas estimadas pelo desenvolvimento |
 | 19 | Lista completa das operadoras de plano de saúde (hoje: SulAmérica Saúde, Bradesco Saúde e Porto Saúde) | Não bloqueia | As três operadoras confirmadas |
-| 17 | Contas na **Vercel** e no **Resend** criadas pelo cliente (ou acesso concedido) | Bloqueia o lançamento | Desenvolvimento local |
+
+### Pendências resolvidas em 01/10/2026
+- **Domínio:** registrado no Registro.br.
+- **E-mail atendimento@:** Microsoft 365. Ao apontar o domínio para a Vercel, preservar o registro MX (`*.mail.protection.outlook.com`), o SPF (`include:spf.protection.outlook.com`), o CNAME `autodiscover` e os CNAMEs de DKIM (`selector1`/`selector2._domainkey`). O Resend usa o subdomínio `send.` (MX e SPF próprios) e o registro `resend._domainkey`, então não conflita com o SPF do Microsoft 365.
+- **Contas na Vercel e no Resend:** o cliente já tem as duas.
+- **Seguradoras de cada produto:** manter a divisão atual; os corretores ajustam no atendimento.
+- **Telefones de assistência 24h:** confirmados pelo cliente.
+- **Avaliações do Google:** 3 escolhidas pelo cliente (Marciel, Rafael e Claudemir), exibidas com primeiro nome e inicial do sobrenome.
 
 ### Pendências já resolvidas (2026-09-29)
 - **Horário de atendimento:** 9h às 18h, de segunda a sexta (sem atendimento nos fins de semana). Atualizado pelo cliente em 30/09/2026; antes era 8h às 20h.
@@ -81,8 +83,6 @@ Legenda:
 
 | Prioridade | Produto | Página | Campo específico do formulário |
 |---|---|---|---|
-| 1 | Seguro Auto | `/seguro-auto` | Modelo e ano do carro |
-| 2 | Seguro Residencial | `/seguro-residencial` | Casa ou apartamento; próprio ou alugado |
 | 3 | Plano de Saúde | `/plano-de-saude` | Para quem (só eu, família ou empresa) e nº de pessoas |
 | 4 | Consórcio | `/consorcio` | Tipo (imóvel, veículo ou outro) e valor aproximado da carta |
 | 5 | Fiança Locatícia | `/fianca-locaticia` | Valor do aluguel |

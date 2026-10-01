@@ -23,7 +23,7 @@ export interface Product {
   audiences: Item[]; // 2–4
   steps: [Item, Item, Item];
   faqs: Faq[]; // 4–6
-  insurers: InsurerId[]; // divisão provável; conferir com o cliente
+  insurers: InsurerId[]; // seguradoras exibidas na página; o cliente aprovou a divisão em 01/10/2026 (os corretores ajustam no atendimento)
   badge?: string;
 }
 
@@ -86,7 +86,6 @@ export const PRODUCTS: readonly Product[] = [
         a: 'Mantenha a calma, sinalize o local e, se houver feridos, chame o socorro. Depois fale com a gente pelo WhatsApp: orientamos o passo a passo e acionamos a seguradora com você.',
       },
     ],
-    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
     insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'suhai', 'yelum', 'bradesco', 'pier', 'azul', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },
   {
@@ -143,7 +142,6 @@ export const PRODUCTS: readonly Product[] = [
         a: 'O seguro do condomínio cobre a estrutura e as áreas comuns. O seu apartamento por dentro e os seus bens precisam de um seguro próprio.',
       },
     ],
-    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
     insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'pier', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },
   {
@@ -204,7 +202,6 @@ export const PRODUCTS: readonly Product[] = [
         a: 'Trabalhamos com operadoras como SulAmérica Saúde, Bradesco Saúde e Porto Saúde. Indicamos a que faz mais sentido para o seu perfil.', // conferir: cliente vai completar a lista de operadoras
       },
     ],
-    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
     insurers: ['sulamerica-saude', 'bradesco', 'porto'],
   },
   {
@@ -261,7 +258,6 @@ export const PRODUCTS: readonly Product[] = [
         a: 'Todos os participantes são contemplados até o fim do grupo, por sorteio ou por lance. O lance é a forma de antecipar essa conquista.',
       },
     ],
-    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
     insurers: ['porto', 'itau', 'bradesco'],
     badge: 'Porto Elite desde 2021',
   },
@@ -318,7 +314,6 @@ export const PRODUCTS: readonly Product[] = [
         a: 'Serve. Existem opções de fiança locatícia para imóveis residenciais e comerciais.',
       },
     ],
-    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
     insurers: ['porto', 'tokio-marine'],
   },
   {
@@ -374,7 +369,6 @@ export const PRODUCTS: readonly Product[] = [
         a: 'Depende da convenção coletiva da categoria. Muitas exigem, e mesmo quando não exigem é um benefício valorizado pela equipe.',
       },
     ],
-    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
     insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },
   {
@@ -431,7 +425,6 @@ export const PRODUCTS: readonly Product[] = [
         a: 'Sim. Existem planos para viagens nacionais, com assistência médica e cobertura de bagagem.',
       },
     ],
-    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
     insurers: ['porto', 'allianz', 'tokio-marine', 'zurich', 'mapfre'],
   },
   {
@@ -488,7 +481,6 @@ export const PRODUCTS: readonly Product[] = [
         a: 'Sim, mercadorias e matéria-prima podem ser incluídas, de acordo com o valor declarado na contratação.',
       },
     ],
-    // DIVISÃO DE SEGURADORAS PROVÁVEL – conferir com o cliente
     insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'yelum', 'bradesco', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },
 ];

@@ -106,7 +106,24 @@ export const GENERAL_FAQS: readonly Faq[] = [
   },
 ];
 
-export const TESTIMONIALS: readonly { name: string; text: string; rating: 5 | 4 }[] = []; // PENDENTE: cliente escolhe 3 do Google
+// Avaliações públicas do Google escolhidas pelo cliente (30/09/2026). Nome abreviado: primeiro nome e inicial do sobrenome.
+export const TESTIMONIALS: readonly { name: string; text: string; rating: 5 | 4 }[] = [
+  {
+    name: 'Marciel S.',
+    text: 'Atendimento eficiente, são extremamente prestativos e atenciosos. Altamente recomendável.',
+    rating: 5,
+  },
+  {
+    name: 'Rafael S.',
+    text: 'Sou muito bem atendido, são consultores pois sempre oferecem a melhor solução e com opções e são ótimos em negociação! Recomendo a todos!',
+    rating: 5,
+  },
+  {
+    name: 'Claudemir C.',
+    text: 'Equipe atenciosa, sempre levantam as melhores condições de acordo com o perfil do segurado. A cada dúvida conseguem esclarecer de forma detalhada e sempre respondem rapidamente.',
+    rating: 5,
+  },
+];
 
 export const ABOUT = {
   title: 'Há mais de 12 anos cuidando do que é importante para você',

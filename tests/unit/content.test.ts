@@ -58,6 +58,17 @@ describe('corretora', () => {
   });
 });
 
+describe('avaliações', () => {
+  test('3 avaliações com nome abreviado e nota', () => {
+    expect(site.TESTIMONIALS).toHaveLength(3);
+    for (const t of site.TESTIMONIALS) {
+      expect(t.name).toMatch(/^\S+ [A-Z]\.$/);
+      expect(t.text.length).toBeGreaterThan(20);
+      expect([4, 5]).toContain(t.rating);
+    }
+  });
+});
+
 describe('regras de redação', () => {
   test('nenhum texto cita o horário antigo (8h às 20h)', () => {
     const all = [...strings(PRODUCTS), ...strings(site)];

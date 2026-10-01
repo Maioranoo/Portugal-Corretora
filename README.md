@@ -42,8 +42,7 @@ Todos os textos, números e dados ficam em **`src/content/`**. Você não precis
 Procure no VS Code (Ctrl+Shift+F) por:
 
 - **`1000`**, em `STATS` de `src/content/site.ts`: número de clientes e de apólices;
-- **`DIVISÃO DE SEGURADORAS PROVÁVEL`**, em `src/content/products.ts`: quais seguradoras aparecem em cada produto;
-- **`conferir`**: telefones de assistência e operadoras de saúde para confirmar.
+- **`conferir`**, em `src/content/products.ts`: lista de operadoras de plano de saúde.
 
 ### Avisos
 

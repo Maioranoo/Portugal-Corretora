@@ -18,8 +18,13 @@ import Icon from './Icon.astro';
           <ul class="reviews__quotes">
             {TESTIMONIALS.map((t) => (
               <li>
+                <div class="reviews__quote-stars" role="img" aria-label={`${t.rating} de 5 estrelas`}>
+                  {Array.from({ length: t.rating }, () => <Icon name="star-fill" size={14} />)}
+                </div>
                 <blockquote>“{t.text}”</blockquote>
-                <p class="reviews__who">{t.name}</p>
+                <p class="reviews__who">
+                  {t.name} <span class="reviews__source">· avaliação no Google</span>
+                </p>
               </li>
             ))}
           </ul>
@@ -76,20 +81,40 @@ import Icon from './Icon.astro';
   .reviews__quotes {
     list-style: none;
     padding: 0;
-    display: grid;
-    gap: var(--space-5);
     margin-top: var(--space-5);
+  }
+
+  .reviews__quotes li {
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .reviews__quotes li:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .reviews__quote-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: var(--space-2);
+    color: var(--color-brand);
   }
 
   .reviews__quotes blockquote {
     font-size: var(--step-1);
     line-height: 1.5;
+    max-width: 62ch;
   }
 
   .reviews__who {
-    margin-top: var(--space-1);
+    margin-top: var(--space-2);
     font-weight: 700;
     color: var(--color-text-muted);
+  }
+
+  .reviews__source {
+    font-weight: 500;
   }
 
   .reviews__actions {
