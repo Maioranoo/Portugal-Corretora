@@ -25,9 +25,12 @@ test('privacidade: dados da corretora, encarregado e cookies', async ({ page }) 
 });
 
 test('avaliar: redireciona para a avaliação no Google', async ({ page }) => {
-  await page.route('https://g.page/**', (r) => r.fulfill({ status: 200, body: 'google' }));
-  await page.goto('/avaliar');
-  await page.waitForURL('https://g.page/r/CU4DXJIHfhtJEBM/review');
+  // Confere só o redirecionamento do site: o Google ainda redireciona por conta própria (para o Maps),
+  // e um redirecionamento do servidor não pode ser interceptado pelo navegador de teste.
+  const res = await page.request.get('/avaliar', { maxRedirects: 0 });
+  // O servidor de desenvolvimento sempre usa 301; o 302 da Vercel é conferido no teste de build.
+  expect([301, 302]).toContain(res.status());
+  expect(res.headers()['location']).toBe('https://g.page/r/CU4DXJIHfhtJEBM/review');
 });
 
 test('404 personalizado com links para os produtos', async ({ page }) => {
