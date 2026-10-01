@@ -28,7 +28,7 @@ export default defineConfig({
     // Manter igual a COMPANY.google.writeReviewUrl em src/content/site.ts (o teste de build confere).
     '/avaliar': {
       status: 302,
-      destination: 'https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3',
+      destination: 'https://g.page/r/CU4DXJIHfhtJEBM/review',
     },
   },
   vite: { build: { assetsInlineLimit: 0 } },

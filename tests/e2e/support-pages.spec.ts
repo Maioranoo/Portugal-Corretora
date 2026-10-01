@@ -25,9 +25,9 @@ test('privacidade: dados da corretora, encarregado e cookies', async ({ page }) 
 });
 
 test('avaliar: redireciona para a avaliação no Google', async ({ page }) => {
-  await page.route('https://www.google.com/**', (r) => r.fulfill({ status: 200, body: 'google' }));
+  await page.route('https://g.page/**', (r) => r.fulfill({ status: 200, body: 'google' }));
   await page.goto('/avaliar');
-  await page.waitForURL(/google\.com\/search.*#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3/);
+  await page.waitForURL('https://g.page/r/CU4DXJIHfhtJEBM/review');
 });
 
 test('404 personalizado com links para os produtos', async ({ page }) => {

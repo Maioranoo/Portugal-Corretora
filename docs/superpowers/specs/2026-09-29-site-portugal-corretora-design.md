@@ -33,7 +33,7 @@ Legenda:
 - **Horário de atendimento:** 9h às 18h, de segunda a sexta (sem atendimento nos fins de semana). Atualizado pelo cliente em 30/09/2026; antes era 8h às 20h.
 - **Facebook:** https://www.facebook.com/portugalseguros
 - **Instagram:** https://www.instagram.com/portugalcorretora/
-- **Link de avaliação:** `/avaliar` redireciona para `https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3`. Esse link abre a janela "escrever avaliação" no Google. Se ele falhar no celular durante os testes, trocamos pelo link oficial do Perfil da Empresa no Google.
+- **Link de avaliação:** `/avaliar` redireciona para o link oficial do Perfil da Empresa, `https://g.page/r/CU4DXJIHfhtJEBM/review` (o link de busca original não abria a janela de avaliação no celular; trocado em 01/10/2026).
 - **Encarregado de dados (DPO):** atendimento@portugalcorretora.com.br
 - **Razão social:** Portugal Administradora e Corretora de Seguros Limitada.
 - **Porto Elite:** a corretora é Porto Elite desde 2021; exibir apenas como "Porto Elite" (sem "Prêmio").

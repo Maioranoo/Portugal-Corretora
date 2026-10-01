@@ -14,7 +14,7 @@ describe('redirecionamentos na saída da Vercel', () => {
     ['^/portugal$', 301, '/#sobre'],
     ['^/planosdesaude$', 301, '/plano-de-saude'],
     ['^/seguroaluguel$', 301, '/fianca-locaticia'],
-    ['^/avaliar$', 302, 'https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3'],
+    ['^/avaliar$', 302, 'https://g.page/r/CU4DXJIHfhtJEBM/review'],
   ])('%s → %i %s', (src, status, location) => {
     expect(route(src)?.status).toBe(status);
     expect(route(src)?.headers?.Location).toBe(location);

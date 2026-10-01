@@ -27,8 +27,8 @@ export const COMPANY = {
     count: 19,
     reviewsUrl:
       'https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,1',
-    writeReviewUrl:
-      'https://www.google.com/search?q=portugal+corretora+de+seguros#lrd=0x94ce42600eb7bcaf:0x491b7e07925c034e,3',
+    // Link oficial "Pedir avaliações" do Perfil da Empresa: abre a janela de avaliação também no celular
+    writeReviewUrl: 'https://g.page/r/CU4DXJIHfhtJEBM/review',
   },
   social: {
     facebook: 'https://www.facebook.com/portugalseguros',
