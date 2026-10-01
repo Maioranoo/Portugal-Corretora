@@ -60,29 +60,14 @@ const href = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(context));
     white-space: nowrap;
   }
 
+  /* No celular: o mesmo balão, um pouco menor, acima do aviso de cookies enquanto ele estiver aberto
+     e respeitando a borda inferior do iPhone */
   @media (max-width: 640px) {
     .wa-float {
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: auto;
-      height: calc(var(--wa-bar-h) + env(safe-area-inset-bottom));
-      padding-bottom: env(safe-area-inset-bottom);
-      gap: var(--space-2);
-      border-radius: 0;
-      box-shadow: 0 -4px 16px rgb(11 27 51 / 0.12);
-      font-weight: 700;
-    }
-
-    .wa-float:hover {
-      transform: none;
-    }
-
-    .wa-float__label {
-      position: static;
-      width: auto;
-      height: auto;
-      clip: auto;
+      right: var(--space-4);
+      bottom: calc(var(--space-4) + var(--cookie-h, 0px) + env(safe-area-inset-bottom));
+      width: 56px;
+      height: 56px;
     }
   }
 </style>

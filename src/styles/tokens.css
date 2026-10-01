@@ -92,12 +92,10 @@
   --container: 72rem;
   --gutter: clamp(1rem, 0.5rem + 2vw, 2rem);
   --header-h: 72px;
-  --wa-bar-h: 0px;
 }
 
 @media (max-width: 640px) {
   :root {
     --header-h: 60px;
-    --wa-bar-h: 56px;
   }
 }
