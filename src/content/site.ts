@@ -40,8 +40,9 @@ export const COMPANY = {
 export const HOME = {
   seo: {
     title: 'Portugal Corretora de Seguros | Santo André, SP',
-    description:
-      'Seguro auto, residencial, plano de saúde e consórcio. Comparamos mais de 10 seguradoras para encontrar o melhor preço para você. Fale pelo WhatsApp.',
+    // Título e descrição que aparecem na prévia do link (WhatsApp, Facebook, Instagram)
+    shareTitle: 'Portugal Corretora de Seguros',
+    description: 'Comparamos as seguradoras e encontramos o seguro certo para você. Fale com a gente pelo WhatsApp.',
   },
   hero: {
     title: 'Seguro com atendimento de verdade, do orçamento ao sinistro',

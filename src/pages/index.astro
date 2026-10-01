@@ -20,7 +20,7 @@ const jsonLd = {
   name: COMPANY.name,
   url: 'https://www.portugalcorretora.com.br/',
   logo: 'https://www.portugalcorretora.com.br/icon-512.png',
-  image: 'https://www.portugalcorretora.com.br/og.jpg',
+  image: 'https://www.portugalcorretora.com.br/og.v2.jpg',
   telephone: '+55-11-93805-2598',
   email: COMPANY.email,
   address: {
@@ -43,7 +43,7 @@ const jsonLd = {
   sameAs: [COMPANY.social.facebook, COMPANY.social.instagram],
 };
 ---
-<BaseLayout title={HOME.seo.title} description={HOME.seo.description} path="/" jsonLd={jsonLd}>
+<BaseLayout title={HOME.seo.title} description={HOME.seo.description} shareTitle={HOME.seo.shareTitle} path="/" jsonLd={jsonLd}>
   <Hero />
   <ProductGrid products={PRODUCTS} />
   <Steps steps={HOME_STEPS} title={SECTIONS.steps.title} />
