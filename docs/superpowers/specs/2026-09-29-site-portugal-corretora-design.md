@@ -18,6 +18,7 @@ Legenda:
 | 18 | Revisar as faixas de valor do formulário: Consórcio (até R$ 50 mil / R$ 50–150 mil / R$ 150–400 mil / acima de R$ 400 mil) e aluguel da Fiança (até R$ 1.500 / R$ 1.500–3.000 / R$ 3.000–6.000 / acima de R$ 6.000), em `src/content/product-fields.ts` | Não bloqueia | Faixas estimadas pelo desenvolvimento |
 
 ### Pendências resolvidas em 01/10/2026
+- **Publicação:** site no ar em https://www.portugalcorretora.com.br (Vercel), domínio verificado no Resend, formulário testado de ponta a ponta (WhatsApp e e-mail no atendimento@), Web Analytics ativado e site atualizado no Perfil da Empresa no Google. Falta só cancelar o Wix.
 - **Números:** +1.500 clientes atendidos por ano e +1.200 apólices ativas.
 - **Operadoras de saúde:** SulAmérica Saúde, Bradesco Saúde, Porto Saúde, Seguros Unimed, Amil, NotreDame Intermédica, Omint, Prevent Senior e MedSênior.
 - **Política de privacidade:** revisada e aprovada pelo jurídico do cliente.
