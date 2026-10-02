@@ -1,124 +1,74 @@
-# Site da Portugal Corretora de Seguros
+# Portugal Corretora de Seguros
 
-Site institucional de [portugalcorretora.com.br](https://www.portugalcorretora.com.br): home, 8 páginas de produto
-(uma para cada anúncio), "Já sou cliente", política de privacidade e o formulário "Falar com um especialista", que
-abre o WhatsApp e envia o pedido por e-mail.
+Site institucional da **Portugal Corretora de Seguros**, corretora com mais de 12 anos de mercado em Santo André (SP),
+registrada na SUSEP sob o nº 2022910.
 
-Feito com [Astro](https://astro.build) e publicado na [Vercel](https://vercel.com).
+**Site no ar:** [www.portugalcorretora.com.br](https://www.portugalcorretora.com.br)
 
 ---
 
-## Como editar o conteúdo (o que você vai usar a cada 3 meses)
+## Finalidade
 
-Todos os textos, números e dados ficam em **`src/content/`**. Você não precisa mexer em mais nada.
+O site substitui a antiga página no Wix, que tinha visual desatualizado, funcionava mal no celular e não levava o
+visitante a entrar em contato. O novo site foi pensado para ser o principal canal de captação da corretora:
 
-| O que você quer mudar | Arquivo |
+- **Gerar contatos** pelo WhatsApp e pelo formulário "Falar com um especialista";
+- **Receber o tráfego dos anúncios do Meta Ads** (Facebook e Instagram), com uma página de destino para cada produto;
+- **Transmitir credibilidade** a quem ainda não conhece a corretora: SUSEP, tempo de mercado, avaliações do Google e
+  seguradoras parceiras;
+- **Atender quem já é cliente**, com os telefones de assistência 24h de cada seguradora.
+
+## O que o site tem
+
+- Página inicial e **8 páginas de produto**: Seguro Auto, Residencial, Plano de Saúde, Consórcio, Fiança Locatícia,
+  Seguro de Vida, Seguro Viagem e Seguro Empresarial;
+- **Formulário integrado ao WhatsApp e ao e-mail**: num único envio, abre o WhatsApp da corretora com a mensagem pronta
+  e envia o pedido para o e-mail de atendimento;
+- Página **"Já sou cliente"** com a assistência 24h das 14 seguradoras parceiras;
+- **Aviso de cookies e política de privacidade** de acordo com a LGPD: o Pixel da Meta só é carregado depois que o
+  visitante aceita;
+- Redirecionamento dos endereços do site antigo e link curto para avaliar a corretora no Google (`/avaliar`).
+
+## Tecnologias
+
+| Área | Tecnologia |
 |---|---|
-| Dados da corretora (CNPJ, SUSEP, endereço, horário, redes sociais, nota do Google) | `src/content/site.ts`, bloco `COMPANY` |
-| Números da seção "Sobre" (clientes, apólices, anos, seguradoras) | `src/content/site.ts`, bloco `STATS` |
-| Título do topo da home, diferenciais, "como funciona", perguntas gerais, texto "Sobre" | `src/content/site.ts` |
-| Depoimentos do Google | `src/content/site.ts`, bloco `TESTIMONIALS` |
-| Textos de cada produto (título, coberturas, perguntas, seguradoras) | `src/content/products.ts` |
-| Seguradoras parceiras e telefones de assistência 24h | `src/content/insurers.ts` |
-| Número do WhatsApp | `src/content/contact.ts` |
-| Perguntas do formulário por produto | `src/content/product-fields.ts` (ver o aviso abaixo) |
+| Framework | [Astro](https://astro.build) 7, com páginas geradas de forma estática |
+| Linguagem | TypeScript, HTML e CSS escrito à mão (sem framework de CSS) |
+| Hospedagem e DNS | [Vercel](https://vercel.com), com uma função serverless para o formulário |
+| E-mail do formulário | [Resend](https://resend.com) |
+| Medição | Vercel Web Analytics (sem cookies) e Pixel da Meta (com consentimento) |
+| Testes | [Vitest](https://vitest.dev) (lógica e conteúdo) e [Playwright](https://playwright.dev) (navegador, desktop e celular) |
 
-### Passo a passo de uma edição
+### Destaques técnicos
 
-1. Abra o arquivo no VS Code e altere **só o texto entre aspas**. Exemplo, para trocar um número:
+- **Desempenho:** nota de 99 a 100 no Lighthouse em celular, com o conteúdo principal aparecendo em menos de 2 segundos.
+  A fonte foi recortada só com os caracteres usados (de 90 KB para 52 KB) e o CSS vai dentro do HTML.
+- **Segurança:** headers de segurança (CSP sem scripts inline, HSTS, X-Frame-Options), HTTPS obrigatório, validação no
+  servidor, proteção contra robôs (campo invisível, tempo mínimo, verificação de origem) e limite de envios por endereço,
+  reforçado por uma regra no Firewall da Vercel. Nenhum dado pessoal fica guardado nem aparece nos logs.
+- **Acessibilidade:** navegação por teclado, áreas de toque de pelo menos 44px no celular e animações que se desligam
+  quando o sistema pede movimento reduzido.
+- **SEO:** título e descrição próprios em cada página, sitemap, dados estruturados (corretora de seguros e perguntas
+  frequentes) e prévia do link para WhatsApp e redes sociais.
+- **Conteúdo fácil de editar:** todos os textos, números e dados ficam em `src/content/`, sem painel administrativo.
 
-   ```ts
-   { value: '1000', label: 'clientes atendidos' },   // antes
-   { value: '1.450', label: 'clientes atendidos' },  // depois
-   ```
+## Rodando localmente
 
-2. Rode os testes: `npm test`. Eles avisam se algo ficou errado, por exemplo um texto com promessa proibida
-   ("os melhores preços", "garantido"), um travessão ou um campo obrigatório vazio.
-3. Veja o resultado com `npm run dev` e abra http://localhost:4321.
-4. Salve no git e envie (`git push`). A Vercel publica sozinha em cerca de 1 minuto.
-
-### Avisos
-
-- **Perguntas do formulário** (`product-fields.ts`): você pode mudar os rótulos e as opções das listas. Se criar ou
-  remover um campo, rode `npm test`, porque a validação do formulário depende deles.
-- **Logos das seguradoras** ficam em `src/assets/insurers/<nome>.svg` (ou `.png`), com a origem de cada um em
-  `FONTES.md`. Para trocar um logo, salve o novo arquivo com um sufixo de versão (por exemplo `porto.v2.svg`) e
-  apague o antigo; assim o navegador de quem já visitou o site não mostra a versão guardada.
-- **Fotos reais**: quando tiver as fotos da equipe e do escritório, coloque em `src/assets/photos/` e peça para
-  incluí-las no site.
-
----
-
-## Configurações na Vercel (variáveis de ambiente)
-
-Em **Vercel → projeto → Settings → Environment Variables**:
-
-| Variável | Para quê | Obrigatória? |
-|---|---|---|
-| `RESEND_API_KEY` | Chave do Resend para enviar o e-mail do formulário | Sim, para receber os pedidos por e-mail |
-| `LEAD_TO_EMAIL` | Quem recebe os pedidos | Não (padrão, mesmo se ficar vazia: atendimento@portugalcorretora.com.br) |
-| `LEAD_FROM_EMAIL` | Remetente do e-mail (domínio verificado no Resend) | Não (padrão, mesmo se ficar vazia: site@portugalcorretora.com.br) |
-| `PUBLIC_META_PIXEL_ID` | ID do Pixel da Meta | Não. Vazio = Pixel desligado |
-
-### Limite de envios do formulário (Firewall da Vercel)
-
-O próprio site já barra mais de 5 pedidos em 10 minutos vindos do mesmo endereço, mas cada cópia da função conta
-separado. Para completar, em **Vercel → projeto → Firewall → Rules**, crie uma regra de **Rate Limit** para o caminho
-`/api/lead`: 10 pedidos por minuto por IP, ação **Deny**.
-
-### Ativar o Pixel da Meta
-
-1. No Gerenciador de Eventos da Meta, copie o **ID do Pixel** (um número de 15 a 16 dígitos).
-2. Cole em `PUBLIC_META_PIXEL_ID` na Vercel.
-3. Refaça a publicação (Vercel → Deployments → Redeploy). O Pixel passa a carregar para quem clicar em "Aceitar"
-   no aviso de cookies, com os eventos `PageView`, `ViewContent` (página de produto), `Lead` (formulário enviado) e
-   `Contact` (clique no WhatsApp).
-
----
-
-## Para desenvolvedores
-
-Requisitos: Node 22.12 ou mais novo.
+Requisito: Node 22.12 ou mais novo.
 
 ```bash
-npm install          # instala as dependências
-npm run dev          # servidor local em http://localhost:4321
-npm test             # testes unitários (lógica, conteúdo, validação)
-npm run check        # checagem de tipos
-npm run test:build   # gera o site e confere headers e redirecionamentos da Vercel
-npm run test:e2e     # testes no navegador (desktop e celular)
-npm run build        # gera o site para produção em .vercel/output
-npm run serve:static # serve o build localmente, comprimido e com os headers de produção (porta 4322)
+npm install
+npm run dev        # http://localhost:4321
+npm test           # testes de lógica e conteúdo
+npm run test:e2e   # testes no navegador
 ```
 
-**Testes no navegador:** o Astro 7 só permite um servidor de desenvolvimento por projeto, e o Playwright sobe o
-servidor de teste dele na porta 4399. **Pare o `npm run dev` antes de rodar `npm run test:e2e`.**
+O passo a passo para editar o conteúdo, as variáveis de ambiente e os demais comandos estão no
+[manual de manutenção](docs/manutencao.md).
 
-**Prints de verificação:** `npx playwright test tests/e2e/screenshots.spec.ts` gera prints de página inteira de todas
-as rotas em `test-results/screens/`.
+## Autor
 
-**Medição de velocidade:** `npm run build`, `npm run serve:static` e, em outro terminal,
-`npx lighthouse http://localhost:4322/ --view` (perfil de celular).
+Desenvolvido por **João Pedro Maiorano**.
 
-### Estrutura
-
-```
-src/content/      textos e dados editáveis
-src/lib/          lógica testada: telefone, WhatsApp, horário, validação, e-mail, consentimento, Pixel
-src/scripts/      comportamento no navegador: formulário, cookies, menu, rastreamento, surgimento ao rolar
-src/components/   seções visuais
-src/pages/        rotas (home, [produto], já sou cliente, privacidade, 404, sitemap, api/lead)
-integrations/     headers de segurança escritos no config.json da Vercel
-tests/unit        Vitest   ·   tests/e2e  Playwright   ·   tests/build  saída da Vercel
-docs/superpowers/ especificação e plano de implementação
-```
-
-### Decisões importantes
-
-- **Formulário:** abre o WhatsApp no mesmo clique e envia o pedido para `/api/lead` (função da Vercel), que valida,
-  barra robôs (campo invisível, tempo mínimo, origem, limite por endereço) e envia o e-mail pelo Resend. Nenhum dado pessoal fica guardado
-  nem vai para os logs.
-- **LGPD:** o Pixel só carrega depois do "Aceitar"; "Recusar" tem o mesmo peso visual; a escolha vale 6 meses.
-- **Segurança:** os headers (CSP, HSTS etc.) são escritos no `.vercel/output/config.json` por
-  `integrations/security-headers.mjs`, porque o `vercel.json` não é aplicado na saída do adaptador do Astro.
-- **Redirecionamentos** do site antigo (Wix) ficam em `astro.config.mjs`.
+- GitHub: [github.com/Maioranoo](https://github.com/Maioranoo)

@@ -1,6 +1,6 @@
 // Limite simples de pedidos por endereço, guardado na memória da função.
 // Cada instância da Vercel tem a sua própria contagem: é uma primeira barreira. A regra de limite no Firewall da
-// Vercel (ver README) completa a proteção.
+// Vercel (ver docs/manutencao.md) completa a proteção.
 
 export interface RateLimitOptions {
   limit: number;
