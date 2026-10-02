@@ -64,9 +64,6 @@ npm test           # testes de lógica e conteúdo
 npm run test:e2e   # testes no navegador
 ```
 
-O passo a passo para editar o conteúdo, as variáveis de ambiente e os demais comandos estão no
-[manual de manutenção](docs/manutencao.md).
-
 ## Autor
 
 Desenvolvido por **João Pedro Maiorano**.
