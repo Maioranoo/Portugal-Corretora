@@ -72,3 +72,4 @@ O passo a passo para editar o conteúdo, as variáveis de ambiente e os demais c
 Desenvolvido por **João Pedro Maiorano**.
 
 - GitHub: [github.com/Maioranoo](https://github.com/Maioranoo)
+- LinkedIn: [João Pedro Maiorano](https://www.linkedin.com/in/jo%C3%A3o-pedro-maiorano-28a10a3b8/)
