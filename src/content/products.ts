@@ -323,53 +323,125 @@ export const PRODUCTS: readonly Product[] = [
     shortName: 'Consórcio',
     priority: 4,
     featured: true,
-    cardText: 'Imóvel ou veículo sem juros, com parcelas que cabem no seu planejamento.',
+    cardText: 'Carro ou imóvel sem juros de financiamento, com parcelas planejadas.',
     seo: {
-      title: 'Consórcio de Imóvel e Veículo | Portugal Corretora',
+      title: 'Consórcio em Santo André e no ABC | Portugal Corretora',
       description:
-        'Consórcio de imóvel ou veículo sem juros, só com taxa de administração. Planejamento e acompanhamento das assembleias com a Portugal Corretora.',
+        'Consórcio de carro e de imóvel em Santo André, São Bernardo e São Caetano. Entenda como funciona e simule com um especialista da Portugal Corretora.',
     },
     hero: {
-      title: 'Conquiste seu imóvel ou seu carro sem pagar juros',
+      title: 'Consórcio de carro e de imóvel em Santo André e no ABC',
       subtitle:
-        'Consórcio é a forma planejada de comprar à vista. Ajudamos a escolher o plano certo e acompanhamos você até a contemplação.',
+        'Uma forma planejada de comprar sem os juros de um financiamento. Explicamos como funciona, comparamos as administradoras parceiras e acompanhamos você até a contemplação.',
     },
-    coveragesTitle: 'O que está incluído',
+    coveragesTitle: 'Por que considerar um consórcio',
     coverages: [
-      { title: 'Sem juros', text: 'Você paga apenas a taxa de administração, diluída nas parcelas.' },
-      { title: 'Carta de crédito', text: 'Para imóvel, veículo ou outros bens, no valor que você escolher.' },
-      { title: 'Sorteio ou lance', text: 'Todo mês há chances de contemplação por sorteio ou por lance.' },
-      { title: 'Parcelas planejadas', text: 'Prazos e valores que cabem no seu orçamento.' },
-      { title: 'Acompanhamento das assembleias', text: 'Avisamos sobre resultados e ajudamos na estratégia de lance.' },
-      { title: 'Compra à vista', text: 'Com a carta em mãos, você negocia como comprador à vista.' },
+      { title: 'Sem juros de financiamento', text: 'No lugar dos juros, há taxa de administração e, quando previstos no contrato, fundo de reserva e seguro.' },
+      { title: 'Carta de crédito', text: 'Para carro, moto, imóvel ou outros bens, no valor que você escolher.' },
+      { title: 'Sorteio ou lance', text: 'Nas assembleias, a contemplação acontece por sorteio ou por lance, conforme as regras do grupo.' },
+      { title: 'Parcelas planejadas', text: 'Prazo e parcela escolhidos de acordo com o seu objetivo e o seu orçamento.' },
+      { title: 'Acompanhamento das assembleias', text: 'Avisamos sobre os resultados e ajudamos você a pensar na estratégia de lance.' },
+      { title: 'Poder de compra à vista', text: 'Com a carta liberada, você negocia o bem como comprador à vista.' },
     ],
+    insurersTitle: 'Administradoras parceiras',
+    insurersLead: 'Comparamos os grupos dessas administradoras para encontrar o plano certo para o seu objetivo.',
     audiences: [
-      { title: 'Comprar um imóvel', text: 'Casa, apartamento ou terreno, com planejamento e sem juros.' },
-      { title: 'Trocar de carro', text: 'Carro novo ou seminovo, sem o custo de um financiamento.' },
-      { title: 'Planejar um investimento', text: 'Uma forma disciplinada de construir patrimônio.' },
+      { title: 'Comprar um imóvel', text: 'Casa, apartamento ou terreno, com planejamento e sem juros de financiamento.' },
+      { title: 'Trocar de carro', text: 'Carro novo ou usado, com parcelas que cabem no seu orçamento.' },
+      { title: 'Planejar uma conquista', text: 'Uma forma disciplinada de juntar para um objetivo de médio ou longo prazo.' },
     ],
     steps: [
       { title: 'Conte o que você precisa', text: 'Diga o tipo de bem e o valor aproximado da carta.' },
-      { title: 'Montamos o plano ideal', text: 'Comparamos grupos, prazos e parcelas para o seu objetivo.' },
+      { title: 'Comparamos os grupos', text: 'Mostramos prazo, parcela e custos de cada opção antes de qualquer decisão.' },
       { title: 'Você é acompanhado até o fim', text: 'Seguimos com você nas assembleias e na contemplação.' },
     ],
+    guide: {
+      title: 'Como funciona o consórcio',
+      lead: 'O essencial para decidir com segurança, em linguagem simples.',
+      sections: [
+        {
+          title: 'O que é consórcio',
+          paragraphs: [
+            'Consórcio é um grupo de pessoas que se juntam para comprar um bem, como um carro ou um imóvel. Todo mês, cada participante paga uma parcela que forma um fundo comum, e esse dinheiro é usado para liberar cartas de crédito aos contemplados.',
+            'Os grupos são organizados por administradoras autorizadas e fiscalizadas pelo Banco Central, de acordo com a Lei nº 11.795/2008.',
+          ],
+        },
+        {
+          title: 'Consórcio ou financiamento?',
+          paragraphs: [
+            'No financiamento, você recebe o bem logo, mas paga juros sobre o valor emprestado. No consórcio, não há juros de financiamento, mas você só recebe a carta quando é contemplado, por sorteio ou lance.',
+            'O consórcio pode fazer sentido para quem consegue planejar e não precisa do bem agora. O financiamento atende quem precisa do bem imediatamente. Ajudamos você a comparar o custo total das duas opções.',
+          ],
+        },
+        {
+          title: 'Quais são os custos do consórcio',
+          paragraphs: [
+            'Consórcio não tem juros de financiamento, mas tem custos. Os principais são:',
+            'Todos esses itens aparecem na proposta e no contrato. Antes de você assinar, mostramos cada um deles.',
+          ],
+          list: [
+            'Taxa de administração, que remunera a administradora e é diluída nas parcelas',
+            'Fundo de reserva, quando previsto no contrato, usado para cobrir imprevistos do grupo',
+            'Seguro, quando incluído no grupo, que pode quitar o saldo em situações como a morte do participante',
+            'Reajuste periódico da carta e das parcelas, pelo índice definido no contrato',
+          ],
+        },
+        {
+          title: 'Como funciona a contemplação',
+          paragraphs: [
+            'Nas assembleias, o grupo contempla participantes por sorteio e por lance. No lance, você oferece antecipar parte das parcelas; as regras de cada grupo definem como os lances são classificados.',
+            'Não existe data certa para ser contemplado. O grupo é planejado para que todos os participantes em dia recebam a carta até o encerramento, mas o momento depende do sorteio ou do lance.',
+          ],
+        },
+        {
+          title: 'Carro ou imóvel: qual consórcio escolher',
+          paragraphs: [
+            'No consórcio de carro, a carta pode ser usada para carro novo ou usado, conforme as regras da administradora. No consórcio de imóvel, para casa, apartamento, terreno e, em alguns grupos, construção ou reforma, com a possibilidade de usar o FGTS conforme as regras do FGTS.',
+          ],
+        },
+        {
+          title: 'Como pedir uma simulação',
+          paragraphs: [
+            'Conte o tipo de bem e o valor aproximado da carta pelo formulário ou pelo WhatsApp. Comparamos os grupos das administradoras parceiras e mostramos prazo, parcela e custos de cada opção, sem compromisso.',
+          ],
+        },
+      ],
+      sources: [
+        { label: 'Banco Central: consórcio', href: 'https://www.bcb.gov.br/estabilidadefinanceira/consorcio' },
+        { label: 'Lei nº 11.795/2008', href: 'https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11795.htm' },
+      ],
+      reviewedAt: 'outubro de 2026',
+    },
     faqs: [
       {
-        q: 'Como funciona o lance?',
-        a: 'O lance é uma oferta para antecipar parcelas e ser contemplado antes do sorteio. Quem oferece o maior percentual na assembleia é contemplado. Ajudamos você a montar a estratégia.',
+        q: 'Consórcio tem juros?',
+        a: 'Não tem juros de financiamento. Os custos são a taxa de administração e, quando previstos no contrato, o fundo de reserva e o seguro. Mostramos todos eles na simulação.',
       },
       {
-        q: 'Consórcio tem juros?',
-        a: 'Não. O consórcio cobra uma taxa de administração, que costuma sair bem mais barata do que os juros de um financiamento.',
+        q: 'Como funciona o lance?',
+        a: 'O lance é a oferta de antecipar parcelas para ser contemplado antes do sorteio. Cada grupo tem regras próprias para classificar os lances. Ajudamos você a montar a estratégia.',
       },
       {
         q: 'Posso usar o FGTS?',
-        a: 'No consórcio de imóvel, sim, conforme as regras do FGTS. Você pode usar o saldo para dar lance, amortizar ou quitar a carta.',
+        a: 'No consórcio de imóvel residencial, o FGTS pode ser usado para lance, complemento da carta ou amortização, desde que você e o imóvel cumpram as regras do FGTS. No consórcio de carro, não.',
       },
       {
         q: 'E se eu não for sorteado?',
-        a: 'Todos os participantes são contemplados até o fim do grupo, por sorteio ou por lance. O lance é a forma de antecipar essa conquista.',
+        a: 'O grupo é planejado para que todos os participantes em dia sejam contemplados até o fim, por sorteio ou por lance. O que não dá para saber é quando; o lance é a forma de tentar antecipar.',
       },
+      {
+        q: 'Com quais administradoras vocês trabalham?',
+        a: 'Com as administradoras de consórcio da Porto, do Itaú e do Bradesco. Comparamos os grupos disponíveis para o seu objetivo.',
+      },
+      {
+        q: 'Vocês atendem São Bernardo do Campo e São Caetano do Sul?',
+        a: 'Sim. Atendemos as duas cidades do mesmo jeito que Santo André, pelo WhatsApp ou pelo formulário, da simulação até a contemplação.',
+      },
+    ],
+    related: [
+      { href: '/consorcio-auto', label: 'Consórcio de carro', text: 'Carro novo ou usado, com parcelas planejadas.' },
+      { href: '/consorcio-imobiliario', label: 'Consórcio de imóvel', text: 'Casa, apartamento ou terreno, com uso do FGTS conforme as regras.' },
+      { href: '/seguro-auto', label: 'Seguro Auto', text: 'Proteja o carro novo comparando mais de 10 seguradoras.' },
     ],
     insurers: ['porto', 'itau', 'bradesco'],
     badge: 'Porto Elite desde 2021',

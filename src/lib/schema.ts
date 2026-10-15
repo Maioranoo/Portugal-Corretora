@@ -1,4 +1,5 @@
 import { PRODUCTS, type Faq } from '../content/products';
+import { SUB_PAGES } from '../content/sub-pages';
 import { AREA_SERVED, COMPANY } from '../content/site';
 
 export const SITE_URL = 'https://www.portugalcorretora.com.br';
@@ -55,7 +56,7 @@ export function organizationNode(): JsonLdNode {
       email: COMPANY.email,
       availableLanguage: 'Portuguese',
     },
-    knowsAbout: PRODUCTS.map((p) => p.name),
+    knowsAbout: [...PRODUCTS.map((p) => p.name), ...SUB_PAGES.map((s) => s.name)],
     sameAs: [COMPANY.social.facebook, COMPANY.social.instagram],
   };
 }

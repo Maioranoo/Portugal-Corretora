@@ -64,7 +64,7 @@ test('sitemap lista as páginas públicas', async ({ request }) => {
   const res = await request.get('/sitemap.xml');
   expect(res.status()).toBe(200);
   const xml = await res.text();
-  for (const p of ['/', '/seguro-auto', '/consorcio', '/seguro-viagem', '/seguro-empresarial', '/ja-sou-cliente', '/privacidade']) {
+  for (const p of ['/', '/seguro-auto', '/consorcio', '/consorcio-auto', '/consorcio-imobiliario', '/seguro-viagem', '/seguro-empresarial', '/ja-sou-cliente', '/privacidade']) {
     expect(xml).toContain(`<loc>https://www.portugalcorretora.com.br${p}</loc>`);
   }
   expect(xml).not.toContain('/avaliar');
