@@ -42,7 +42,7 @@ describe('produtos', () => {
     const p = PRODUCTS.find((x) => x.slug === 'seguro-auto')!;
     expect(p.seo.title).toMatch(/Santo André/);
     expect(p.hero.title).toMatch(/seguro auto/i);
-    expect(p.hero.title).toMatch(/Santo André/);
+    expect(p.hero.title).toMatch(/Santo\sAndré/);
     const titles = p.guide!.sections.map((s) => s.title).join(' | ');
     for (const re of [/cotar/i, /valor/i, /terceiros/i, /franquia/i, /usado/i, /corretora/i]) expect(titles).toMatch(re);
     const faqText = p.faqs.map((f) => f.q).join(' ');
@@ -147,7 +147,7 @@ describe('home e SEO local', () => {
     expect(site.HOME.seo.title).toMatch(/Santo André/);
     expect(site.HOME.seo.description.length).toBeGreaterThanOrEqual(70);
     expect(site.HOME.seo.description.length).toBeLessThanOrEqual(160);
-    expect(site.HOME.hero.title).toMatch(/Santo André/);
+    expect(site.HOME.hero.title).toMatch(/Santo\sAndré/);
   });
   test('o FAQ geral cita as três cidades atendidas', () => {
     const text = site.GENERAL_FAQS.map((f) => `${f.q} ${f.a}`).join(' ');

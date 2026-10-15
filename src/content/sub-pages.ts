@@ -38,7 +38,7 @@ export const SUB_PAGES: readonly SubPage[] = [
         'Consórcio de carro novo ou usado, sem juros de financiamento. Atendemos Santo André, São Bernardo e São Caetano. Simule com a Portugal Corretora.',
     },
     hero: {
-      title: 'Consórcio de carro em Santo André e no ABC, sem juros de financiamento',
+      title: 'Consórcio de carro em Santo André e no ABC, sem juros de financiamento',
       subtitle:
         'Carro novo ou usado, com parcelas planejadas. Comparamos os grupos das administradoras parceiras e acompanhamos você nas assembleias, em Santo André, São Bernardo do Campo e São Caetano do Sul.',
     },
@@ -137,7 +137,7 @@ export const SUB_PAGES: readonly SubPage[] = [
         'Consórcio de imóvel para casa, apartamento ou terreno, com uso do FGTS conforme as regras. Santo André, São Bernardo e São Caetano. Simule conosco.',
     },
     hero: {
-      title: 'Consórcio de imóvel em Santo André e no ABC: um caminho planejado para a casa própria',
+      title: 'Consórcio de imóvel em Santo André e no ABC: um caminho planejado para a casa própria',
       subtitle:
         'Casa, apartamento ou terreno, sem juros de financiamento. Explicamos o uso do FGTS, comparamos as administradoras parceiras e acompanhamos você até a contemplação.',
     },

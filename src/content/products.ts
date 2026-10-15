@@ -67,7 +67,7 @@ export const PRODUCTS: readonly Product[] = [
         'Cote seguro auto em Santo André, São Bernardo e São Caetano. Comparamos mais de 10 seguradoras para o seu perfil e atendemos pelo WhatsApp.',
     },
     hero: {
-      title: 'Seguro auto em Santo André e no ABC, com a cobertura certa para o seu perfil',
+      title: 'Seguro auto em Santo André e no ABC, com a cobertura certa para o seu perfil',
       subtitle:
         'Comparamos mais de 10 seguradoras para encontrar a proposta que combina com você e com o seu carro. Atendemos Santo André, São Bernardo do Campo e São Caetano do Sul, e acompanhamos você se precisar usar o seguro.',
     },
@@ -330,7 +330,7 @@ export const PRODUCTS: readonly Product[] = [
         'Consórcio de carro e de imóvel em Santo André, São Bernardo e São Caetano. Entenda como funciona e simule com um especialista da Portugal Corretora.',
     },
     hero: {
-      title: 'Consórcio de carro e de imóvel em Santo André e no ABC',
+      title: 'Consórcio de carro e de imóvel em Santo André e no ABC',
       subtitle:
         'Uma forma planejada de comprar sem os juros de um financiamento. Explicamos como funciona, comparamos as administradoras parceiras e acompanhamos você até a contemplação.',
     },

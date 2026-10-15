@@ -49,7 +49,8 @@ export const HOME = {
       'Corretora de seguros em Santo André, com atendimento em São Bernardo e São Caetano. Seguro auto, consórcio e mais, comparando mais de 10 seguradoras.',
   },
   hero: {
-    title: 'Seguro com atendimento de verdade em Santo André e no ABC',
+    // Espaço não separável em "Santo André" para que o nome da cidade não quebre entre linhas no título grande.
+    title: 'Seguro com atendimento de verdade em Santo André e no ABC',
     subtitle:
       'Do orçamento ao sinistro, comparamos mais de 10 seguradoras para encontrar a proposta certa para você. Atendemos Santo André, São Bernardo do Campo e São Caetano do Sul pelo WhatsApp.',
   },
