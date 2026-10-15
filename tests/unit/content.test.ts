@@ -139,3 +139,22 @@ describe('consórcio', () => {
     expect(all).toMatch(/regras do FGTS/);
   });
 });
+
+describe('home e SEO local', () => {
+  test('título, descrição e H1 da home citam a corretora e a região', () => {
+    expect(site.HOME.seo.title.length).toBeLessThanOrEqual(60);
+    expect(site.HOME.seo.title).toMatch(/Corretora de Seguros/);
+    expect(site.HOME.seo.title).toMatch(/Santo André/);
+    expect(site.HOME.seo.description.length).toBeGreaterThanOrEqual(70);
+    expect(site.HOME.seo.description.length).toBeLessThanOrEqual(160);
+    expect(site.HOME.hero.title).toMatch(/Santo André/);
+  });
+  test('o FAQ geral cita as três cidades atendidas', () => {
+    const text = site.GENERAL_FAQS.map((f) => `${f.q} ${f.a}`).join(' ');
+    for (const city of site.AREA_SERVED) expect(text).toContain(city);
+  });
+  test('todos os títulos são únicos', () => {
+    const titles = [site.HOME.seo.title, ...PRODUCTS.map((p) => p.seo.title), ...SUB_PAGES.map((s) => s.seo.title)];
+    expect(new Set(titles).size).toBe(titles.length);
+  });
+});

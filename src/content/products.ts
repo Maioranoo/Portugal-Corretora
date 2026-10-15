@@ -265,7 +265,7 @@ export const PRODUCTS: readonly Product[] = [
     featured: true,
     cardText: 'Planos para você, sua família ou sua empresa, a partir de 2 vidas.',
     seo: {
-      title: 'Plano de Saúde Individual, Familiar e Empresarial',
+      title: 'Plano de Saúde Familiar e Empresarial | Portugal Corretora',
       description:
         'Plano de saúde para você, sua família ou sua empresa, inclusive MEI a partir de 2 vidas. Comparamos opções de rede e preço com a Portugal Corretora.',
     },
@@ -509,7 +509,7 @@ export const PRODUCTS: readonly Product[] = [
     featured: false,
     cardText: 'Proteção financeira para a sua família e benefício para a sua empresa.',
     seo: {
-      title: 'Seguro de Vida Individual e Empresarial',
+      title: 'Seguro de Vida Individual e Empresarial | Portugal Corretora',
       description:
         'Seguro de vida individual ou em grupo para empresas. Proteção financeira para quem você ama, com coberturas para morte, invalidez e doenças graves.',
     },
@@ -564,7 +564,7 @@ export const PRODUCTS: readonly Product[] = [
     featured: false,
     cardText: 'Despesas médicas, bagagem e imprevistos cobertos no Brasil e no exterior.',
     seo: {
-      title: 'Seguro Viagem Nacional e Internacional',
+      title: 'Seguro Viagem Nacional e Internacional | Portugal Corretora',
       description:
         'Seguro viagem para o Brasil e o exterior, com despesas médicas, bagagem e assistência 24h. Compare as opções com a Portugal Corretora.',
     },
@@ -620,7 +620,7 @@ export const PRODUCTS: readonly Product[] = [
     featured: false,
     cardText: 'Imóvel comercial, estoque e equipamentos protegidos contra imprevistos.',
     seo: {
-      title: 'Seguro Empresarial para o seu negócio',
+      title: 'Seguro Empresarial para o seu negócio | Portugal Corretora',
       description:
         'Seguro empresarial para lojas, escritórios e pequenas empresas: imóvel, estoque e equipamentos protegidos. Compare com a Portugal Corretora.',
     },
