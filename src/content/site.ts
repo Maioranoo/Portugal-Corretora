@@ -50,7 +50,7 @@ export const HOME = {
   hero: {
     title: 'Seguro com atendimento de verdade, do orçamento ao sinistro',
     subtitle:
-      'Comparamos mais de 10 seguradoras para encontrar o melhor preço para você. Fale com um especialista pelo WhatsApp.',
+      'Do orçamento ao sinistro, comparamos mais de 10 seguradoras para encontrar a proposta certa para você. Atendemos Santo André, São Bernardo do Campo e São Caetano do Sul pelo WhatsApp.',
   },
 } as const;
 
@@ -72,7 +72,7 @@ export const DIFFERENTIALS: readonly Item[] = [
   },
   {
     title: 'Mais de 10 seguradoras',
-    text: 'Comparamos as opções para encontrar o melhor preço e a cobertura certa.',
+    text: 'Comparamos as opções para encontrar a proposta e a cobertura certas para você.',
   },
   {
     title: 'Porto Elite',

@@ -62,24 +62,102 @@ export const PRODUCTS: readonly Product[] = [
     featured: true,
     cardText: 'Proteção contra batida, roubo e danos a terceiros, com assistência 24h.',
     seo: {
-      title: 'Seguro Auto em Santo André | Portugal Corretora',
+      title: 'Seguro Auto em Santo André e no ABC | Portugal Corretora',
       description:
-        'Compare seguro auto em mais de 10 seguradoras e encontre o melhor preço para o seu perfil. Atendimento pelo WhatsApp com a Portugal Corretora.',
+        'Cote seguro auto em Santo André, São Bernardo e São Caetano. Comparamos mais de 10 seguradoras para o seu perfil e atendemos pelo WhatsApp.',
     },
     hero: {
-      title: 'Seguro auto com o preço certo para o seu perfil',
+      title: 'Seguro auto em Santo André e no ABC, com a cobertura certa para o seu perfil',
       subtitle:
-        'Comparamos mais de 10 seguradoras para encontrar o melhor preço para você. E se precisar usar, a gente acompanha tudo com você.',
+        'Comparamos mais de 10 seguradoras para encontrar a proposta que combina com você e com o seu carro. Atendemos Santo André, São Bernardo do Campo e São Caetano do Sul, e acompanhamos você se precisar usar o seguro.',
     },
-    coveragesTitle: 'O que o Seguro Auto cobre',
+    coveragesTitle: 'Coberturas que você pode contratar',
     coverages: [
-      { title: 'Colisão e perda total', text: 'Conserto do carro após batidas ou indenização quando o reparo não compensa.' },
-      { title: 'Roubo e furto', text: 'Indenização se o seu carro for levado, conforme o valor contratado.' },
-      { title: 'Danos a terceiros', text: 'Cobre danos materiais e corporais que você causar a outras pessoas no trânsito.' },
-      { title: 'Assistência 24h', text: 'Guincho, chaveiro, troca de pneu e pane seca ou elétrica, a qualquer hora.' },
-      { title: 'Carro reserva', text: 'Um carro para você não ficar a pé enquanto o seu está na oficina.' },
-      { title: 'Vidros, faróis e retrovisores', text: 'Troca ou reparo sem precisar acionar a cobertura principal.' },
+      { title: 'Colisão e perda total', text: 'Conserto após batidas ou indenização quando o reparo não compensa, nos limites da apólice.' },
+      { title: 'Roubo e furto', text: 'Indenização se o carro for levado, conforme o valor e as condições contratadas.' },
+      { title: 'Danos a terceiros', text: 'Danos materiais e corporais que você causar a outras pessoas, até o limite escolhido.' },
+      { title: 'Assistência 24h da seguradora', text: 'Guincho, chaveiro, troca de pneu e pane, de acordo com o plano de assistência.' },
+      { title: 'Carro reserva', text: 'Opcional para você não ficar a pé enquanto o carro está na oficina.' },
+      { title: 'Vidros, faróis e retrovisores', text: 'Opcional para troca ou reparo, conforme as regras da seguradora.' },
     ],
+    guide: {
+      title: 'Guia do seguro auto: o que saber antes de cotar',
+      lead: 'Respostas diretas para as dúvidas que mais ouvimos de motoristas de Santo André, São Bernardo do Campo e São Caetano do Sul.',
+      sections: [
+        {
+          title: 'Como cotar seguro auto em Santo André e no ABC',
+          paragraphs: [
+            'Para cotar, precisamos de poucas informações sobre o carro, quem dirige e como ele é usado:',
+            'Com esses dados, a Portugal Corretora consulta mais de 10 seguradoras e mostra as opções lado a lado, explicando o que muda entre elas. Você pode começar pelo formulário desta página ou pelo WhatsApp. O atendimento é o mesmo para Santo André, São Bernardo do Campo e São Caetano do Sul.',
+          ],
+          list: [
+            'Modelo, versão e ano do carro',
+            'CEP onde o carro passa a noite',
+            'Idade e tempo de habilitação de quem dirige com mais frequência',
+            'Uso do carro: particular, trabalho ou aplicativo',
+            'Apólice atual, se você já tem seguro, para aproveitar a classe de bônus',
+          ],
+        },
+        {
+          title: 'O que influencia o valor do seguro de carro',
+          paragraphs: [
+            'Cada seguradora calcula o preço com base no risco. Os pontos que mais pesam costumam ser:',
+            'Como cada seguradora avalia esses pontos de um jeito, o mesmo carro pode ter preços bem diferentes. Por isso comparar faz diferença.',
+          ],
+          list: [
+            'O modelo do carro, o valor de mercado e o custo das peças',
+            'O CEP de pernoite e de circulação, porque os índices de roubo e de batidas mudam de um bairro para outro',
+            'O perfil de quem dirige, como idade e tempo de habilitação',
+            'Onde o carro fica guardado, em casa e no trabalho',
+            'O histórico de seguro e a classe de bônus',
+            'As coberturas, os limites e a franquia escolhidos',
+          ],
+        },
+        {
+          title: 'Seguro compreensivo ou só contra terceiros?',
+          paragraphs: [
+            'O seguro compreensivo, também chamado de completo, protege o seu carro contra colisão, roubo, furto, incêndio e alguns fenômenos naturais, e normalmente inclui danos a terceiros e assistência.',
+            'O seguro contra terceiros cobre só os danos que você causar a outras pessoas e aos bens delas. Custa menos, mas não paga o conserto nem a indenização do seu carro. Pode fazer sentido para carros de menor valor. Na cotação, mostramos as duas opções para você comparar.',
+          ],
+        },
+        {
+          title: 'Como escolher a cobertura certa',
+          paragraphs: [
+            'Comece pelo que você não conseguiria pagar sozinho: o valor do carro e os danos a terceiros. Para terceiros, vale considerar limites mais altos para danos materiais e corporais, porque um acidente envolvendo outro carro ou pessoas pode custar caro.',
+            'Depois, veja os opcionais que fazem diferença na sua rotina, como carro reserva, vidros e guincho com distância maior. Contratar só o que faz sentido para você deixa o seguro mais equilibrado.',
+          ],
+        },
+        {
+          title: 'Como funciona a franquia',
+          paragraphs: [
+            'A franquia é a parte do conserto que fica com você quando usa o seguro em um dano parcial. Se o conserto custar menos que a franquia, normalmente não vale acionar o seguro.',
+            'Em geral, a franquia não é cobrada em perda total, roubo ou furto, mas isso depende das condições de cada apólice. Franquia reduzida deixa o uso mais barato e o seguro mais caro; franquia maior faz o contrário. Simulamos as opções para você escolher.',
+          ],
+        },
+        {
+          title: 'Dá para fazer seguro de carro usado?',
+          paragraphs: [
+            'Sim. A maioria das seguradoras aceita carros usados, e a idade do carro muda principalmente o preço e as coberturas disponíveis. Em alguns casos, a seguradora pede vistoria antes de aceitar.',
+            'A aceitação é sempre da seguradora, que analisa o carro e o perfil de quem dirige. Se uma não aceitar, procuramos outras opções para você.',
+          ],
+        },
+        {
+          title: 'Por que contratar com uma corretora',
+          paragraphs: [
+            'A corretora trabalha para você, não para uma seguradora específica. Na Portugal Corretora, registrada na SUSEP sob o nº 2022910, você compara várias seguradoras em um só atendimento e tem com quem contar na renovação, nas mudanças da apólice e no sinistro.',
+            'A remuneração da corretora já vem incluída no valor do seguro, sem cobrança separada pelo atendimento.',
+          ],
+        },
+      ],
+      sources: [
+        {
+          label: 'SUSEP: seguro de automóveis',
+          href: 'https://www.gov.br/susep/pt-br/assuntos/meu-futuro-seguro/seguros-previdencia-e-capitalizacao/seguros/seguro-de-automoveis',
+        },
+        { label: 'SUSEP: corretor de seguros', href: 'https://www.gov.br/susep/pt-br/assuntos/corretor-de-seguros' },
+      ],
+      reviewedAt: 'outubro de 2026',
+    },
     audiences: [
       { title: 'Primeiro carro', text: 'Explicamos cada cobertura para você contratar só o que faz sentido.' },
       { title: 'Família', text: 'Proteção para o carro que leva todo mundo, com assistência para imprevistos.' },
@@ -92,8 +170,12 @@ export const PRODUCTS: readonly Product[] = [
     ],
     faqs: [
       {
-        q: 'O que é franquia?',
-        a: 'É a parte do conserto que você paga quando usa o seguro em uma batida com dano parcial. Franquias maiores deixam o seguro mais barato; menores deixam o uso mais barato. Ajudamos você a escolher o equilíbrio certo.',
+        q: 'Onde cotar seguro auto em Santo André?',
+        a: 'Na Portugal Corretora de Seguros, na Av. Portugal, 1285, Jardim Bela Vista, em Santo André. A cotação é feita pelo WhatsApp ou pelo formulário desta página, sem precisar ir ao escritório, e comparamos mais de 10 seguradoras para o seu perfil.',
+      },
+      {
+        q: 'Vocês atendem São Bernardo do Campo e São Caetano do Sul?',
+        a: 'Sim. Atendemos as duas cidades do mesmo jeito que Santo André: cotação, contratação, renovação e acompanhamento no sinistro, pelo WhatsApp ou pelo formulário.',
       },
       {
         q: 'Por que o preço muda de uma pessoa para outra?',
@@ -101,7 +183,7 @@ export const PRODUCTS: readonly Product[] = [
       },
       {
         q: 'Posso trocar de seguradora na renovação sem perder o bônus?',
-        a: 'Sim. O bônus é do segurado e acompanha você na troca de seguradora, desde que a renovação seja feita no prazo e sem interrupção.',
+        a: 'Em geral, sim. O bônus é do segurado e pode ser levado para outra seguradora, desde que a renovação seja feita no prazo e sem interrupção. Conferimos a sua classe de bônus antes da troca.',
       },
       {
         q: 'Motorista de aplicativo consegue fazer seguro?',
@@ -111,6 +193,11 @@ export const PRODUCTS: readonly Product[] = [
         q: 'O que fazer em caso de batida?',
         a: 'Mantenha a calma, sinalize o local e, se houver feridos, chame o socorro. Depois fale com a gente pelo WhatsApp: orientamos o passo a passo e acionamos a seguradora com você.',
       },
+    ],
+    related: [
+      { href: '/consorcio-auto', label: 'Consórcio de carro', text: 'Planeje a troca do carro sem os juros de um financiamento.' },
+      { href: '/seguro-residencial', label: 'Seguro Residencial', text: 'Proteção para a casa ou o apartamento, próprio ou alugado.' },
+      { href: '/ja-sou-cliente', label: 'Já sou cliente', text: 'Sinistro, assistência 24h da seguradora e segunda via.' },
     ],
     insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'suhai', 'yelum', 'bradesco', 'pier', 'azul', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },

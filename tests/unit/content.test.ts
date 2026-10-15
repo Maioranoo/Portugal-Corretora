@@ -10,7 +10,7 @@ function strings(value: unknown): string[] {
   if (value && typeof value === 'object') return Object.values(value).flatMap(strings);
   return [];
 }
-const FORBIDDEN = [/os melhores preços/i, /menor preço/i, /garantid[oa]/i, /atendimento (24|vinte e quatro)/i];
+const FORBIDDEN = [/os melhores preços/i, /menor preço/i, /melhor preço/i, /garantid[oa]/i, /atendimento (24|vinte e quatro)/i];
 
 describe('produtos', () => {
   test('8 produtos, na ordem de prioridade, com os slugs do formulário', () => {
@@ -36,6 +36,18 @@ describe('produtos', () => {
     expect(p.insurers.length).toBeGreaterThan(0);
     const ids = new Set(INSURERS.map((i) => i.id));
     for (const id of p.insurers) expect(ids.has(id)).toBe(true);
+  });
+  test('seguro auto responde às dúvidas de quem vai cotar, com foco local', () => {
+    const p = PRODUCTS.find((x) => x.slug === 'seguro-auto')!;
+    expect(p.seo.title).toMatch(/Santo André/);
+    expect(p.hero.title).toMatch(/seguro auto/i);
+    expect(p.hero.title).toMatch(/Santo André/);
+    const titles = p.guide!.sections.map((s) => s.title).join(' | ');
+    for (const re of [/cotar/i, /valor/i, /terceiros/i, /franquia/i, /usado/i, /corretora/i]) expect(titles).toMatch(re);
+    const faqText = p.faqs.map((f) => f.q).join(' ');
+    expect(faqText).toMatch(/São Bernardo do Campo/);
+    expect(p.related!.map((r) => r.href)).toContain('/consorcio-auto');
+    for (const src of p.guide!.sources ?? []) expect(src.href).toMatch(/^https:\/\/www\.gov\.br\//);
   });
 });
 
