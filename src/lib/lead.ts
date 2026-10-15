@@ -1,5 +1,6 @@
 import { PRODUCT_FORMS, isProductSlug, type ProductSlug } from '../content/product-fields';
 import { normalizeBrPhone } from './phone';
+import { sanitizeArrival, type Arrival } from './origin';
 import { sanitizeUtm, type Utm } from './utm';
 
 export const LIMITS = { nome: 80, cidade: 60, pagina: 200 } as const;
@@ -13,6 +14,7 @@ export interface ValidLead {
   cidade?: string;
   pagina: string;
   utm: Utm;
+  origem: Arrival;
 }
 export type LeadErrors = Record<string, string>;
 export type LeadValidation = { ok: true; lead: ValidLead } | { ok: false; errors: LeadErrors };
@@ -80,6 +82,7 @@ export function validateLead(raw: unknown): LeadValidation {
       ...(cidade ? { cidade } : {}),
       pagina,
       utm: sanitizeUtm(r.utm),
+      origem: sanitizeArrival(r.origem),
     },
   };
 }

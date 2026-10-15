@@ -2,6 +2,7 @@ import { WHATSAPP_NUMBER } from '../content/contact';
 import { isWithinBusinessHours } from '../lib/business-hours';
 import { validateLead, type LeadErrors } from '../lib/lead';
 import { trackEvent } from '../lib/meta-pixel';
+import { captureArrival, safeSessionStorage } from '../lib/origin';
 import { maskBrPhoneInput } from '../lib/phone';
 import { captureUtm } from '../lib/utm';
 import { buildLeadMessage, buildWhatsAppUrl } from '../lib/whatsapp';
@@ -10,14 +11,6 @@ const OFFLINE_MSG = 'Parece que você está sem internet. Verifique a conexão e
 const IN_HOURS_MSG = 'Nossa equipe continua a conversa com você por lá.';
 const OFF_HOURS_MSG =
   'Recebemos seu contato! Nosso atendimento funciona de segunda a sexta, das 9h às 18h. Retornamos no próximo dia útil.';
-
-function sessionStore(): Storage | null {
-  try {
-    return window.sessionStorage;
-  } catch {
-    return null;
-  }
-}
 
 function showErrors(form: HTMLFormElement, errors: LeadErrors) {
   let first: HTMLElement | null = null;
@@ -45,7 +38,8 @@ function initLeadForm(root: HTMLElement) {
   if (!form || !success) return;
   const status = form.querySelector<HTMLElement>('[data-form-status]');
   const startedAt = performance.now();
-  const utm = captureUtm(sessionStore(), window.location.search);
+  const utm = captureUtm(safeSessionStorage(), window.location.search);
+  const origem = captureArrival(safeSessionStorage(), document.referrer, window.location.hostname, window.location.pathname);
   let sent = false;
 
   const select = form.querySelector<HTMLSelectElement>('[data-product-select]');
@@ -98,6 +92,7 @@ function initLeadForm(root: HTMLElement) {
       cidade: String(data.get('cidade') ?? ''),
       pagina: window.location.pathname,
       utm,
+      origem,
       elapsedMs: Math.round(performance.now() - startedAt),
       website: String(data.get('website') ?? ''),
     };
