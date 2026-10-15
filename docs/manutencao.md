@@ -20,6 +20,10 @@ Todos os textos, números e dados ficam em **`src/content/`**. Você não precis
 | Depoimentos do Google | `src/content/site.ts`, bloco `TESTIMONIALS` |
 | Textos de cada produto (título, coberturas, perguntas, seguradoras) | `src/content/products.ts` |
 | Seguradoras parceiras e telefones de assistência 24h | `src/content/insurers.ts` |
+| Guia da página, "Veja também" e títulos para o Google | `src/content/products.ts`, campos `guide`, `related` e `seo` |
+| Subpáginas de consórcio (carro e imóvel) | `src/content/sub-pages.ts` |
+| Cidades atendidas | `src/content/site.ts`, `AREA_SERVED` |
+| Robôs bloqueados ou liberados (busca e IA) | `public/robots.txt` |
 | Número do WhatsApp | `src/content/contact.ts` |
 | Perguntas do formulário por produto | `src/content/product-fields.ts` (ver o aviso abaixo) |
 
@@ -39,6 +43,7 @@ Todos os textos, números e dados ficam em **`src/content/`**. Você não precis
 
 ### Avisos
 
+- **Guia das páginas:** ao mudar um texto do guia, atualize `reviewedAt` (a data da última revisão). Mais detalhes de SEO e GEO em `docs/seo-geo.md`.
 - **Perguntas do formulário** (`product-fields.ts`): você pode mudar os rótulos e as opções das listas. Se criar ou
   remover um campo, rode `npm test`, porque a validação do formulário depende deles.
 - **Logos das seguradoras** ficam em `src/assets/insurers/<nome>.svg` (ou `.png`), com a origem de cada um em
