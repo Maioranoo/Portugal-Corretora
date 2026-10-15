@@ -6,8 +6,9 @@ import Icon from './Icon.astro';
 
 interface Props {
   product?: ProductSlug;
+  preset?: Readonly<Record<string, string>>; // pré-seleção: chave = field.id, valor = texto exato da opção
 }
-const { product } = Astro.props;
+const { product, preset } = Astro.props;
 const slugs = product ? [product] : [...PRODUCT_SLUGS];
 const fallbackUrl = buildWhatsAppUrl(WHATSAPP_NUMBER, buildGenericMessage(product ? PRODUCT_FORMS[product].name : undefined));
 ---
@@ -65,7 +66,7 @@ const fallbackUrl = buildWhatsAppUrl(WHATSAPP_NUMBER, buildGenericMessage(produc
                   <select id={id} name={name} required aria-describedby={`${id}-erro`}>
                     <option value="">Escolha uma opção</option>
                     {field.options.map((o) => (
-                      <option value={o}>{o}</option>
+                      <option value={o} selected={preset?.[field.id] === o}>{o}</option>
                     ))}
                   </select>
                 ) : (

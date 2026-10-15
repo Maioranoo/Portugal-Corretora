@@ -28,6 +28,9 @@ for (const [slug, name] of PRODUCTS) {
     const wa = await page.locator('.wa-float').getAttribute('href');
     expect(new URL(wa!).searchParams.get('text')).toContain(name);
     await expect(page.locator('details').first()).toBeAttached();
+    const crumbs = page.getByRole('navigation', { name: 'Você está em' });
+    await expect(crumbs.getByRole('link', { name: 'Início' })).toHaveAttribute('href', '/');
+    await expect(crumbs.locator('[aria-current="page"]')).toHaveText(name);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
   });
 }

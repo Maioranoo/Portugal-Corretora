@@ -1,0 +1,77 @@
+---
+import type { RelatedLink } from '../content/products';
+import Icon from './Icon.astro';
+
+interface Props {
+  links: readonly RelatedLink[];
+}
+const { links } = Astro.props;
+---
+<section class="section related" aria-labelledby="relacionados-titulo">
+  <div class="container">
+    <h2 class="section__title" id="relacionados-titulo" data-reveal>Veja também</h2>
+    <ul class="related__list">
+      {
+        links.map((l) => (
+          <li>
+            <a class="related__link" href={l.href}>
+              <span class="related__name">{l.label}</span>
+              <span class="related__text">{l.text}</span>
+              <span class="related__go" aria-hidden="true"><Icon name="arrow" size={18} /></span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .related__list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .related__link {
+    display: grid;
+    gap: var(--space-1);
+    height: 100%;
+    padding: var(--space-5) var(--space-6);
+    border-radius: var(--radius);
+    background: var(--color-globe-disc);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .related__name {
+    font-weight: 700;
+    font-size: var(--step-1);
+    color: var(--color-brand);
+  }
+
+  .related__text {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .related__go {
+    color: var(--color-brand);
+    margin-top: var(--space-2);
+  }
+
+  @media (hover: hover) {
+    .related__link:hover .related__name {
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .related__list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

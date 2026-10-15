@@ -9,22 +9,48 @@ export interface Item {
   title: string;
   text: string;
 }
-export interface Product {
-  slug: ProductSlug;
+export interface GuideSection {
+  title: string;
+  paragraphs: string[]; // a lista (se houver) aparece depois do primeiro parágrafo
+  list?: string[];
+}
+export interface Guide {
+  title: string;
+  lead?: string;
+  sections: GuideSection[];
+  sources?: { label: string; href: string }[]; // só sites oficiais (SUSEP, Banco Central, Planalto, FGTS)
+  reviewedAt: string; // ex.: "outubro de 2026"
+}
+export interface RelatedLink {
+  href: string;
+  label: string;
+  text: string;
+}
+// Conteúdo de qualquer página no modelo de produto (produtos e subpáginas de consórcio)
+export interface PageContent {
+  slug: string;
   name: string;
-  shortName: string; // rótulo curto do trilho de produtos
-  priority: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-  featured: boolean;
-  cardText: string; // até 90 caracteres
   seo: { title: string; description: string }; // title ≤ 60; description 70–160
   hero: { title: string; subtitle: string };
   coveragesTitle: string;
   coverages: Item[]; // 4–6
   audiences: Item[]; // 2–4
   steps: [Item, Item, Item];
-  faqs: Faq[]; // 4–6
-  insurers: InsurerId[]; // seguradoras exibidas na página; o cliente aprovou a divisão em 01/10/2026 (os corretores ajustam no atendimento)
+  faqs: Faq[]; // 4 ou mais
+  insurers: InsurerId[];
+  insurersTitle?: string; // padrão: "Seguradoras parceiras para <nome>"
+  insurersLead?: string; // padrão: PRODUCT_PAGE.insurersLead
   badge?: string;
+  guide?: Guide;
+  related?: RelatedLink[];
+}
+export interface Product extends PageContent {
+  slug: ProductSlug;
+  shortName: string; // rótulo curto do trilho de produtos
+  priority: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  featured: boolean;
+  cardText: string; // até 90 caracteres
+  // insurers: seguradoras exibidas na página; o cliente aprovou a divisão em 01/10/2026 (os corretores ajustam no atendimento)
 }
 
 export const PRODUCTS: readonly Product[] = [
