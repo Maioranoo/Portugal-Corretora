@@ -37,6 +37,9 @@ export const COMPANY = {
   portoElite: { label: 'Porto Elite', since: 2021 },
 } as const;
 
+// Cidades atendidas (o atendimento é o mesmo nas três). Usado nos dados estruturados e nos textos.
+export const AREA_SERVED = ['Santo André', 'São Bernardo do Campo', 'São Caetano do Sul'] as const;
+
 export const HOME = {
   seo: {
     title: 'Portugal Corretora de Seguros | Santo André, SP',

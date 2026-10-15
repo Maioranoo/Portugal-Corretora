@@ -30,12 +30,18 @@ test('perguntas frequentes abrem e fecham', async ({ page }) => {
   await expect(first).toHaveAttribute('open', '');
 });
 
-test('JSON-LD de corretora é válido', async ({ page }) => {
+test('JSON-LD traz a corretora com dados oficiais e sem nota autodeclarada', async ({ page }) => {
   await page.goto('/');
-  const raw = await page.locator('script[type="application/ld+json"]').textContent();
-  const data = JSON.parse(raw ?? '{}');
-  expect(data['@type']).toBe('InsuranceAgency');
-  expect(data.aggregateRating.ratingValue).toBe(4.8);
+  const data = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}');
+  const org = data['@graph'].find((n: { '@type': string }) => n['@type'] === 'InsuranceAgency');
+  expect(org['@id']).toBe('https://www.portugalcorretora.com.br/#corretora');
+  expect(org.address.postalCode).toBe('09040-011');
+  expect(org.areaServed.map((c: { name: string }) => c.name)).toEqual([
+    'Santo André',
+    'São Bernardo do Campo',
+    'São Caetano do Sul',
+  ]);
+  expect(org.aggregateRating).toBeUndefined();
 });
 
 test('sem rolagem horizontal', async ({ page }) => {

@@ -10,6 +10,7 @@ import TrustBadges from '../components/TrustBadges.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { PRODUCTS, type Product } from '../content/products';
 import { COMPANY, PRODUCT_PAGE } from '../content/site';
+import { breadcrumbNode, faqNode, serviceNode } from '../lib/schema';
 import { buildGenericMessage, buildWhatsAppUrl } from '../lib/whatsapp';
 
 export const getStaticPaths = (() =>
@@ -20,23 +21,20 @@ interface Props {
 }
 const { product } = Astro.props;
 const waUrl = buildWhatsAppUrl(COMPANY.whatsapp, buildGenericMessage(product.name));
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: product.faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
+const path = `/${product.slug}`;
+const schema = [
+  breadcrumbNode([{ name: 'Início', path: '/' }, { name: product.name, path }], path),
+  serviceNode({ name: product.name, path, description: product.seo.description }),
+  faqNode(product.faqs, path),
+];
 ---
 <BaseLayout
   title={product.seo.title}
   description={product.seo.description}
-  path={`/${product.slug}`}
+  path={path}
   productName={product.name}
   simpleHeader
-  jsonLd={jsonLd}
+  schema={schema}
 >
   <section class="p-hero" aria-labelledby="produto-titulo">
     <div class="container p-hero__grid">
