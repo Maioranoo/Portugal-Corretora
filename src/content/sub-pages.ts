@@ -178,7 +178,8 @@ export const SUB_PAGES: readonly SubPage[] = [
           list: [
             'O imóvel precisa ser residencial, urbano e para a sua moradia',
             'É preciso somar pelo menos 3 anos de trabalho com FGTS, contando todos os empregos',
-            'Você não pode ter outro imóvel residencial na cidade onde mora ou trabalha, nem financiamento ativo pelo Sistema Financeiro da Habitação',
+            'Você não pode ter outro imóvel residencial na cidade onde mora ou trabalha, nas cidades vizinhas ou na mesma região metropolitana, nem financiamento ativo pelo Sistema Financeiro da Habitação',
+            'O valor do imóvel precisa estar dentro do limite do Sistema Financeiro da Habitação',
             'Terreno sem construção e imóvel comercial não permitem o uso do FGTS',
             'A liberação depende da análise da Caixa e da administradora',
           ],
@@ -219,7 +220,7 @@ export const SUB_PAGES: readonly SubPage[] = [
       },
       {
         q: 'Dá para comprar terreno com consórcio?',
-        a: 'Em muitos grupos, sim. Nesse caso, o FGTS não pode ser usado para o terreno sem construção.',
+        a: 'Em muitos grupos, sim. Nesse caso, conforme as regras do FGTS, o saldo não pode ser usado para terreno sem construção.',
       },
       {
         q: 'Consórcio de imóvel tem juros?',

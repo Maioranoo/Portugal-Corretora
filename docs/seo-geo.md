@@ -33,7 +33,7 @@ Dois termos, explicados uma vez:
 
 | Gravidade | Problema |
 |---|---|
-| **Crítico** | Nenhum bloqueio de indexação. |
+| **Crítico** | Nenhum problema crítico encontrado: nada impedia a indexação do site. |
 | **Alto** | Nenhum conteúdo para São Bernardo do Campo e São Caetano do Sul. |
 | **Alto** | H1 e títulos sem as palavras que as pessoas buscam (o H1 do consórcio nem tinha "consórcio"). |
 | **Alto** | Páginas comerciais rasas e todas no mesmo molde. |
@@ -148,6 +148,7 @@ Use nome, endereço e telefone **idênticos** aos do Perfil do Google em todos:
 - [ ] Confirmar a frase "A remuneração da corretora já vem incluída no valor do seguro, sem cobrança separada pelo atendimento" (`/seguro-auto`).
 - [ ] Revisar a lista de condições do FGTS em `/consorcio-imobiliario` (regras oficiais de moradia própria; podem mudar).
 - [ ] Decidir se mantém "o grupo é planejado para que todos os participantes em dia sejam contemplados até o encerramento" (`/consorcio` e subpáginas).
+- [ ] Alinhar a resposta do FAQ da home "Quanto custa o atendimento da corretora?" ("Nada para você. A corretora é remunerada pela seguradora") com o texto do guia de seguro auto ("a remuneração da corretora já vem incluída no valor do seguro"), depois de confirmar com o dono.
 - [ ] Confirmar que "mais de 10 seguradoras" e "+12 anos" continuam corretos.
 - [ ] O botão principal continua "Falar com um especialista" (regra do PRODUCT.md). Trocar para "Cotar seguro auto" ou "Simular consórcio" é decisão do dono.
 
@@ -156,6 +157,8 @@ Use nome, endereço e telefone **idênticos** aos do Perfil do Google em todos:
 - Revisão jurídica dos textos de consórcio e FGTS (as regras podem mudar).
 - Revisar o campo `reviewedAt` dos guias a cada 6 meses.
 - Se a corretora quiser medir também os cliques no botão do WhatsApp, existe a opção 2: eventos do Vercel Analytics (exige o plano Pro).
+
+- Sitemap sem data de atualização (lastmod): não alterado; o Google ignora datas que não refletem mudanças reais.
 
 **Não alterados por estarem fora do escopo:** os saltos na ordem dos títulos (o h3 de sucesso do formulário vem antes do primeiro h2, e o h2 "Cookies" aparece em todas as páginas) e o redirecionamento `http` sem `www` em 2 saltos (configuração da Vercel).
 
