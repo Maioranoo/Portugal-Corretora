@@ -191,3 +191,17 @@ test('sem internet mostra aviso e mantém os dados', async ({ page, context }) =
   expect(await opened(page)).toHaveLength(0);
   await context.setOffline(false);
 });
+
+test('o pedido leva a origem da visita (site de onde veio e primeira página)', async ({ page }) => {
+  await stubOpen(page);
+  const bodies = await captureApi(page);
+  await page.goto('/', { referer: 'https://www.google.com.br/' });
+  await page.goto('/seguro-auto');
+  const form = page.locator('[data-lead-form]');
+  await form.getByLabel('Seu nome').fill('Maria Souza');
+  await form.getByLabel('WhatsApp', { exact: true }).pressSequentially('11987654321');
+  await form.getByLabel('Modelo e ano do carro').fill('HB20 2022');
+  await form.getByRole('button', { name: 'Falar com um especialista' }).click();
+  await expect.poll(() => bodies.length).toBe(1);
+  expect(bodies[0].origem).toEqual({ referrer: 'www.google.com.br', landing: '/' });
+});

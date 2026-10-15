@@ -11,6 +11,7 @@ const lead: ValidLead = {
   cidade: 'Santo André',
   pagina: '/seguro-auto',
   utm: { utm_source: 'meta', utm_campaign: 'auto-set' },
+  origem: { referrer: 'www.google.com.br', landing: '/' },
 };
 
 describe('escapeHtml', () => {
@@ -37,6 +38,7 @@ describe('renderLeadEmail', () => {
       expect(body).toContain('https://wa.me/5511987654321');
       expect(body).toContain('/seguro-auto');
       expect(body).toContain('auto-set');
+      expect(body).toContain('Campanha (meta / auto-set)');
       expect(body).toContain('29/09/2026');
       expect(body).toContain('12:30');
       expect(body).toContain('Santo André');
@@ -44,5 +46,11 @@ describe('renderLeadEmail', () => {
   });
   test('texto puro mantém os caracteres originais', () => {
     expect(msg.text).toContain('Zé <b>& "Cia"</b>');
+  });
+
+  test('sem UTM, a origem vem do site anterior', () => {
+    const m = renderLeadEmail({ ...lead, utm: {} }, new Date('2026-09-29T15:30:00Z'));
+    expect(m.text).toContain('Chegou ao site por: Google (busca)');
+    expect(m.text).toContain('Primeira página aberta: /');
   });
 });

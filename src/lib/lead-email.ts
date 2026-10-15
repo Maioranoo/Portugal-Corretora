@@ -1,4 +1,5 @@
 import type { ValidLead } from './lead';
+import { describeOrigin } from './origin';
 import { formatBrPhone } from './phone';
 import { UTM_KEYS } from './utm';
 
@@ -28,7 +29,9 @@ export function renderLeadEmail(lead: ValidLead, receivedAt: Date): EmailMessage
     ['Produto', lead.produtoNome],
     ...lead.detalhes.map((d): [string, string] => [d.label, d.value]),
     ...(lead.cidade ? [['Cidade', lead.cidade] as [string, string]] : []),
-    ['Página de origem', lead.pagina],
+    ['Chegou ao site por', describeOrigin(lead.origem, lead.utm)],
+    ['Primeira página aberta', lead.origem.landing],
+    ['Página do formulário', lead.pagina],
     ...UTM_KEYS.filter((k) => lead.utm[k]).map((k): [string, string] => [k, lead.utm[k] as string]),
     ['Recebido em', `${when} (horário de Brasília)`],
   ];

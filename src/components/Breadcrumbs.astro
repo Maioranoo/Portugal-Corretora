@@ -1,0 +1,45 @@
+---
+import type { Crumb } from '../lib/schema';
+
+interface Props {
+  items: readonly Crumb[];
+}
+const { items } = Astro.props;
+---
+<nav class="crumbs" aria-label="Você está em">
+  <ol>
+    {
+      items.map((c, i) => (
+        <li>{i === items.length - 1 ? <span aria-current="page">{c.name}</span> : <a href={c.path}>{c.name}</a>}</li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  .crumbs ol {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--space-2);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  .crumbs li + li::before {
+    content: '›' / '';
+    margin-right: var(--space-2);
+    color: var(--color-text-muted);
+  }
+
+  .crumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

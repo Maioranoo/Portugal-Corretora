@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { INSURERS } from '../../src/content/insurers';
 import { PRODUCT_FORMS, PRODUCT_SLUGS } from '../../src/content/product-fields';
 import { PRODUCTS } from '../../src/content/products';
+import { SUB_PAGES } from '../../src/content/sub-pages';
 import * as site from '../../src/content/site';
 
 function strings(value: unknown): string[] {
@@ -10,7 +11,7 @@ function strings(value: unknown): string[] {
   if (value && typeof value === 'object') return Object.values(value).flatMap(strings);
   return [];
 }
-const FORBIDDEN = [/os melhores preços/i, /menor preço/i, /garantid[oa]/i, /atendimento (24|vinte e quatro)/i];
+const FORBIDDEN = [/os melhores preços/i, /menor preço/i, /melhor preço/i, /garantid[oa]/i, /atendimento (24|vinte e quatro)/i];
 
 describe('produtos', () => {
   test('8 produtos, na ordem de prioridade, com os slugs do formulário', () => {
@@ -36,6 +37,18 @@ describe('produtos', () => {
     expect(p.insurers.length).toBeGreaterThan(0);
     const ids = new Set(INSURERS.map((i) => i.id));
     for (const id of p.insurers) expect(ids.has(id)).toBe(true);
+  });
+  test('seguro auto responde às dúvidas de quem vai cotar, com foco local', () => {
+    const p = PRODUCTS.find((x) => x.slug === 'seguro-auto')!;
+    expect(p.seo.title).toMatch(/Santo André/);
+    expect(p.hero.title).toMatch(/seguro auto/i);
+    expect(p.hero.title).toMatch(/Santo\sAndré/);
+    const titles = p.guide!.sections.map((s) => s.title).join(' | ');
+    for (const re of [/cotar/i, /valor/i, /terceiros/i, /franquia/i, /usado/i, /corretora/i]) expect(titles).toMatch(re);
+    const faqText = p.faqs.map((f) => f.q).join(' ');
+    expect(faqText).toMatch(/São Bernardo do Campo/);
+    expect(p.related!.map((r) => r.href)).toContain('/consorcio-auto');
+    for (const src of p.guide!.sources ?? []) expect(src.href).toMatch(/^https:\/\/www\.gov\.br\//);
   });
 });
 
@@ -71,19 +84,77 @@ describe('avaliações', () => {
 
 describe('regras de redação', () => {
   test('nenhum texto cita o horário antigo (8h às 20h)', () => {
-    const all = [...strings(PRODUCTS), ...strings(site)];
+    const all = [...strings(PRODUCTS), ...strings(SUB_PAGES), ...strings(site)];
     for (const text of all) expect(text, text).not.toMatch(/8h às 20h|20h/);
   });
   test('o prêmio aparece só como "Porto Elite"', () => {
-    const all = [...strings(PRODUCTS), ...strings(site)];
+    const all = [...strings(PRODUCTS), ...strings(SUB_PAGES), ...strings(site)];
     for (const text of all) expect(text, text).not.toMatch(/Prêmio Porto Elite/);
   });
   test('sem travessão (— ou –) em nenhum texto visível', () => {
-    const all = [...strings(PRODUCTS), ...strings(site), ...strings(INSURERS)];
+    const all = [...strings(PRODUCTS), ...strings(SUB_PAGES), ...strings(site), ...strings(INSURERS)];
     for (const text of all) expect(text, text).not.toMatch(/[–—]/);
   });
   test('sem promessas absolutas em nenhum texto', () => {
-    const all = [...strings(PRODUCTS), ...strings(site)];
+    const all = [...strings(PRODUCTS), ...strings(SUB_PAGES), ...strings(site)];
     for (const text of all) for (const re of FORBIDDEN) expect(text, text).not.toMatch(re);
+  });
+});
+
+const NUMBERS = [/%/, /R\$/, /\d+\s*meses/i];
+
+describe('consórcio', () => {
+  const hub = PRODUCTS.find((p) => p.slug === 'consorcio')!;
+  const pages = [hub, ...SUB_PAGES];
+
+  test('duas subpáginas de consórcio, com formulário de consórcio pré-preenchido', () => {
+    expect(SUB_PAGES.map((s) => s.slug)).toEqual(['consorcio-auto', 'consorcio-imobiliario']);
+    for (const s of SUB_PAGES) {
+      expect(s.parent).toBe('consorcio');
+      expect(s.form.product).toBe('consorcio');
+      const field = PRODUCT_FORMS.consorcio.fields.find((f) => f.id === 'tipo')!;
+      expect(field.kind === 'select' && field.options).toContain(s.form.preset.tipo);
+    }
+  });
+  test.each(SUB_PAGES.map((s) => [s.slug, s] as const))('%s tem conteúdo completo', (_, s) => {
+    expect(s.seo.title.length).toBeLessThanOrEqual(60);
+    expect(s.seo.description.length).toBeGreaterThanOrEqual(70);
+    expect(s.seo.description.length).toBeLessThanOrEqual(160);
+    expect(s.coverages.length).toBeGreaterThanOrEqual(4);
+    expect(s.coverages.length).toBeLessThanOrEqual(6);
+    expect(s.faqs.length).toBeGreaterThanOrEqual(4);
+    expect(s.guide!.sections.length).toBeGreaterThanOrEqual(4);
+  });
+  test('sem números comerciais (taxa, valor, prazo) no texto', () => {
+    for (const text of strings(pages)) for (const re of NUMBERS) expect(text, text).not.toMatch(re);
+  });
+  test('administradoras rotuladas como administradoras; H1 central fala de consórcio', () => {
+    for (const p of pages) expect(p.insurersTitle).toBe('Administradoras parceiras');
+    expect(hub.hero.title).toMatch(/consórcio/i);
+  });
+  test('custos e FGTS explicados com condições', () => {
+    const all = strings(pages).join(' ');
+    expect(all).toMatch(/taxa de administração/);
+    expect(all).toMatch(/fundo de reserva/);
+    expect(all).toMatch(/regras do FGTS/);
+  });
+});
+
+describe('home e SEO local', () => {
+  test('título, descrição e H1 da home citam a corretora e a região', () => {
+    expect(site.HOME.seo.title.length).toBeLessThanOrEqual(60);
+    expect(site.HOME.seo.title).toMatch(/Corretora de Seguros/);
+    expect(site.HOME.seo.title).toMatch(/Santo André/);
+    expect(site.HOME.seo.description.length).toBeGreaterThanOrEqual(70);
+    expect(site.HOME.seo.description.length).toBeLessThanOrEqual(160);
+    expect(site.HOME.hero.title).toMatch(/Santo\sAndré/);
+  });
+  test('o FAQ geral cita as três cidades atendidas', () => {
+    const text = site.GENERAL_FAQS.map((f) => `${f.q} ${f.a}`).join(' ');
+    for (const city of site.AREA_SERVED) expect(text).toContain(city);
+  });
+  test('todos os títulos são únicos', () => {
+    const titles = [site.HOME.seo.title, ...PRODUCTS.map((p) => p.seo.title), ...SUB_PAGES.map((s) => s.seo.title)];
+    expect(new Set(titles).size).toBe(titles.length);
   });
 });

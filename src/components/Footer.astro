@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import logoBranco from '../assets/brand/logo-branco.png';
 import { PRODUCTS } from '../content/products';
+import { SUB_PAGES } from '../content/sub-pages';
 import { COMPANY } from '../content/site';
 import { buildGenericMessage, buildWhatsAppUrl } from '../lib/whatsapp';
 import Icon from './Icon.astro';
@@ -28,8 +29,11 @@ const year = new Date().getFullYear();
     <nav class="footer__col" aria-label="Seguros">
       <h2>Seguros</h2>
       <ul>
-        {PRODUCTS.map((p) => (
-          <li><a href={`/${p.slug}`}>{p.name}</a></li>
+        {PRODUCTS.flatMap((p) => [
+          { href: `/${p.slug}`, label: p.name },
+          ...SUB_PAGES.filter((s) => s.parent === p.slug).map((s) => ({ href: `/${s.slug}`, label: s.name })),
+        ]).map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
         ))}
       </ul>
     </nav>

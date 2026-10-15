@@ -9,22 +9,48 @@ export interface Item {
   title: string;
   text: string;
 }
-export interface Product {
-  slug: ProductSlug;
+export interface GuideSection {
+  title: string;
+  paragraphs: string[]; // a lista (se houver) aparece depois do primeiro parágrafo
+  list?: string[];
+}
+export interface Guide {
+  title: string;
+  lead?: string;
+  sections: GuideSection[];
+  sources?: { label: string; href: string }[]; // só sites oficiais (SUSEP, Banco Central, Planalto, FGTS)
+  reviewedAt: string; // ex.: "outubro de 2026"
+}
+export interface RelatedLink {
+  href: string;
+  label: string;
+  text: string;
+}
+// Conteúdo de qualquer página no modelo de produto (produtos e subpáginas de consórcio)
+export interface PageContent {
+  slug: string;
   name: string;
-  shortName: string; // rótulo curto do trilho de produtos
-  priority: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-  featured: boolean;
-  cardText: string; // até 90 caracteres
   seo: { title: string; description: string }; // title ≤ 60; description 70–160
   hero: { title: string; subtitle: string };
   coveragesTitle: string;
   coverages: Item[]; // 4–6
   audiences: Item[]; // 2–4
   steps: [Item, Item, Item];
-  faqs: Faq[]; // 4–6
-  insurers: InsurerId[]; // seguradoras exibidas na página; o cliente aprovou a divisão em 01/10/2026 (os corretores ajustam no atendimento)
+  faqs: Faq[]; // 4 ou mais
+  insurers: InsurerId[];
+  insurersTitle?: string; // padrão: "Seguradoras parceiras para <nome>"
+  insurersLead?: string; // padrão: PRODUCT_PAGE.insurersLead
   badge?: string;
+  guide?: Guide;
+  related?: RelatedLink[];
+}
+export interface Product extends PageContent {
+  slug: ProductSlug;
+  shortName: string; // rótulo curto do trilho de produtos
+  priority: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  featured: boolean;
+  cardText: string; // até 90 caracteres
+  // insurers: seguradoras exibidas na página; o cliente aprovou a divisão em 01/10/2026 (os corretores ajustam no atendimento)
 }
 
 export const PRODUCTS: readonly Product[] = [
@@ -36,24 +62,102 @@ export const PRODUCTS: readonly Product[] = [
     featured: true,
     cardText: 'Proteção contra batida, roubo e danos a terceiros, com assistência 24h.',
     seo: {
-      title: 'Seguro Auto em Santo André | Portugal Corretora',
+      title: 'Seguro Auto em Santo André e no ABC | Portugal Corretora',
       description:
-        'Compare seguro auto em mais de 10 seguradoras e encontre o melhor preço para o seu perfil. Atendimento pelo WhatsApp com a Portugal Corretora.',
+        'Cote seguro auto em Santo André, São Bernardo e São Caetano. Comparamos mais de 10 seguradoras para o seu perfil e atendemos pelo WhatsApp.',
     },
     hero: {
-      title: 'Seguro auto com o preço certo para o seu perfil',
+      title: 'Seguro auto em Santo André e no ABC, com a cobertura certa para o seu perfil',
       subtitle:
-        'Comparamos mais de 10 seguradoras para encontrar o melhor preço para você. E se precisar usar, a gente acompanha tudo com você.',
+        'Comparamos mais de 10 seguradoras para encontrar a proposta que combina com você e com o seu carro. Atendemos Santo André, São Bernardo do Campo e São Caetano do Sul, e acompanhamos você se precisar usar o seguro.',
     },
-    coveragesTitle: 'O que o Seguro Auto cobre',
+    coveragesTitle: 'Coberturas que você pode contratar',
     coverages: [
-      { title: 'Colisão e perda total', text: 'Conserto do carro após batidas ou indenização quando o reparo não compensa.' },
-      { title: 'Roubo e furto', text: 'Indenização se o seu carro for levado, conforme o valor contratado.' },
-      { title: 'Danos a terceiros', text: 'Cobre danos materiais e corporais que você causar a outras pessoas no trânsito.' },
-      { title: 'Assistência 24h', text: 'Guincho, chaveiro, troca de pneu e pane seca ou elétrica, a qualquer hora.' },
-      { title: 'Carro reserva', text: 'Um carro para você não ficar a pé enquanto o seu está na oficina.' },
-      { title: 'Vidros, faróis e retrovisores', text: 'Troca ou reparo sem precisar acionar a cobertura principal.' },
+      { title: 'Colisão e perda total', text: 'Conserto após batidas ou indenização quando o reparo não compensa, nos limites da apólice.' },
+      { title: 'Roubo e furto', text: 'Indenização se o carro for levado, conforme o valor e as condições contratadas.' },
+      { title: 'Danos a terceiros', text: 'Danos materiais e corporais que você causar a outras pessoas, até o limite escolhido.' },
+      { title: 'Assistência 24h da seguradora', text: 'Guincho, chaveiro, troca de pneu e pane, de acordo com o plano de assistência.' },
+      { title: 'Carro reserva', text: 'Opcional para você não ficar a pé enquanto o carro está na oficina.' },
+      { title: 'Vidros, faróis e retrovisores', text: 'Opcional para troca ou reparo, conforme as regras da seguradora.' },
     ],
+    guide: {
+      title: 'Guia do seguro auto: o que saber antes de cotar',
+      lead: 'Respostas diretas para as dúvidas que mais ouvimos de motoristas de Santo André, São Bernardo do Campo e São Caetano do Sul.',
+      sections: [
+        {
+          title: 'Como cotar seguro auto em Santo André e no ABC',
+          paragraphs: [
+            'Para cotar, precisamos de poucas informações sobre o carro, quem dirige e como ele é usado:',
+            'Com esses dados, a Portugal Corretora consulta mais de 10 seguradoras e mostra as opções lado a lado, explicando o que muda entre elas. Você pode começar pelo formulário desta página ou pelo WhatsApp. O atendimento é o mesmo para Santo André, São Bernardo do Campo e São Caetano do Sul.',
+          ],
+          list: [
+            'Modelo, versão e ano do carro',
+            'CEP onde o carro passa a noite',
+            'Idade e tempo de habilitação de quem dirige com mais frequência',
+            'Uso do carro: particular, trabalho ou aplicativo',
+            'Apólice atual, se você já tem seguro, para aproveitar a classe de bônus',
+          ],
+        },
+        {
+          title: 'O que influencia o valor do seguro de carro',
+          paragraphs: [
+            'Cada seguradora calcula o preço com base no risco. Os pontos que mais pesam costumam ser:',
+            'Como cada seguradora avalia esses pontos de um jeito, o mesmo carro pode ter preços bem diferentes. Por isso comparar faz diferença.',
+          ],
+          list: [
+            'O modelo do carro, o valor de mercado e o custo das peças',
+            'O CEP de pernoite e de circulação, porque os índices de roubo e de batidas mudam de um bairro para outro',
+            'O perfil de quem dirige, como idade e tempo de habilitação',
+            'Onde o carro fica guardado, em casa e no trabalho',
+            'O histórico de seguro e a classe de bônus',
+            'As coberturas, os limites e a franquia escolhidos',
+          ],
+        },
+        {
+          title: 'Seguro compreensivo ou só contra terceiros?',
+          paragraphs: [
+            'O seguro compreensivo, também chamado de completo, protege o seu carro contra colisão, roubo, furto, incêndio e alguns fenômenos naturais, e normalmente inclui danos a terceiros e assistência.',
+            'O seguro contra terceiros cobre só os danos que você causar a outras pessoas e aos bens delas. Custa menos, mas não paga o conserto nem a indenização do seu carro. Pode fazer sentido para carros de menor valor. Na cotação, mostramos as duas opções para você comparar.',
+          ],
+        },
+        {
+          title: 'Como escolher a cobertura certa',
+          paragraphs: [
+            'Comece pelo que você não conseguiria pagar sozinho: o valor do carro e os danos a terceiros. Para terceiros, vale considerar limites mais altos para danos materiais e corporais, porque um acidente envolvendo outro carro ou pessoas pode custar caro.',
+            'Depois, veja os opcionais que fazem diferença na sua rotina, como carro reserva, vidros e guincho com distância maior. Contratar só o que faz sentido para você deixa o seguro mais equilibrado.',
+          ],
+        },
+        {
+          title: 'Como funciona a franquia',
+          paragraphs: [
+            'A franquia é a parte do conserto que fica com você quando usa o seguro em um dano parcial. Se o conserto custar menos que a franquia, normalmente não vale acionar o seguro.',
+            'Em geral, a franquia não é cobrada em perda total, roubo ou furto, mas isso depende das condições de cada apólice. Franquia reduzida deixa o uso mais barato e o seguro mais caro; franquia maior faz o contrário. Simulamos as opções para você escolher.',
+          ],
+        },
+        {
+          title: 'Dá para fazer seguro de carro usado?',
+          paragraphs: [
+            'Sim. A maioria das seguradoras aceita carros usados, e a idade do carro muda principalmente o preço e as coberturas disponíveis. Em alguns casos, a seguradora pede vistoria antes de aceitar.',
+            'A aceitação é sempre da seguradora, que analisa o carro e o perfil de quem dirige. Se uma não aceitar, procuramos outras opções para você.',
+          ],
+        },
+        {
+          title: 'Por que contratar com uma corretora',
+          paragraphs: [
+            'A corretora trabalha para você, não para uma seguradora específica. Na Portugal Corretora, registrada na SUSEP sob o nº 2022910, você compara várias seguradoras em um só atendimento e tem com quem contar na renovação, nas mudanças da apólice e no sinistro.',
+            'A remuneração da corretora já vem incluída no valor do seguro, sem cobrança separada pelo atendimento.',
+          ],
+        },
+      ],
+      sources: [
+        {
+          label: 'SUSEP: seguro de automóveis',
+          href: 'https://www.gov.br/susep/pt-br/assuntos/meu-futuro-seguro/seguros-previdencia-e-capitalizacao/seguros/seguro-de-automoveis',
+        },
+        { label: 'SUSEP: corretor de seguros', href: 'https://www.gov.br/susep/pt-br/assuntos/corretor-de-seguros' },
+      ],
+      reviewedAt: 'outubro de 2026',
+    },
     audiences: [
       { title: 'Primeiro carro', text: 'Explicamos cada cobertura para você contratar só o que faz sentido.' },
       { title: 'Família', text: 'Proteção para o carro que leva todo mundo, com assistência para imprevistos.' },
@@ -66,8 +170,12 @@ export const PRODUCTS: readonly Product[] = [
     ],
     faqs: [
       {
-        q: 'O que é franquia?',
-        a: 'É a parte do conserto que você paga quando usa o seguro em uma batida com dano parcial. Franquias maiores deixam o seguro mais barato; menores deixam o uso mais barato. Ajudamos você a escolher o equilíbrio certo.',
+        q: 'Onde cotar seguro auto em Santo André?',
+        a: 'Na Portugal Corretora de Seguros, na Av. Portugal, 1285, Jardim Bela Vista, em Santo André. A cotação é feita pelo WhatsApp ou pelo formulário desta página, sem precisar ir ao escritório, e comparamos mais de 10 seguradoras para o seu perfil.',
+      },
+      {
+        q: 'Vocês atendem São Bernardo do Campo e São Caetano do Sul?',
+        a: 'Sim. Atendemos as duas cidades do mesmo jeito que Santo André: cotação, contratação, renovação e acompanhamento no sinistro, pelo WhatsApp ou pelo formulário.',
       },
       {
         q: 'Por que o preço muda de uma pessoa para outra?',
@@ -75,7 +183,7 @@ export const PRODUCTS: readonly Product[] = [
       },
       {
         q: 'Posso trocar de seguradora na renovação sem perder o bônus?',
-        a: 'Sim. O bônus é do segurado e acompanha você na troca de seguradora, desde que a renovação seja feita no prazo e sem interrupção.',
+        a: 'Em geral, sim. O bônus é do segurado e pode ser levado para outra seguradora, desde que a renovação seja feita no prazo e sem interrupção. Conferimos a sua classe de bônus antes da troca.',
       },
       {
         q: 'Motorista de aplicativo consegue fazer seguro?',
@@ -85,6 +193,11 @@ export const PRODUCTS: readonly Product[] = [
         q: 'O que fazer em caso de batida?',
         a: 'Mantenha a calma, sinalize o local e, se houver feridos, chame o socorro. Depois fale com a gente pelo WhatsApp: orientamos o passo a passo e acionamos a seguradora com você.',
       },
+    ],
+    related: [
+      { href: '/consorcio-auto', label: 'Consórcio de carro', text: 'Planeje a troca do carro sem os juros de um financiamento.' },
+      { href: '/seguro-residencial', label: 'Seguro Residencial', text: 'Proteção para a casa ou o apartamento, próprio ou alugado.' },
+      { href: '/ja-sou-cliente', label: 'Já sou cliente', text: 'Sinistro, assistência 24h da seguradora e segunda via.' },
     ],
     insurers: ['porto', 'allianz', 'tokio-marine', 'hdi', 'suhai', 'yelum', 'bradesco', 'pier', 'azul', 'itau', 'mitsui-sumitomo', 'zurich', 'mapfre'],
   },
@@ -152,7 +265,7 @@ export const PRODUCTS: readonly Product[] = [
     featured: true,
     cardText: 'Planos para você, sua família ou sua empresa, a partir de 2 vidas.',
     seo: {
-      title: 'Plano de Saúde Individual, Familiar e Empresarial',
+      title: 'Plano de Saúde Familiar e Empresarial | Portugal Corretora',
       description:
         'Plano de saúde para você, sua família ou sua empresa, inclusive MEI a partir de 2 vidas. Comparamos opções de rede e preço com a Portugal Corretora.',
     },
@@ -210,53 +323,125 @@ export const PRODUCTS: readonly Product[] = [
     shortName: 'Consórcio',
     priority: 4,
     featured: true,
-    cardText: 'Imóvel ou veículo sem juros, com parcelas que cabem no seu planejamento.',
+    cardText: 'Carro ou imóvel sem juros de financiamento, com parcelas planejadas.',
     seo: {
-      title: 'Consórcio de Imóvel e Veículo | Portugal Corretora',
+      title: 'Consórcio em Santo André e no ABC | Portugal Corretora',
       description:
-        'Consórcio de imóvel ou veículo sem juros, só com taxa de administração. Planejamento e acompanhamento das assembleias com a Portugal Corretora.',
+        'Consórcio de carro e de imóvel em Santo André, São Bernardo e São Caetano. Entenda como funciona e simule com um especialista da Portugal Corretora.',
     },
     hero: {
-      title: 'Conquiste seu imóvel ou seu carro sem pagar juros',
+      title: 'Consórcio de carro e de imóvel em Santo André e no ABC',
       subtitle:
-        'Consórcio é a forma planejada de comprar à vista. Ajudamos a escolher o plano certo e acompanhamos você até a contemplação.',
+        'Uma forma planejada de comprar sem os juros de um financiamento. Explicamos como funciona, comparamos as administradoras parceiras e acompanhamos você até a contemplação.',
     },
-    coveragesTitle: 'O que está incluído',
+    coveragesTitle: 'Por que considerar um consórcio',
     coverages: [
-      { title: 'Sem juros', text: 'Você paga apenas a taxa de administração, diluída nas parcelas.' },
-      { title: 'Carta de crédito', text: 'Para imóvel, veículo ou outros bens, no valor que você escolher.' },
-      { title: 'Sorteio ou lance', text: 'Todo mês há chances de contemplação por sorteio ou por lance.' },
-      { title: 'Parcelas planejadas', text: 'Prazos e valores que cabem no seu orçamento.' },
-      { title: 'Acompanhamento das assembleias', text: 'Avisamos sobre resultados e ajudamos na estratégia de lance.' },
-      { title: 'Compra à vista', text: 'Com a carta em mãos, você negocia como comprador à vista.' },
+      { title: 'Sem juros de financiamento', text: 'No lugar dos juros, há taxa de administração e, quando previstos no contrato, fundo de reserva e seguro.' },
+      { title: 'Carta de crédito', text: 'Para carro, moto, imóvel ou outros bens, no valor que você escolher.' },
+      { title: 'Sorteio ou lance', text: 'Nas assembleias, a contemplação acontece por sorteio ou por lance, conforme as regras do grupo.' },
+      { title: 'Parcelas planejadas', text: 'Prazo e parcela escolhidos de acordo com o seu objetivo e o seu orçamento.' },
+      { title: 'Acompanhamento das assembleias', text: 'Avisamos sobre os resultados e ajudamos você a pensar na estratégia de lance.' },
+      { title: 'Poder de compra à vista', text: 'Com a carta liberada, você negocia o bem como comprador à vista.' },
     ],
+    insurersTitle: 'Administradoras parceiras',
+    insurersLead: 'Comparamos os grupos dessas administradoras para encontrar o plano certo para o seu objetivo.',
     audiences: [
-      { title: 'Comprar um imóvel', text: 'Casa, apartamento ou terreno, com planejamento e sem juros.' },
-      { title: 'Trocar de carro', text: 'Carro novo ou seminovo, sem o custo de um financiamento.' },
-      { title: 'Planejar um investimento', text: 'Uma forma disciplinada de construir patrimônio.' },
+      { title: 'Comprar um imóvel', text: 'Casa, apartamento ou terreno, com planejamento e sem juros de financiamento.' },
+      { title: 'Trocar de carro', text: 'Carro novo ou usado, com parcelas que cabem no seu orçamento.' },
+      { title: 'Planejar uma conquista', text: 'Uma forma disciplinada de juntar para um objetivo de médio ou longo prazo.' },
     ],
     steps: [
       { title: 'Conte o que você precisa', text: 'Diga o tipo de bem e o valor aproximado da carta.' },
-      { title: 'Montamos o plano ideal', text: 'Comparamos grupos, prazos e parcelas para o seu objetivo.' },
+      { title: 'Comparamos os grupos', text: 'Mostramos prazo, parcela e custos de cada opção antes de qualquer decisão.' },
       { title: 'Você é acompanhado até o fim', text: 'Seguimos com você nas assembleias e na contemplação.' },
     ],
+    guide: {
+      title: 'Como funciona o consórcio',
+      lead: 'O essencial para decidir com segurança, em linguagem simples.',
+      sections: [
+        {
+          title: 'O que é consórcio',
+          paragraphs: [
+            'Consórcio é um grupo de pessoas que se juntam para comprar um bem, como um carro ou um imóvel. Todo mês, cada participante paga uma parcela que forma um fundo comum, e esse dinheiro é usado para liberar cartas de crédito aos contemplados.',
+            'Os grupos são organizados por administradoras autorizadas e fiscalizadas pelo Banco Central, de acordo com a Lei nº 11.795/2008.',
+          ],
+        },
+        {
+          title: 'Consórcio ou financiamento?',
+          paragraphs: [
+            'No financiamento, você recebe o bem logo, mas paga juros sobre o valor emprestado. No consórcio, não há juros de financiamento, mas você só recebe a carta quando é contemplado, por sorteio ou lance.',
+            'O consórcio pode fazer sentido para quem consegue planejar e não precisa do bem agora. O financiamento atende quem precisa do bem imediatamente. Ajudamos você a comparar o custo total das duas opções.',
+          ],
+        },
+        {
+          title: 'Quais são os custos do consórcio',
+          paragraphs: [
+            'Consórcio não tem juros de financiamento, mas tem custos. Os principais são:',
+            'Todos esses itens aparecem na proposta e no contrato. Antes de você assinar, mostramos cada um deles.',
+          ],
+          list: [
+            'Taxa de administração, que remunera a administradora e é diluída nas parcelas',
+            'Fundo de reserva, quando previsto no contrato, usado para cobrir imprevistos do grupo',
+            'Seguro, quando incluído no grupo, que pode quitar o saldo em situações como a morte do participante',
+            'Reajuste periódico da carta e das parcelas, pelo índice definido no contrato',
+          ],
+        },
+        {
+          title: 'Como funciona a contemplação',
+          paragraphs: [
+            'Nas assembleias, o grupo contempla participantes por sorteio e por lance. No lance, você oferece antecipar parte das parcelas; as regras de cada grupo definem como os lances são classificados.',
+            'Não existe data certa para ser contemplado. O grupo é planejado para que todos os participantes em dia recebam a carta até o encerramento, mas o momento depende do sorteio ou do lance.',
+          ],
+        },
+        {
+          title: 'Carro ou imóvel: qual consórcio escolher',
+          paragraphs: [
+            'No consórcio de carro, a carta pode ser usada para carro novo ou usado, conforme as regras da administradora. No consórcio de imóvel, para casa, apartamento, terreno e, em alguns grupos, construção ou reforma, com a possibilidade de usar o FGTS conforme as regras do FGTS.',
+          ],
+        },
+        {
+          title: 'Como pedir uma simulação',
+          paragraphs: [
+            'Conte o tipo de bem e o valor aproximado da carta pelo formulário ou pelo WhatsApp. Comparamos os grupos das administradoras parceiras e mostramos prazo, parcela e custos de cada opção, sem compromisso.',
+          ],
+        },
+      ],
+      sources: [
+        { label: 'Banco Central: consórcio', href: 'https://www.bcb.gov.br/estabilidadefinanceira/consorcio' },
+        { label: 'Lei nº 11.795/2008', href: 'https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11795.htm' },
+      ],
+      reviewedAt: 'outubro de 2026',
+    },
     faqs: [
       {
-        q: 'Como funciona o lance?',
-        a: 'O lance é uma oferta para antecipar parcelas e ser contemplado antes do sorteio. Quem oferece o maior percentual na assembleia é contemplado. Ajudamos você a montar a estratégia.',
+        q: 'Consórcio tem juros?',
+        a: 'Não tem juros de financiamento. Os custos são a taxa de administração e, quando previstos no contrato, o fundo de reserva e o seguro. Mostramos todos eles na simulação.',
       },
       {
-        q: 'Consórcio tem juros?',
-        a: 'Não. O consórcio cobra uma taxa de administração, que costuma sair bem mais barata do que os juros de um financiamento.',
+        q: 'Como funciona o lance?',
+        a: 'O lance é a oferta de antecipar parcelas para ser contemplado antes do sorteio. Cada grupo tem regras próprias para classificar os lances. Ajudamos você a montar a estratégia.',
       },
       {
         q: 'Posso usar o FGTS?',
-        a: 'No consórcio de imóvel, sim, conforme as regras do FGTS. Você pode usar o saldo para dar lance, amortizar ou quitar a carta.',
+        a: 'No consórcio de imóvel residencial, o FGTS pode ser usado para lance, complemento da carta ou amortização, desde que você e o imóvel cumpram as regras do FGTS. No consórcio de carro, não.',
       },
       {
         q: 'E se eu não for sorteado?',
-        a: 'Todos os participantes são contemplados até o fim do grupo, por sorteio ou por lance. O lance é a forma de antecipar essa conquista.',
+        a: 'O grupo é planejado para que todos os participantes em dia sejam contemplados até o fim, por sorteio ou por lance. O que não dá para saber é quando; o lance é a forma de tentar antecipar.',
       },
+      {
+        q: 'Com quais administradoras vocês trabalham?',
+        a: 'Com as administradoras de consórcio da Porto, do Itaú e do Bradesco. Comparamos os grupos disponíveis para o seu objetivo.',
+      },
+      {
+        q: 'Vocês atendem São Bernardo do Campo e São Caetano do Sul?',
+        a: 'Sim. Atendemos as duas cidades do mesmo jeito que Santo André, pelo WhatsApp ou pelo formulário, da simulação até a contemplação.',
+      },
+    ],
+    related: [
+      { href: '/consorcio-auto', label: 'Consórcio de carro', text: 'Carro novo ou usado, com parcelas planejadas.' },
+      { href: '/consorcio-imobiliario', label: 'Consórcio de imóvel', text: 'Casa, apartamento ou terreno, com uso do FGTS conforme as regras.' },
+      { href: '/seguro-auto', label: 'Seguro Auto', text: 'Proteja o carro novo comparando mais de 10 seguradoras.' },
     ],
     insurers: ['porto', 'itau', 'bradesco'],
     badge: 'Porto Elite desde 2021',
@@ -324,7 +509,7 @@ export const PRODUCTS: readonly Product[] = [
     featured: false,
     cardText: 'Proteção financeira para a sua família e benefício para a sua empresa.',
     seo: {
-      title: 'Seguro de Vida Individual e Empresarial',
+      title: 'Seguro de Vida Individual e Empresarial | Portugal Corretora',
       description:
         'Seguro de vida individual ou em grupo para empresas. Proteção financeira para quem você ama, com coberturas para morte, invalidez e doenças graves.',
     },
@@ -379,7 +564,7 @@ export const PRODUCTS: readonly Product[] = [
     featured: false,
     cardText: 'Despesas médicas, bagagem e imprevistos cobertos no Brasil e no exterior.',
     seo: {
-      title: 'Seguro Viagem Nacional e Internacional',
+      title: 'Seguro Viagem Nacional e Internacional | Portugal Corretora',
       description:
         'Seguro viagem para o Brasil e o exterior, com despesas médicas, bagagem e assistência 24h. Compare as opções com a Portugal Corretora.',
     },
@@ -435,7 +620,7 @@ export const PRODUCTS: readonly Product[] = [
     featured: false,
     cardText: 'Imóvel comercial, estoque e equipamentos protegidos contra imprevistos.',
     seo: {
-      title: 'Seguro Empresarial para o seu negócio',
+      title: 'Seguro Empresarial para o seu negócio | Portugal Corretora',
       description:
         'Seguro empresarial para lojas, escritórios e pequenas empresas: imóvel, estoque e equipamentos protegidos. Compare com a Portugal Corretora.',
     },

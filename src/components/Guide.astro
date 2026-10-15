@@ -1,0 +1,101 @@
+---
+import type { Guide } from '../content/products';
+
+interface Props {
+  guide: Guide;
+  id: string;
+}
+const { guide, id } = Astro.props;
+---
+<section class="section guide" aria-labelledby={`${id}-titulo`}>
+  <div class="container guide__inner">
+    <div class="section__head" data-reveal>
+      <h2 class="section__title" id={`${id}-titulo`}>{guide.title}</h2>
+      {guide.lead && <p class="section__lead">{guide.lead}</p>}
+    </div>
+    <div class="guide__body">
+      {
+        guide.sections.map((s) => {
+          const [first, ...rest] = s.paragraphs;
+          return (
+            <article class="guide__item">
+              <h3>{s.title}</h3>
+              <p>{first}</p>
+              {s.list && (
+                <ul>
+                  {s.list.map((li) => (
+                    <li>{li}</li>
+                  ))}
+                </ul>
+              )}
+              {rest.map((p) => (
+                <p>{p}</p>
+              ))}
+            </article>
+          );
+        })
+      }
+    </div>
+    <div class="guide__meta">
+      <p>Conteúdo revisado em {guide.reviewedAt}. As condições finais dependem de cada seguradora ou administradora.</p>
+      {
+        guide.sources && guide.sources.length > 0 && (
+          <p>
+            Fontes oficiais:{' '}
+            {guide.sources.map((src, i) => (
+              <>
+                {i > 0 && ' · '}
+                <a href={src.href} target="_blank" rel="noopener">{src.label}</a>
+              </>
+            ))}
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .guide__inner {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .guide__body {
+    display: grid;
+    gap: var(--space-6);
+    max-width: 72ch;
+  }
+
+  .guide__item h3 {
+    font-size: var(--step-1);
+    color: var(--color-ink);
+  }
+
+  .guide__item p,
+  .guide__item ul {
+    margin-top: var(--space-2);
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  .guide__item ul {
+    padding-left: 1.25rem;
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .guide__meta {
+    max-width: 72ch;
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  .guide__meta a {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

@@ -1,3 +1,20 @@
+# Buscadores e buscas com IA (Googlebot, Bingbot, OAI-SearchBot, ChatGPT-User,
+# Claude-SearchBot, PerplexityBot e outros): liberados.
 User-agent: *
 Allow: /
+Disallow: /api/
+
+# Robôs que coletam conteúdo para TREINAR modelos de IA: bloqueados por decisão da
+# corretora (outubro de 2026). Isso não tira o site do Google, do Bing nem das buscas com IA.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: Bytespider
+User-agent: cohere-training-data-crawler
+Disallow: /
+
 Sitemap: https://www.portugalcorretora.com.br/sitemap.xml

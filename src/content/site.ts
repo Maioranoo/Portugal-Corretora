@@ -37,17 +37,22 @@ export const COMPANY = {
   portoElite: { label: 'Porto Elite', since: 2021 },
 } as const;
 
+// Cidades atendidas (o atendimento é o mesmo nas três). Usado nos dados estruturados e nos textos.
+export const AREA_SERVED = ['Santo André', 'São Bernardo do Campo', 'São Caetano do Sul'] as const;
+
 export const HOME = {
   seo: {
-    title: 'Portugal Corretora de Seguros | Santo André, SP',
+    title: 'Portugal Corretora de Seguros em Santo André e no ABC',
     // Título e descrição que aparecem na prévia do link (WhatsApp, Facebook, Instagram)
     shareTitle: 'Portugal Corretora de Seguros',
-    description: 'Comparamos as seguradoras e encontramos o seguro certo para você. Fale com a gente pelo WhatsApp.',
+    description:
+      'Corretora de seguros em Santo André, com atendimento em São Bernardo e São Caetano. Seguro auto, consórcio e mais, comparando mais de 10 seguradoras.',
   },
   hero: {
-    title: 'Seguro com atendimento de verdade, do orçamento ao sinistro',
+    // Espaço não separável em "Santo André" para que o nome da cidade não quebre entre linhas no título grande.
+    title: 'Seguro com atendimento de verdade em Santo André e no ABC',
     subtitle:
-      'Comparamos mais de 10 seguradoras para encontrar o melhor preço para você. Fale com um especialista pelo WhatsApp.',
+      'Do orçamento ao sinistro, comparamos mais de 10 seguradoras para encontrar a proposta certa para você. Atendemos Santo André, São Bernardo do Campo e São Caetano do Sul pelo WhatsApp.',
   },
 } as const;
 
@@ -69,7 +74,7 @@ export const DIFFERENTIALS: readonly Item[] = [
   },
   {
     title: 'Mais de 10 seguradoras',
-    text: 'Comparamos as opções para encontrar o melhor preço e a cobertura certa.',
+    text: 'Comparamos as opções para encontrar a proposta e a cobertura certas para você.',
   },
   {
     title: 'Porto Elite',
@@ -93,8 +98,8 @@ export const GENERAL_FAQS: readonly Faq[] = [
     a: 'Nada para você. A corretora é remunerada pela seguradora, e você ainda ganha a comparação entre várias opções em um só atendimento.',
   },
   {
-    q: 'Vocês atendem fora de Santo André?',
-    a: 'Sim. Nosso escritório fica em Santo André, mas o atendimento pelo WhatsApp funciona para todo o Brasil.',
+    q: 'Vocês atendem São Bernardo do Campo e São Caetano do Sul?',
+    a: 'Sim. Nosso escritório fica em Santo André, e atendemos São Bernardo do Campo e São Caetano do Sul do mesmo jeito, pelo WhatsApp ou pelo formulário. Clientes de outras cidades também podem ser atendidos a distância.',
   },
   {
     q: 'Como aciono meu seguro?',
@@ -130,6 +135,7 @@ export const ABOUT = {
   paragraphs: [
     'A Portugal Corretora de Seguros nasceu em Santo André com uma ideia simples: seguro precisa de atendimento próximo, antes e depois da contratação. Comparamos as seguradoras, explicamos cada detalhe e ficamos ao seu lado quando você precisa usar.',
     'Nossa equipe tem especialistas em diferentes ramos e se mantém atualizada com cursos oferecidos pelas próprias seguradoras. Assim, você recebe uma orientação clara em todo o processo de cotação, contratação e pós-venda.',
+    'Do escritório na Av. Portugal, em Santo André, atendemos clientes de toda a cidade e também de São Bernardo do Campo e São Caetano do Sul, com o mesmo cuidado em cada atendimento.',
   ],
 } as const;
 

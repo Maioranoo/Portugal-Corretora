@@ -13,6 +13,8 @@ const PAGES = [
   '/seguro-residencial',
   '/plano-de-saude',
   '/consorcio',
+  '/consorcio-auto',
+  '/consorcio-imobiliario',
   '/fianca-locaticia',
   '/seguro-de-vida',
   '/seguro-viagem',

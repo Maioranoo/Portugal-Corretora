@@ -1,0 +1,7 @@
+---
+import ProductPage from '../components/ProductPage.astro';
+import { getSubPage, subPageCrumbs } from '../content/sub-pages';
+
+const sub = getSubPage('consorcio-auto');
+---
+<ProductPage page={sub} formProduct={sub.form.product} formPreset={sub.form.preset} breadcrumbs={subPageCrumbs(sub)} />

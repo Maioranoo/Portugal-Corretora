@@ -25,6 +25,7 @@ describe('validateLead', () => {
         cidade: 'Santo André',
         pagina: '/seguro-auto',
         utm: { utm_campaign: 'auto-set' },
+        origem: { referrer: '', landing: '/' },
       },
     });
   });
@@ -91,5 +92,12 @@ describe('validateLead', () => {
       expect(r.errors.whatsapp).toBe('Informe um WhatsApp com DDD. Ex.: (11) 98765-4321.');
       expect(r.errors.produto).toBe('Escolha o tipo de seguro.');
     }
+  });
+
+  test('origem é aceita só quando segura', () => {
+    const ok = validateLead({ ...base, origem: { referrer: 'www.google.com', landing: '/seguro-auto' } });
+    expect(ok.ok && ok.lead.origem).toEqual({ referrer: 'www.google.com', landing: '/seguro-auto' });
+    const bad = validateLead({ ...base, origem: { referrer: '<script>', landing: 'javascript:alert(1)' } });
+    expect(bad.ok && bad.lead.origem).toEqual({ referrer: '', landing: '/' });
   });
 });
